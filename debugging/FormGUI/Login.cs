@@ -63,7 +63,7 @@ namespace Project_PBO_Kel_5
                 {
                     MessageBox.Show("Login Berhasil sebagai Admin", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Hide();
-                    Dashboard_Admin dashboard = new Dashboard_Admin(serviceAkun,akun);
+                    dashboard_admin2 dashboard = new dashboard_admin2(serviceAkun,akun);
                     dashboard.ShowDialog();
                     this.Close();
                 }
