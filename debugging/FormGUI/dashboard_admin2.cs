@@ -12,11 +12,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using debugging.Model;
+using debugging.Service;
 
 namespace Project_PBO_Kel_5
 {
     public partial class dashboard_admin2 : Form
     {
+        private readonly ServiceAkun serviceAkun;
+        private readonly UserLogin akun;
+        private readonly ServiceProduk serviceProduk;
         Chat_admin chatadmin;
         Status status;
         SubMahar subMahar;
@@ -25,9 +30,11 @@ namespace Project_PBO_Kel_5
         Riwayat_Transaksi history;
         formhomeadmin Formhomeadmin;
 
-        public dashboard_admin2()
+        public dashboard_admin2(ServiceAkun serviceAkun, UserLogin akun)
         {
             InitializeComponent();
+            this.serviceAkun = serviceAkun;
+            this.akun = akun;
             this.IsMdiContainer = true;
         }
         bool sidebarExpand = true;
@@ -48,7 +55,7 @@ namespace Project_PBO_Kel_5
             else
             {
                 flowLayoutPanel1.Width -= 5;
-                if (flowLayoutPanel1.Width <= 94                    )
+                if (flowLayoutPanel1.Width <= 94)
                 {
                     timer1.Stop();
                     sidebarExpand = false;
