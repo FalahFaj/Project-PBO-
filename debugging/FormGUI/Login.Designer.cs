@@ -41,12 +41,14 @@
             label4 = new Label();
             linkLabel1 = new LinkLabel();
             panel1 = new Panel();
+            pictureBox6 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
             SuspendLayout();
             // 
             // pictureBox1
@@ -75,7 +77,7 @@
             label1.AutoSize = true;
             label1.Location = new Point(143, 105);
             label1.Name = "label1";
-            label1.Size = new Size(180, 20);
+            label1.Size = new Size(205, 25);
             label1.TabIndex = 2;
             label1.Text = "Get Started to Login";
             // 
@@ -147,7 +149,7 @@
             label2.Font = new Font("Microsoft Sans Serif", 8F, FontStyle.Bold);
             label2.Location = new Point(867, 9);
             label2.Name = "label2";
-            label2.Size = new Size(86, 17);
+            label2.Size = new Size(96, 20);
             label2.TabIndex = 12;
             label2.Text = "New User?";
             // 
@@ -158,7 +160,7 @@
             label4.Font = new Font("Microsoft Sans Serif", 8F, FontStyle.Bold);
             label4.Location = new Point(1037, 9);
             label4.Name = "label4";
-            label4.Size = new Size(43, 17);
+            label4.Size = new Size(48, 20);
             label4.TabIndex = 14;
             label4.Text = "Here";
             // 
@@ -170,7 +172,7 @@
             linkLabel1.LinkColor = Color.FromArgb(219, 131, 130);
             linkLabel1.Location = new Point(963, 9);
             linkLabel1.Name = "linkLabel1";
-            linkLabel1.Size = new Size(69, 17);
+            linkLabel1.Size = new Size(77, 20);
             linkLabel1.TabIndex = 15;
             linkLabel1.TabStop = true;
             linkLabel1.Text = "Register";
@@ -187,13 +189,27 @@
             panel1.Size = new Size(444, 413);
             panel1.TabIndex = 17;
             // 
+            // pictureBox6
+            // 
+            pictureBox6.BackColor = Color.Transparent;
+            pictureBox6.Dock = DockStyle.Left;
+            pictureBox6.Image = (Image)resources.GetObject("pictureBox6.Image");
+            pictureBox6.Location = new Point(0, 0);
+            pictureBox6.Margin = new Padding(0);
+            pictureBox6.Name = "pictureBox6";
+            pictureBox6.Size = new Size(569, 600);
+            pictureBox6.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox6.TabIndex = 18;
+            pictureBox6.TabStop = false;
+            // 
             // Login
             // 
-            AutoScaleDimensions = new SizeF(11F, 20F);
+            AutoScaleDimensions = new SizeF(13F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
             BackColor = Color.White;
             ClientSize = new Size(1100, 600);
+            Controls.Add(pictureBox6);
             Controls.Add(linkLabel1);
             Controls.Add(label4);
             Controls.Add(label2);
@@ -217,6 +233,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -236,5 +253,6 @@
         private CheckBox checkBox1;
         private PictureBox pictureBox1;
         private Panel panel1;
+        private PictureBox pictureBox6;
     }
 }
