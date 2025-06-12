@@ -11,12 +11,12 @@ namespace debugging.Model
     {
         [Key]
         public int id_kategori { get; set; }
-        public string nama_kategori { get; set; }
+        public string kategori { get; set; }
         public ICollection<Produk> produk { get; set; }
-        public Kategori(int id_kategori, string nama_kategori)
+        public Kategori(int id_kategori, string kategori)
         {
             this.id_kategori = id_kategori;
-            this.nama_kategori = nama_kategori;
+            this.kategori = kategori;
         }
     }
 }

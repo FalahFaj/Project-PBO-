@@ -1,4 +1,4 @@
-﻿namespace Project_PBO_Kel_5
+﻿namespace debugging
 {
     partial class dashboard_admin2
     {

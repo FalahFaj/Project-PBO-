@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Project_PBO_Kel_5
+namespace debugging
 {
     public partial class Regist_Alamat : Form
     {

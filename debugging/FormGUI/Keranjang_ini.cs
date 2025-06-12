@@ -8,18 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace debugging
+namespace debugging.FormGUI
 {
-    public partial class AboutUs : Form
+    public partial class Keranjang_ini : Form
     {
-        public AboutUs()
+        public Keranjang_ini()
         {
             InitializeComponent();
-        }
-
-        private void AboutUs_Load(object sender, EventArgs e)
-        {
-            this.ControlBox = false; 
         }
     }
 }

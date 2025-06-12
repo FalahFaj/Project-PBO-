@@ -8,18 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Project_PBO_Kel_5
+namespace debugging
 {
-    public partial class Keranjang : Form
+    public partial class formangkat: Form
     {
-        public Keranjang()
+        public formangkat()
         {
             InitializeComponent();
-        }
-
-        private void Keranjang_Load(object sender, EventArgs e)
-        {
-            this.ControlBox = false; 
         }
     }
 }

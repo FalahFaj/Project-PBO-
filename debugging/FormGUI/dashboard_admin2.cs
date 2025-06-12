@@ -15,20 +15,20 @@ using System.Windows.Forms;
 using debugging.Model;
 using debugging.Service;
 
-namespace Project_PBO_Kel_5
+namespace debugging
 {
     public partial class dashboard_admin2 : Form
     {
         private readonly ServiceAkun serviceAkun;
         private readonly UserLogin akun;
         private readonly ServiceProduk serviceProduk;
-        Chat_admin chatadmin;
-        Status status;
-        SubMahar subMahar;
-        SubSeserahan subSeserahan;
-        SubSuvernir subSuvernir;
-        Riwayat_Transaksi history;
-        formhomeadmin Formhomeadmin;
+        //Chat_admin chatadmin;
+        //Status status;
+        //SubMahar subMahar;
+        //SubSeserahan subSeserahan;
+        //SubSuvernir subSuvernir;
+        //Riwayat_Transaksi history;
+        //formhomeadmin Formhomeadmin;
 
         public dashboard_admin2(ServiceAkun serviceAkun, UserLogin akun)
         {
@@ -99,43 +99,45 @@ namespace Project_PBO_Kel_5
 
         private void button4_Click(object sender, EventArgs e)
         {
-            if (chatadmin == null)
-            {
-                chatadmin = new Chat_admin();
-                chatadmin.FormClosed += Chatadmin_FormClosed;
-                chatadmin.MdiParent = this;
-                chatadmin.Dock = DockStyle.Fill;
-                chatadmin.Show();
-            }
-            else
-            {
-                chatadmin.Activate();
-            }
+            MessageBox.Show("Fitur ini belum tersedia.", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //if (chatadmin == null)
+            //{
+            //    chatadmin = new Chat_admin();
+            //    chatadmin.FormClosed += Chatadmin_FormClosed;
+            //    chatadmin.MdiParent = this;
+            //    chatadmin.Dock = DockStyle.Fill;
+            //    chatadmin.Show();
+            //}
+            //else
+            //{
+            //    chatadmin.Activate();
+            //}
         }
-        private void Chatadmin_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            chatadmin = null;
-        }
+        //private void Chatadmin_FormClosed(object sender, FormClosedEventArgs e)
+        //{
+        //    chatadmin = null;
+        //}
 
         private void button3_Click(object sender, EventArgs e)
         {
-            if (status == null)
-            {
-                status = new Status();
-                status.FormClosed += Status_FormClosed;
-                status.MdiParent = this;
-                status.Dock = DockStyle.Fill;
-                status.Show();
-            }
-            else
-            {
-                status.Activate();
-            }
+            MessageBox.Show("Fitur ini belum tersedia.", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //if (status == null)
+            //{
+            //    status = new Status(serviceAkun, akun);
+            //    status.FormClosed += Status_FormClosed;
+            //    status.MdiParent = this;
+            //    status.Dock = DockStyle.Fill;
+            //    status.Show();
+            //}
+            //else
+            //{
+            //    status.Activate();
+            //}
         }
-        private void Status_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            status = null;
-        }
+        //private void Status_FormClosed(object sender, FormClosedEventArgs e)
+        //{
+        //    status = null;
+        //}
 
         private void flowLayoutPanel2_Paint(object sender, PaintEventArgs e)
         {
@@ -171,83 +173,84 @@ namespace Project_PBO_Kel_5
 
         private void button7_Click(object sender, EventArgs e)
         {
-            if (subMahar == null)
-            {
-                subMahar = new SubMahar();
-                subMahar.FormClosed += SubMahar_FormClosed;
-                subMahar.MdiParent = this;
-                subMahar.Dock = DockStyle.Fill;
-                subMahar.Show();
-            }
-            else
-            {
-                subMahar.Activate();
-            }
+            //if (subMahar == null)
+            //{
+            //    subMahar = new SubMahar();
+            //    subMahar.FormClosed += SubMahar_FormClosed;
+            //    subMahar.MdiParent = this;
+            //    subMahar.Dock = DockStyle.Fill;
+            //    subMahar.Show();
+            //}
+            //else
+            //{
+            //    subMahar.Activate();
+            //}
         }
-        private void SubMahar_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            subMahar = null;
-        }
+        //private void SubMahar_FormClosed(object sender, FormClosedEventArgs e)
+        //{
+        //    subMahar = null;
+        //}
 
         private void button8_Click(object sender, EventArgs e)
         {
-            if (subSeserahan == null)
-            {
-                subSeserahan = new SubSeserahan();
-                subSeserahan.FormClosed += SubSeserahan_FormClosed;
-                subSeserahan.MdiParent = this;
-                subSeserahan.Dock = DockStyle.Fill;
-                subSeserahan.Show();
-            }
-            else
-            {
-                subSeserahan.Activate();
-            }
+            //if (subSeserahan == null)
+            //{
+            //    subSeserahan = new SubSeserahan();
+            //    subSeserahan.FormClosed += SubSeserahan_FormClosed;
+            //    subSeserahan.MdiParent = this;
+            //    subSeserahan.Dock = DockStyle.Fill;
+            //    subSeserahan.Show();
+            //}
+            //else
+            //{
+            //    subSeserahan.Activate();
+            //}
         }
-        private void SubSeserahan_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            subSeserahan = null;
-        }
+        //private void SubSeserahan_FormClosed(object sender, FormClosedEventArgs e)
+        //{
+        //    subSeserahan = null;
+        //}
 
         private void button9_Click(object sender, EventArgs e)
         {
-            if (subSuvernir == null)
-            {
-                subSuvernir = new SubSuvernir();
-                subSuvernir.FormClosed += SubSuvernir_FormClosed;
-                subSuvernir.MdiParent = this;
-                subSuvernir.Dock = DockStyle.Fill;
-                subSuvernir.Show();
-            }
-            else
-            {
-                subSuvernir.Activate();
-            }
+            //if (subSuvernir == null)
+            //{
+            //    subSuvernir = new SubSuvernir();
+            //    subSuvernir.FormClosed += SubSuvernir_FormClosed;
+            //    subSuvernir.MdiParent = this;
+            //    subSuvernir.Dock = DockStyle.Fill;
+            //    subSuvernir.Show();
+            //}
+            //else
+            //{
+            //    subSuvernir.Activate();
+            //}
         }
-        private void SubSuvernir_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            subSuvernir = null;
-        }
+        //private void SubSuvernir_FormClosed(object sender, FormClosedEventArgs e)
+        //{
+        //    subSuvernir = null;
+        //}
 
         private void button5_Click(object sender, EventArgs e)
         {
-            if (history == null)
-            {
-                history = new Riwayat_Transaksi();
-                history.FormClosed += History_FormClosed;
-                history.MdiParent = this;
-                history.Dock = DockStyle.Fill;
-                history.Show();
-            }
-            else
-            {
-                history.Activate();
-            }
+            MessageBox.Show("Fitur ini belum tersedia.", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //if (history == null)
+            //{
+            //    history = new Riwayat_Transaksi();
+            //    history.FormClosed += History_FormClosed;
+            //    history.MdiParent = this;
+            //    history.Dock = DockStyle.Fill;
+            //    history.Show();
+            //}
+            //else
+            //{
+            //    history.Activate();
+            //}
         }
-        private void History_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            history = null;
-        }
+        //private void History_FormClosed(object sender, FormClosedEventArgs e)
+        //{
+        //    history = null;
+        //}
 
         private void button6_Click(object sender, EventArgs e)
         {
@@ -264,22 +267,23 @@ namespace Project_PBO_Kel_5
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (Formhomeadmin == null)
-            {
-                Formhomeadmin = new formhomeadmin();
-                Formhomeadmin.FormClosed += Formhomeadmin_FormClosed;
-                Formhomeadmin.MdiParent = this;
-                Formhomeadmin.Dock = DockStyle.Fill;
-                Formhomeadmin.Show();
-            }
-            else
-            {
-                Formhomeadmin.Activate();
-            }
+            MessageBox.Show("Fitur ini belum tersedia.", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //if (Formhomeadmin == null)
+            //{
+            //    Formhomeadmin = new formhomeadmin();
+            //    Formhomeadmin.FormClosed += Formhomeadmin_FormClosed;
+            //    Formhomeadmin.MdiParent = this;
+            //    Formhomeadmin.Dock = DockStyle.Fill;
+            //    Formhomeadmin.Show();
+            //}
+            //else
+            //{
+            //    Formhomeadmin.Activate();
+            //}
         }
-        private void Formhomeadmin_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Formhomeadmin = null;
-        }
+        //private void Formhomeadmin_FormClosed(object sender, FormClosedEventArgs e)
+        //{
+        //    Formhomeadmin = null;
+        //}
     }
 }

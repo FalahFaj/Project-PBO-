@@ -37,9 +37,9 @@
             // pictureBoxProduk
             // 
             pictureBoxProduk.Dock = DockStyle.Fill;
-            pictureBoxProduk.Location = new Point(0, 0);
+            pictureBoxProduk.Location = new Point(0, 83);
             pictureBoxProduk.Name = "pictureBoxProduk";
-            pictureBoxProduk.Size = new Size(100, 100);
+            pictureBoxProduk.Size = new Size(150, 117);
             pictureBoxProduk.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBoxProduk.TabIndex = 0;
             pictureBoxProduk.TabStop = false;
@@ -48,10 +48,10 @@
             // 
             labelNamaProduk.Dock = DockStyle.Top;
             labelNamaProduk.Font = new Font("Arial", 12F, FontStyle.Bold);
-            labelNamaProduk.Location = new Point(0, 0);
+            labelNamaProduk.Location = new Point(0, 37);
             labelNamaProduk.Name = "labelNamaProduk";
             labelNamaProduk.Padding = new Padding(5);
-            labelNamaProduk.Size = new Size(100, 23);
+            labelNamaProduk.Size = new Size(150, 46);
             labelNamaProduk.TabIndex = 1;
             // 
             // labelHargaProduk
@@ -61,7 +61,7 @@
             labelHargaProduk.Location = new Point(0, 0);
             labelHargaProduk.Name = "labelHargaProduk";
             labelHargaProduk.Padding = new Padding(5);
-            labelHargaProduk.Size = new Size(100, 23);
+            labelHargaProduk.Size = new Size(150, 37);
             labelHargaProduk.TabIndex = 2;
             // 
             // KotakProduk

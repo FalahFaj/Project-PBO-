@@ -13,7 +13,7 @@ using debugging.DAL;
 using debugging.PenghubungDB;
 using debugging.Service;
 
-namespace Project_PBO_Kel_5
+namespace debugging
 {
     public partial class Regis : Form
     {

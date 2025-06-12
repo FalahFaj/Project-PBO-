@@ -14,21 +14,25 @@ using debugging.PenghubungDB;
 using debugging.Service;
 using debugging.Assets;
 
-namespace Project_PBO_Kel_5
+namespace debugging
 {
     public partial class DashboardUser : Form
     {
         AboutUs aboutUs;
         Keranjang keranjang;
-        SubMahar subMahar;
-        SubSeserahan subSeserahan;
-        SubSuvernir subSuvernir;
         private readonly ServiceProduk serviceProduk;
         private readonly ServiceAkun serviceAkun;
         private readonly UserLogin akun;
+        private System.Windows.Forms.Timer produkTimer;
+        private SubMahar subMaharForm;
+        private SubSeserahan subSeserahanForm;
+        private SubSuvernir subSuvernirForm;
+        private Keranjang_ini keranjang_ini;
+        private Dictionary<int, Image> imageCache = new();
         public DashboardUser(ServiceAkun serviceAkun, UserLogin akun)
         {
             InitializeComponent();
+            this.IsMdiContainer = true;
             this.serviceAkun = serviceAkun;
             this.akun = akun;
 
@@ -36,27 +40,87 @@ namespace Project_PBO_Kel_5
             IAksesProduk aksesproduk = new AksesProduk(koneksiDB);
             this.serviceProduk = new ServiceProduk(aksesproduk);
 
+            keranjang_ini = new Keranjang_ini();
+            subMaharForm = new SubMahar(serviceProduk);
+            subSeserahanForm = new SubSeserahan(serviceProduk);
+            subSuvernirForm = new SubSuvernir(serviceProduk);
+
+            subMaharForm.TopLevel = false;
+            subMaharForm.FormBorderStyle = FormBorderStyle.None;
+            subMaharForm.Dock = DockStyle.Fill;
+            flowLayoutPanel3.Controls.Add(subMaharForm);
+
+            subSeserahanForm.TopLevel = false;
+            subSeserahanForm.FormBorderStyle = FormBorderStyle.None;
+            subSeserahanForm.Dock = DockStyle.Fill;
+            flowLayoutPanel3.Controls.Add(subSeserahanForm);
+
+            subSuvernirForm.TopLevel = false;
+            subSuvernirForm.FormBorderStyle = FormBorderStyle.None;
+            subSuvernirForm.Dock = DockStyle.Fill;
+            flowLayoutPanel3.Controls.Add(subSuvernirForm);
+
+
+            produkTimer = new System.Windows.Forms.Timer();
+            produkTimer.Interval = 1000;
+            produkTimer.Tick += ProdukTimer_Tick;
+            produkTimer.Start();
+        }
+        private void ProdukTimer_Tick(object sender, EventArgs e)
+        {
+            produkTimer.Stop();
             LoadProducts(serviceProduk);
+        }
+        private Image FotoProdukCached(Produk produk)
+        {
+            if (produk == null) return null;
+            if (imageCache.TryGetValue(produk.id_produk, out var img))
+                return img;
+            var image = FotoProduk(produk.foto);
+            if (image != null)
+                imageCache[produk.id_produk] = image;
+            return image;
         }
         private void LoadProducts(ServiceProduk serviceProduk)
         {
-            var produk = serviceProduk.GetAllProduk();  
+            var produk = serviceProduk.GetAllProduk();
             foreach (var item in produk)
             {
                 var kartu = new KotakProduk
                 {
                     NamaProduk = item.nama,
                     HargaProduk = item.harga,
-                    FotoProduk = FotoProduk(item.foto),
-                    Margin = new Padding(10, 10, 10, 10)
+                    FotoProduk = FotoProdukCached(item),
+                    Margin = new Padding(10, 10, 10, 10),
+                    Tag = item
                 };
                 kartu.Padding = new Padding(5);
                 kartu.Width = 170;
                 kartu.Height = 300;
+                kartu.Click += Kartu_Click;
+                foreach (Control control in kartu.Controls)
+                {
+                    control.Click += (sender, e) => Kartu_Click(kartu, e);
+                }
                 flowLayoutPanel3.Controls.Add(kartu);
             }
         }
-
+        private void Kartu_Click(object sender, EventArgs e)
+        {
+            if (sender is KotakProduk kartu && kartu.Tag is Produk produk)
+            {
+                if (produk != null)
+                {
+                    DetailProduk detailProduk = new DetailProduk(produk, akun, serviceAkun);
+                    detailProduk.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("Produk tidak ditemukan.");
+                }
+            }
+        }
+         
         private static Image FotoProduk(byte[] byteFoto)
         {
             try
@@ -88,6 +152,8 @@ namespace Project_PBO_Kel_5
 
         bool menuExpand = false;
         bool sidebarExpand = true;
+        private object proudukTimer;
+
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (menuExpand == false)
@@ -177,87 +243,97 @@ namespace Project_PBO_Kel_5
 
         private void button2_Click_1(object sender, EventArgs e)
         {
-            if (keranjang == null)
+            if (keranjang_ini == null)
             {
-                keranjang = new Keranjang();
-                keranjang.FormClosed += Keranjang_FormClosed;
-                keranjang.MdiParent = this;
-                keranjang.Dock = DockStyle.Fill;
-                keranjang.Show();
+                keranjang_ini = new Keranjang_ini();
+                keranjang_ini.FormClosed += Keranjang_FormClosed;
+                keranjang_ini.MdiParent = this;
+                keranjang_ini.Dock = DockStyle.Fill;
+                keranjang_ini.Show();
             }
             else
             {
-                keranjang.Activate();
+                keranjang_ini.Activate();
             }
         }
 
         private void Keranjang_FormClosed(object? sender, FormClosedEventArgs e)
         {
-            keranjang = null;
+            keranjang_ini = null;
         }
+        private void Tampilkan_Produk_Berdasar_Kategori(int id_kategori)
+        {
+            flowLayoutPanel3.Controls.Clear();
+            var produks = serviceProduk.GetAllProduk()
+                .Where(p => p.id_kategori == id_kategori)
+                .ToList();
+            foreach (var item in produks)
+            {
+                var kartu = new KotakProduk
+                {
+                    NamaProduk = item.nama,
+                    HargaProduk = item.harga,
+                    FotoProduk = FotoProdukCached(item),
+                    Margin = new Padding(10, 10, 10, 10),
+                    Tag = item
+                };
+                kartu.Padding = new Padding(5);
+                kartu.Width = 170;
+                kartu.Height = 300;
+                kartu.Click += Kartu_Click;
+                foreach (Control control in kartu.Controls)
+                {
+                    control.Click += (sender, e) => Kartu_Click(kartu, e);
+                }
+                flowLayoutPanel3.Controls.Add(kartu);
+            }
+        }
+
 
         private void button5_Click(object sender, EventArgs e)
         {
-            if (subMahar == null)
-            {
-                subMahar = new SubMahar();
-                subMahar.FormClosed += SubMahar_FormClosed;
-                subMahar.MdiParent = this;
-                subMahar.Dock = DockStyle.Fill;
-                subMahar.Show();
-            }
-            else
-            {
-                subMahar.Activate();
-            }
+            subSeserahanForm.Hide();
+            subSuvernirForm.Hide();
+            subMaharForm.Show();
+            subMaharForm.BringToFront();
+            //flowLayoutPanel3.Controls.Clear();
+            //Tampilkan_Produk_Berdasar_Kategori(3);
         }
 
-        private void SubMahar_FormClosed(object? sender, FormClosedEventArgs e)
-        {
-            subMahar = null;
-        }
+        //private void SubMahar_FormClosed(object? sender, FormClosedEventArgs e)
+        //{
+        //    subMahar = null;
+        //}
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (subSeserahan == null)
-            {
-                subSeserahan = new SubSeserahan();
-                subSeserahan.FormClosed += SubSeserahan_FormClosed;
-                subSeserahan.MdiParent = this;
-                subSeserahan.Dock = DockStyle.Fill;
-                subSeserahan.Show();
-            }
-            else
-            {
-                subSeserahan.Activate();
-            }
+            subMaharForm.Hide();
+            subSuvernirForm.Hide();
+            subSeserahanForm.Show();
+            subSeserahanForm.BringToFront();
+            //flowLayoutPanel3.Controls.Clear();
+            //Tampilkan_Produk_Berdasar_Kategori(4);
         }
 
-        private void SubSeserahan_FormClosed(object? sender, FormClosedEventArgs e)
-        {
-            subSeserahan = null;
-        }
+        //private void SubSeserahan_FormClosed(object? sender, FormClosedEventArgs e)
+        //{
+        //    subSeserahan = null;
+        //}
 
         private void button7_Click(object sender, EventArgs e)
         {
-            if (subSuvernir == null)
-            {
-                subSuvernir = new SubSuvernir();
-                subSuvernir.FormClosed += SubSuvernir_FormClosed;
-                subSuvernir.MdiParent = this;
-                subSuvernir.Dock = DockStyle.Fill;
-                subSuvernir.Show();
-            }
-            else
-            {
-                subSuvernir.Activate();
-            }
+            subMaharForm.Hide();
+            subSeserahanForm.Hide();
+            subSuvernirForm.Show();
+            subSuvernirForm.BringToFront();
+            //flowLayoutPanel3.Controls.Clear();
+            //Tampilkan_Produk_Berdasar_Kategori(1);
         }
 
-        private void SubSuvernir_FormClosed(object? sender, FormClosedEventArgs e)
-        {
-            subSuvernir = null;
-        }
+        //private void SubSuvernir_FormClosed(object? sender, FormClosedEventArgs e)
+        //{
+        //    subSuvernir = null;
+        //}
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -288,5 +364,9 @@ namespace Project_PBO_Kel_5
             this.Show();
         }
 
+        private void DashboardUser_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

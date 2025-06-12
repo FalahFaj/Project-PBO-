@@ -14,9 +14,9 @@ namespace debugging.Model
         public int id_customer { get; set; }
         public string nama { get; set; }
         public string no_hp { get; set; }
-        public string email_address { get; set; }
         public string username { get; set; }
         public string password { get; set; }
+        public string email_address { get; set; }
         public string? rt { get; set; }
         public string? rw { get; set; }
         public string? kelurahan { get; set; }

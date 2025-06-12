@@ -17,7 +17,7 @@ namespace debugging.PenghubungDB
         public DbSet<Produk> produk { get; set; }
         public DbSet<Akun_admin> akun_admin { get; set; }
         public DbSet<Customer> customer { get; set; }
-        public DbSet<Daftar_transaksi> daftar_transaksi { get; set; }
+        public DbSet<Item_penyewaan> item_penyewaan { get; set; }
         public DbSet<Kategori> kategori { get; set; }
         public DbSet<Penyewaan> penyewaan { get; set; }
         public DbSet<Item_transaksi> item_transaksi { get; set; }
@@ -63,7 +63,7 @@ namespace debugging.PenghubungDB
                 .HasForeignKey(dc => dc.id_customer);
 
             // Daftar Transaksi
-            modelBuilder.Entity<Daftar_transaksi>();
+            modelBuilder.Entity<Item_penyewaan>();
 
             // Item Transaksi
             modelBuilder.Entity<Item_transaksi>();

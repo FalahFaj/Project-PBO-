@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Project_PBO_Kel_5
+namespace debugging
 {
     [NotMapped]
     partial class AboutUs

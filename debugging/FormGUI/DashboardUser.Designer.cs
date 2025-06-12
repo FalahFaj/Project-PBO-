@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Project_PBO_Kel_5
+namespace debugging
 {
     [NotMapped]
     partial class DashboardUser
@@ -398,10 +398,10 @@ namespace Project_PBO_Kel_5
             // 
             flowLayoutPanel3.AutoScroll = true;
             flowLayoutPanel3.AutoSize = true;
-            flowLayoutPanel3.Location = new Point(250, 50);
-            flowLayoutPanel3.MaximumSize = new Size(500, 0);
+            flowLayoutPanel3.Dock = DockStyle.Fill;
+            flowLayoutPanel3.Location = new Point(247, 50);
             flowLayoutPanel3.Name = "flowLayoutPanel3";
-            flowLayoutPanel3.Size = new Size(500, 0);
+            flowLayoutPanel3.Size = new Size(853, 550);
             flowLayoutPanel3.TabIndex = 7;
             // 
             // DashboardUser
@@ -409,13 +409,14 @@ namespace Project_PBO_Kel_5
             AutoScaleMode = AutoScaleMode.None;
             BackColor = Color.White;
             ClientSize = new Size(1100, 600);
+            Controls.Add(flowLayoutPanel3);
             Controls.Add(flowLayoutPanel1);
             Controls.Add(panel1);
-            Controls.Add(flowLayoutPanel3);
             DoubleBuffered = true;
             IsMdiContainer = true;
             Margin = new Padding(4);
             Name = "DashboardUser";
+            Load += DashboardUser_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();

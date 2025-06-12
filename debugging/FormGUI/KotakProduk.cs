@@ -31,5 +31,6 @@ namespace debugging.FormGUI
             get { return pictureBoxProduk.Image; }
             set { pictureBoxProduk.Image = value; }
         }
+
     }
 }

@@ -117,4 +117,61 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <metadata name="Column1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Column2.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Column3.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Column4.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Column5.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Column6.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Column7.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Column8.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="button1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAA
+        4wAAAOMBD+bfpwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAOHSURBVFhHtVZt
+        SxRRFN4P0Yu9YLU7Z1IRk+pLFPQrAqEoerP6IEFEP8O+FGp7z3VFc81+QNA3KSiKXsDW7GMEvZGlpu49
+        sxWU5WplnJlZ3blzd3d8O/DAMOec5zwz995zTywW0XakctsA6Swg3QSkYUBSgDTrg5+HQVAfCGqOt9FW
+        PX/ZFk/SPkDnFiBNA9J8REyDoP5Ep9qr80W2OjG2yZZ0HZDmDAWiYtYS1N7QOrJR5y9rrBxQvTIQLg9S
+        ZeJIu/Q6Rksk1SF/TcNEK4CFNGbJ7EG9XsC8L1/94gWwiES7svW6rvGaL/G3/wJB51zwc9hvhlSZPan3
+        G/T6MX/DhRNMkPTbktnDhVx+5nehuBKwBV0JFPeOWuTdnreTqilAwB+QVE2ANGOIN+FHYCn8c64HmZAH
+        SUc5p77n+3ZAegSCBhLdaovLI+iIGxPOC8FG6nGL+x0uSpOZtYRznHOq8Vs1IL0EpA+A9AmQntSkJ6rY
+        Z6FzzO+Oer6On65wv73qTh1zNqqTRYKHeMPaqclEvItqbKS3/Dd4I7siZPZEpCWV6gwL4N4edi7iD/d3
+        JuYeD8IZBEGvoWPKKixhbSpX5/0N9aDQ9ZjczQ3zFSPNAvhi0R0LxS2k8y5hx9RmC+mZhfTGdJZrOr/W
+        g6CPFtK9wjHj3AoihlgAGRyMv7ZwWlzy9EQVID0GpHf8y/XiBbNxssHdE4IG9rfOr3ffCaeFuQz8jCwL
+        MO3af5agy0zgNihBD5mYC+hFdTP9CVuoCyVEzJQQoK5yIq8noLoP6IwwsV6slEHX1G5A+mwL506sdX4d
+        v7OQ2sJ1PAGGJXAk314g6K5LFOHLdQPMNgLSKCDd5pNjSdUdruMtwQuDoxiXdPKoxrkGvkVIleHu1Rdy
+        BHFRJ45qnGvgK0YvC2g2OCoK8Fox/+ZsIz/rfrZKAmypTnnNpXwrNgoApPGimHHdz1ZBgNeK3UBB/YaA
+        SgJyRTE53c9WVoCgvoVAfxIqdYGshYA8L10gmKdXQ+DaCJDqmh7rNR2pMqFgJCxstgL8wbV4+Jjx3gXj
+        vFyNTziDxpGMjS8Zv3noIlYLX3YKp1avGzAenXl6NSSvFKMgpg7o9YzGg4aF9NRAskyo56YrvKzxOvH0
+        yuc1TBgZeb7YSq55FGPlPEAuUQjHpkNHbSXGXcsfs3q9mZCy/lXO4OchW9INW6jTCx0ugv0HsVqlxiTJ
+        K5QAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="button2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAA
+        qAAAAKgBefSzxgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAACxSURBVEhL7ZRN
+        CsJADIW/hYIeQNH7n6h14RH0FpUHLYRH6PxgxUW/TUvy8jIzgcDOv3ICDh5c4TjXVHEG3sAAXD2ZII20
+        qlFtEZ1cBRPwKDRRThppVVN96wswzoVP4O6CRHNzQQk3iE0812y+4EZq4rFu84X4zvrG/7X5NBFP/bWT
+        R7IG2eC72PSJsoF6rPsmbhTf3HPNTdwgG6hrqptsvip6l92rZaO2rmtpq813fssHAIpHG1HHw1QAAAAA
+        SUVORK5CYII=
+</value>
+  </data>
 </root>

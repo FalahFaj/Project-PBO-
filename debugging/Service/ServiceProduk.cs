@@ -20,5 +20,12 @@ namespace debugging.Service
         {
             return aksesProduk.GetAllProduk();
         }
+        public List<Produk> GetProdukByName(string nama)
+        {
+            var semuaProduk = GetAllProduk();
+            return semuaProduk
+                .Where(p => p.nama.ToLower().Contains(nama.ToLower()))
+                .ToList();
+        }
     }
 }

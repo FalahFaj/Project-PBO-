@@ -11,7 +11,7 @@ namespace debugging.Model
     {
         [Key]
         public int id_jenis_transaksi { get; set; }
-        public string nama_jenis_transaksi { get; set; }
+        public string nama_jenis { get; set; }
         public ICollection<Transaksi> transaksi { get; set; }
     }
 }

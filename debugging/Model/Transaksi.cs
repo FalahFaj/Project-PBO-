@@ -19,7 +19,7 @@ namespace debugging.Model
         [ForeignKey("id_metode_pembayaran")]
         public int id_metode_pembayaran { get; set; }
         [ForeignKey("id_penyewaan")]
-        public int id_penyewaan { get; set; }
+        public int? id_penyewaan { get; set; }
         [ForeignKey("id_jenis_transaksi")]
         public int id_jenis_transaksi { get; set; }
     }

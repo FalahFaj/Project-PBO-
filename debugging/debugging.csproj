@@ -17,6 +17,11 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.5" />
     <PackageReference Include="Npgsql" Version="9.0.3" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.4" />
+	<PackageReference Include="FontAwesome.Sharp" Version="6.6.0" />
+	<PackageReference Include="PDFsharp-MigraDoc-GDI" Version="6.2.0" />
+	<PackageReference Include="SkiaSharp.Views.WindowsForms" Version="3.119.0" />
+	<PackageReference Include="System.Text.Encoding.CodePages" Version="10.0.0-preview.4.25258.110" />
+	<PackageReference Include="System.Windows.Forms.DataVisualization" Version="1.0.0-prerelease.20110.1" />
   </ItemGroup>
 
   <ItemGroup>

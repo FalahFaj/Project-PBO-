@@ -12,7 +12,6 @@ namespace debugging.Model
         [Key]
         public int id_keranjang { get; set; }
         public int id_customer { get; set; }
-        public int id_produk { get; set; }
-        public int jumlah { get; set; }
+
     }
 }

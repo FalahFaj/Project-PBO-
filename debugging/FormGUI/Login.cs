@@ -12,7 +12,7 @@ using debugging.PenghubungDB;
 using debugging.DAL;
 using debugging.Service;
 
-namespace Project_PBO_Kel_5
+namespace debugging
 {
     public partial class Login : Form
     {
