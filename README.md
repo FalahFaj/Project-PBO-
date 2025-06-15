@@ -1,6 +1,6 @@
 # 🎓 Project PBO
 
-## 👥 Kelompok
+## 👥 Kelompok 5
 - **Muhammad Fajrul Falah** (242410103052)  
 - **Alfin Kamal Saputra** (242410103039)  
 - **Muhammad Rizqi Ramadhani** (242410103058)
