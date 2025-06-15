@@ -208,14 +208,23 @@ namespace debugging
             {
                 int idCustomer = userLogin.Id;
                 int idMetode = 0;
+                Metode_pembayaran metode = null;
+
                 if (comboBox1.SelectedItem != null)
                 {
-                    var metode = metode_pembayaran.FirstOrDefault(m => m.metode_pembayaran == comboBox1.SelectedItem.ToString());
+                    metode = metode_pembayaran.FirstOrDefault(m => m.metode_pembayaran == comboBox1.SelectedItem.ToString());
                     if (metode != null)
                     {
                         idMetode = metode.id_metode_pembayaran;
                     }
                 }
+
+                if (idMetode == 0)
+                {
+                    MessageBox.Show("Pilih metode Pembayaran terlebih dahulu");
+                    return;
+                }
+
                 var transaksi = new Transaksi
                 {
                     tanggal = DateTime.UtcNow,
@@ -239,6 +248,29 @@ namespace debugging
                     };
                     db.item_transaksi.Add(item);
                     total = produk.harga;
+                    transaksi.nominal = total;
+                    db.SaveChanges();
+                    var result = MessageBox.Show(
+                        "Pembelian berhasil.\nApakah Anda ingin mencetak struk?",
+                        "Cetak Struk",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Question
+                    );
+
+                    if (result == DialogResult.Yes)
+                    {
+                        debugging.Service.Cetak_Struk.BuatStrukPembelian(
+                            userLogin.Name,
+                            produk.nama,
+                            (int)numericUpDown1.Value,
+                            total,
+                            transaksi.tanggal,
+                            metode.metode_pembayaran,
+                            metode.no_rekening
+                        );
+                        MessageBox.Show($"Struk berhasil dicetak ke file struk_pemmbelian.pdf dan disimpan di {Environment.CurrentDirectory}");
+                    }
+                    this.Close();
                 }
                 else
                 {

@@ -55,7 +55,22 @@ namespace debugging.PenghubungDB
             modelBuilder.Entity<Customer>();
 
             // Transaksi  
-            modelBuilder.Entity<Transaksi>();
+            modelBuilder.Entity<Transaksi>()
+                .HasOne(t => t.customer)
+                .WithMany(c => c.transaksi)
+                .HasForeignKey(t => t.id_customer);
+            modelBuilder.Entity<Transaksi>()
+                .HasOne(t => t.jenis_transaksi)
+                .WithMany(jt => jt.transaksi)
+                .HasForeignKey(t => t.id_jenis_transaksi);
+            modelBuilder.Entity<Transaksi>()
+                .HasOne(t => t.MetodePembayaran)
+                .WithMany(mp => mp.MetodePembayaran)
+                .HasForeignKey(t => t.id_metode_pembayaran);
+            modelBuilder.Entity<Transaksi>()
+                .HasOne(t => t.Penyewaan)
+                .WithMany(p => p.Transaksis)
+                .HasForeignKey(t => t.id_penyewaan);
 
             // Data Chat  
             modelBuilder.Entity<Data_chat>()

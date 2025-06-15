@@ -19,5 +19,6 @@ namespace debugging.Model
         public string status_peminjaman { get; set; }
         [ForeignKey("id_customer")]
         public int id_customer { get; set; }
+        public ICollection<Transaksi> Transaksis { get; set; }
     }
 }

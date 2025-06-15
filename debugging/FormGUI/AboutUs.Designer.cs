@@ -43,7 +43,6 @@ namespace debugging
             lblPassword = new Label();
             lblEmail = new Label();
             lblAlamat = new Label();
-            label6 = new Label();
             SuspendLayout();
             // 
             // label1
@@ -160,22 +159,11 @@ namespace debugging
             lblAlamat.Size = new Size(0, 20);
             lblAlamat.TabIndex = 11;
             // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Location = new Point(179, 331);
-            label6.Margin = new Padding(2, 0, 2, 0);
-            label6.Name = "label6";
-            label6.Size = new Size(290, 20);
-            label6.TabIndex = 12;
-            label6.Text = "Ubur Ubur Ikan Lele, Project PBO sepele Le";
-            // 
             // AboutUs
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(640, 360);
-            Controls.Add(label6);
             Controls.Add(lblAlamat);
             Controls.Add(lblEmail);
             Controls.Add(lblPassword);
@@ -189,7 +177,7 @@ namespace debugging
             Controls.Add(label2);
             Controls.Add(label1);
             FormBorderStyle = FormBorderStyle.None;
-            Margin = new Padding(2, 2, 2, 2);
+            Margin = new Padding(2);
             Name = "AboutUs";
             Text = "AboutUs";
             Load += AboutUs_Load;
@@ -211,6 +199,5 @@ namespace debugging
         private Label lblPassword;
         private Label lblEmail;
         private Label lblAlamat;
-        private Label label6;
     }
 }

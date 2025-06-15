@@ -170,7 +170,7 @@ namespace debugging
                         id_penyewaan = penyewaan.id_penyewaan,
                         id_produk = produk.id_produk,
                         jumlah = jumlah,
-                        harga = totalSewa,
+                        harga_sewa = totalSewa,
                         durasi_hari = hariSewa
                     };
                     db.item_penyewaan.Add(item_penyewaan);
@@ -186,6 +186,27 @@ namespace debugging
                     };
                     db.transaksi.Add(transaksi);
                     db.SaveChanges();
+                    var result = MessageBox.Show(
+                        "Penyewaan berhasil dibuat. Apakah Anda ingin melanjutkan ke cetak struk?",
+                        "Konfirmasi",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Question);
+                    if (result == DialogResult.Yes)
+                    {
+                        string alamat = lblAlamat.Text;
+                        debugging.Service.Cetak_Struk.BuatStrukPenyewaan(
+                            akun.Name,
+                            produk.nama,
+                            (int)numericUpDownJumlah.Value,
+                            totalSewa,
+                            tanggalSewa.Value,
+                            tanggalKembali.Value,
+                            metode.metode_pembayaran,
+                            metode.no_rekening,
+                            alamat
+                        );
+                    };
+                        MessageBox.Show($"Struk penyewaan telah dicetak dan disimpan di {Environment.CurrentDirectory}", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {

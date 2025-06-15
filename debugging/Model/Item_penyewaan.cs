@@ -14,7 +14,7 @@ namespace debugging.Model
         public int id_penyewaan { get; set; }
         public int id_produk { get; set; }
         public int jumlah { get; set; }
-        public decimal harga { get; set; }
+        public decimal harga_sewa { get; set; }
         public int durasi_hari { get; set; }
     }
 }

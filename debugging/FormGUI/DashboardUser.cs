@@ -318,8 +318,6 @@ namespace debugging
         {
             if (aboutUs == null)
             {
-                flowLayoutPanel1.Hide();
-                flowLayoutPanel2.Hide();
                 flowLayoutPanel3.Hide();
                 aboutUs = new AboutUs(akun);
                 aboutUs.FormClosed += AboutUs_FormClosed;

@@ -34,6 +34,8 @@ namespace debugging
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DashboardUser));
             panel1 = new Panel();
+            PanelchatAdmin = new Panel();
+            TombolBukaChat = new FontAwesome.Sharp.IconButton();
             label1 = new Label();
             pictureBox1 = new PictureBox();
             flowLayoutPanel1 = new FlowLayoutPanel();
@@ -62,8 +64,6 @@ namespace debugging
             timer1 = new System.Windows.Forms.Timer(components);
             timer2 = new System.Windows.Forms.Timer(components);
             flowLayoutPanel3 = new FlowLayoutPanel();
-            PanelchatAdmin = new Panel();
-            TombolBukaChat = new FontAwesome.Sharp.IconButton();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             flowLayoutPanel1.SuspendLayout();
@@ -96,6 +96,27 @@ namespace debugging
             panel1.Name = "panel1";
             panel1.Size = new Size(1100, 50);
             panel1.TabIndex = 0;
+            // 
+            // PanelchatAdmin
+            // 
+            PanelchatAdmin.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+            PanelchatAdmin.AutoScroll = true;
+            PanelchatAdmin.Location = new Point(863, 50);
+            PanelchatAdmin.Name = "PanelchatAdmin";
+            PanelchatAdmin.Size = new Size(237, 507);
+            PanelchatAdmin.TabIndex = 0;
+            // 
+            // TombolBukaChat
+            // 
+            TombolBukaChat.IconChar = FontAwesome.Sharp.IconChar.Message;
+            TombolBukaChat.IconColor = Color.Black;
+            TombolBukaChat.IconFont = FontAwesome.Sharp.IconFont.Regular;
+            TombolBukaChat.IconSize = 35;
+            TombolBukaChat.Location = new Point(1030, 9);
+            TombolBukaChat.Name = "TombolBukaChat";
+            TombolBukaChat.Size = new Size(58, 38);
+            TombolBukaChat.TabIndex = 2;
+            TombolBukaChat.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
@@ -349,7 +370,7 @@ namespace debugging
             button3.Name = "button3";
             button3.Size = new Size(229, 120);
             button3.TabIndex = 2;
-            button3.Text = "             About Us";
+            button3.Text = "             About Me";
             button3.TextAlign = ContentAlignment.MiddleLeft;
             button3.UseVisualStyleBackColor = false;
             button3.Click += button3_Click;
@@ -407,27 +428,6 @@ namespace debugging
             flowLayoutPanel3.Name = "flowLayoutPanel3";
             flowLayoutPanel3.Size = new Size(853, 550);
             flowLayoutPanel3.TabIndex = 7;
-            // 
-            // PanelchatAdmin
-            // 
-            PanelchatAdmin.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
-            PanelchatAdmin.AutoScroll = true;
-            PanelchatAdmin.Location = new Point(863, 50);
-            PanelchatAdmin.Name = "PanelchatAdmin";
-            PanelchatAdmin.Size = new Size(237, 507);
-            PanelchatAdmin.TabIndex = 0;
-            // 
-            // TombolBukaChat
-            // 
-            TombolBukaChat.IconChar = FontAwesome.Sharp.IconChar.Message;
-            TombolBukaChat.IconColor = Color.Black;
-            TombolBukaChat.IconFont = FontAwesome.Sharp.IconFont.Regular;
-            TombolBukaChat.IconSize = 35;
-            TombolBukaChat.Location = new Point(1030, 9);
-            TombolBukaChat.Name = "TombolBukaChat";
-            TombolBukaChat.Size = new Size(58, 38);
-            TombolBukaChat.TabIndex = 2;
-            TombolBukaChat.UseVisualStyleBackColor = true;
             // 
             // DashboardUser
             // 
