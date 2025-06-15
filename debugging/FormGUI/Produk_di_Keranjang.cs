@@ -16,5 +16,25 @@ namespace debugging
         {
             InitializeComponent();
         }
+        public string NamaProduk
+        {
+            get { return lblNama.Text; }
+            set { lblNama.Text = value; }
+        }
+        public decimal HargaProduk
+        {
+            get { return decimal.Parse(lblHarga.Text); }
+            set { lblHarga.Text = $"Rp {value:N0}"; }
+        }
+        public int JumlahProduk
+        {
+            get { return int.Parse(lblJumlah.Text); }
+            set { lblJumlah.Text = value.ToString(); }
+        }
+        public Image FotoProduk
+        {
+            get { return fotoProduk.Image; }
+            set { fotoProduk.Image = value; }
+        }
     }
 }

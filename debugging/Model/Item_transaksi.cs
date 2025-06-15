@@ -16,11 +16,5 @@ namespace debugging.Model
         public int jumlah { get; set; }
         [ForeignKey("id_transaksi")]
         public int id_transaksi { get; set; }
-        public Item_transaksi(int id_item_transaksi, int id_produk, int jumlah)
-        {
-            this.id_item_transaksi = id_item_transaksi;
-            this.id_produk = id_produk;
-            this.jumlah = jumlah;
-        }
     }
 }

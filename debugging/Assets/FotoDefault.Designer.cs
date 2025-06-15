@@ -59,14 +59,49 @@ namespace debugging.Assets {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Boho {
+            get {
+                object obj = ResourceManager.GetObject("Boho", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] box_kayu {
+            get {
+                object obj = ResourceManager.GetObject("box kayu", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
 
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] GetFotoDefault()
+        internal static byte[] FotoDefaultResource
         {
-            object obj = ResourceManager.GetObject("FotoDefault", resourceCulture);
-            return ((byte[])(obj));
+            get
+            {
+                object obj = ResourceManager.GetObject("FotoDefault", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        public static Image GetFotoDefault()
+        {
+            byte[] fotoByte = FotoDefault.FotoDefaultResource;
+            if(fotoByte != null)
+            {
+                using (var ms = new MemoryStream(fotoByte))
+                {
+                    return Image.FromStream(ms);
+                }
+            }
+            return null;
         }
     }
 }

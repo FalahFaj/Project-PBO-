@@ -13,6 +13,7 @@ using debugging.Service;
 using System.IO;
 using debugging.Assets;
 using System.Reflection;
+using debugging.PenghubungDB;
 
 namespace debugging.FormGUI
 {
@@ -50,12 +51,53 @@ namespace debugging.FormGUI
 
         private void btnBeli_Click(object sender, EventArgs e)
         {
-            MessageBox.Show($"Anda telah membeli produk {produk.nama} seharga Rp {produk.harga:N0}.");
+            this.Hide();
+            if (produk.disewakan)
+            {
+                btnBeli.Text = "Sewa";
+                Form_Penyewaan penyewaan = new Form_Penyewaan(produk, akun, serviceAkun);
+                penyewaan.ShowDialog();
+            }
+            else
+            {
+                Pembayaran pembayaran = new Pembayaran(produk, serviceAkun, akun);
+                pembayaran.ShowDialog();
+            }
+            this.Show();
         }
 
         private void btnKeranjang_Click(object sender, EventArgs e)
         {
-            MessageBox.Show($"Produk {produk.nama} telah ditambahkan ke keranjang.");
+            using (var db = new KoneksiDB())
+            {
+                var keranjang = db.keranjang.FirstOrDefault(k => k.id_customer == akun.Id);
+                if (keranjang == null)
+                {
+                    keranjang = new Keranjang
+                    {
+                        id_customer = akun.Id,
+                    };
+                    db.keranjang.Add(keranjang);
+                    db.SaveChanges();
+                }
+                var detailKeranjang = db.detail_keranjang.FirstOrDefault(dk => dk.id_produk == produk.id_produk && dk.id_keranjang == keranjang.id_keranjang);
+                if (detailKeranjang != null)
+                {
+                    detailKeranjang.jumlah += 1;
+                }
+                else
+                {
+                    detailKeranjang = new Detail_keranjang
+                    {
+                        id_produk = produk.id_produk,
+                        id_keranjang = keranjang.id_keranjang,
+                        jumlah = 1
+                    };
+                    db.detail_keranjang.Add(detailKeranjang);
+                }
+                db.SaveChanges();
+            }
+            MessageBox.Show("Produk telah ditambahkan ke keranjang.", "Berhasil", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

@@ -29,149 +29,129 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Regist_Alamat));
-            textBox5 = new TextBox();
+            boxKelurahan = new TextBox();
             pictureBox7 = new PictureBox();
-            textBox1 = new TextBox();
+            boxKec = new TextBox();
             pictureBox3 = new PictureBox();
-            textBox4 = new TextBox();
-            pictureBox6 = new PictureBox();
-            textBox3 = new TextBox();
+            boxKota = new TextBox();
             pictureBox5 = new PictureBox();
-            textBox2 = new TextBox();
+            boxProvinsi = new TextBox();
             pictureBox4 = new PictureBox();
             label1 = new Label();
-            textBox6 = new TextBox();
+            boxRw = new TextBox();
             pictureBox1 = new PictureBox();
             pictureBox2 = new PictureBox();
-            textBox7 = new TextBox();
-            textBox8 = new TextBox();
-            pictureBox8 = new PictureBox();
+            boxRt = new TextBox();
+            btnSimpan = new Button();
+            btnKeluar = new FontAwesome.Sharp.IconButton();
             ((System.ComponentModel.ISupportInitialize)pictureBox7).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox8).BeginInit();
             SuspendLayout();
             // 
-            // textBox5
+            // boxKelurahan
             // 
-            textBox5.BackColor = Color.White;
-            textBox5.BorderStyle = BorderStyle.None;
-            textBox5.Font = new Font("Poppins", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            textBox5.ForeColor = Color.DarkGray;
-            textBox5.Location = new Point(604, 159);
-            textBox5.Multiline = true;
-            textBox5.Name = "textBox5";
-            textBox5.Size = new Size(333, 33);
-            textBox5.TabIndex = 38;
-            textBox5.Text = "Kelurahan";
+            boxKelurahan.BackColor = Color.White;
+            boxKelurahan.BorderStyle = BorderStyle.None;
+            boxKelurahan.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            boxKelurahan.ForeColor = Color.DarkGray;
+            boxKelurahan.Location = new Point(484, 127);
+            boxKelurahan.Margin = new Padding(2);
+            boxKelurahan.Multiline = true;
+            boxKelurahan.Name = "boxKelurahan";
+            boxKelurahan.Size = new Size(266, 26);
+            boxKelurahan.TabIndex = 38;
+            boxKelurahan.Text = "Kelurahan";
             // 
             // pictureBox7
             // 
             pictureBox7.BackColor = SystemColors.ButtonHighlight;
             pictureBox7.Image = (Image)resources.GetObject("pictureBox7.Image");
-            pictureBox7.Location = new Point(577, 143);
+            pictureBox7.Location = new Point(463, 114);
+            pictureBox7.Margin = new Padding(2);
             pictureBox7.Name = "pictureBox7";
-            pictureBox7.Size = new Size(381, 63);
+            pictureBox7.Size = new Size(305, 50);
             pictureBox7.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox7.TabIndex = 37;
             pictureBox7.TabStop = false;
             // 
-            // textBox1
+            // boxKec
             // 
-            textBox1.BackColor = Color.White;
-            textBox1.BorderStyle = BorderStyle.None;
-            textBox1.Font = new Font("Poppins", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            textBox1.ForeColor = Color.DarkGray;
-            textBox1.Location = new Point(127, 384);
-            textBox1.Multiline = true;
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(333, 33);
-            textBox1.TabIndex = 36;
-            textBox1.Text = "Kecamatan";
+            boxKec.BackColor = Color.White;
+            boxKec.BorderStyle = BorderStyle.None;
+            boxKec.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            boxKec.ForeColor = Color.DarkGray;
+            boxKec.Location = new Point(102, 294);
+            boxKec.Margin = new Padding(2);
+            boxKec.Multiline = true;
+            boxKec.Name = "boxKec";
+            boxKec.Size = new Size(266, 26);
+            boxKec.TabIndex = 36;
+            boxKec.Text = "Kecamatan";
             // 
             // pictureBox3
             // 
             pictureBox3.BackColor = SystemColors.ButtonHighlight;
             pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
-            pictureBox3.Location = new Point(94, 368);
+            pictureBox3.Location = new Point(75, 281);
+            pictureBox3.Margin = new Padding(2);
             pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(381, 63);
+            pictureBox3.Size = new Size(305, 50);
             pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox3.TabIndex = 35;
             pictureBox3.TabStop = false;
             // 
-            // textBox4
+            // boxKota
             // 
-            textBox4.BackColor = Color.White;
-            textBox4.BorderStyle = BorderStyle.None;
-            textBox4.Font = new Font("Poppins", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            textBox4.ForeColor = Color.DarkGray;
-            textBox4.Location = new Point(127, 309);
-            textBox4.Multiline = true;
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(333, 33);
-            textBox4.TabIndex = 34;
-            textBox4.Text = "Kota";
-            // 
-            // pictureBox6
-            // 
-            pictureBox6.BackColor = SystemColors.ButtonHighlight;
-            pictureBox6.Image = (Image)resources.GetObject("pictureBox6.Image");
-            pictureBox6.Location = new Point(94, 293);
-            pictureBox6.Name = "pictureBox6";
-            pictureBox6.Size = new Size(381, 63);
-            pictureBox6.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox6.TabIndex = 33;
-            pictureBox6.TabStop = false;
-            // 
-            // textBox3
-            // 
-            textBox3.BackColor = Color.White;
-            textBox3.BorderStyle = BorderStyle.None;
-            textBox3.Font = new Font("Poppins", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            textBox3.ForeColor = Color.DarkGray;
-            textBox3.Location = new Point(127, 233);
-            textBox3.Multiline = true;
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(333, 33);
-            textBox3.TabIndex = 32;
-            textBox3.Text = "Kabupaten";
+            boxKota.BackColor = Color.White;
+            boxKota.BorderStyle = BorderStyle.None;
+            boxKota.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            boxKota.ForeColor = Color.DarkGray;
+            boxKota.Location = new Point(102, 209);
+            boxKota.Margin = new Padding(2);
+            boxKota.Multiline = true;
+            boxKota.Name = "boxKota";
+            boxKota.Size = new Size(266, 26);
+            boxKota.TabIndex = 32;
+            boxKota.Text = "Kabupaten/Kota";
             // 
             // pictureBox5
             // 
             pictureBox5.BackColor = SystemColors.ButtonHighlight;
             pictureBox5.Image = (Image)resources.GetObject("pictureBox5.Image");
-            pictureBox5.Location = new Point(94, 217);
+            pictureBox5.Location = new Point(75, 197);
+            pictureBox5.Margin = new Padding(2);
             pictureBox5.Name = "pictureBox5";
-            pictureBox5.Size = new Size(381, 63);
+            pictureBox5.Size = new Size(305, 50);
             pictureBox5.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox5.TabIndex = 31;
             pictureBox5.TabStop = false;
             // 
-            // textBox2
+            // boxProvinsi
             // 
-            textBox2.BackColor = Color.White;
-            textBox2.BorderStyle = BorderStyle.None;
-            textBox2.Font = new Font("Poppins", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            textBox2.ForeColor = Color.DarkGray;
-            textBox2.Location = new Point(127, 159);
-            textBox2.Multiline = true;
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(333, 33);
-            textBox2.TabIndex = 30;
-            textBox2.Text = "Provinsi";
+            boxProvinsi.BackColor = Color.White;
+            boxProvinsi.BorderStyle = BorderStyle.None;
+            boxProvinsi.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            boxProvinsi.ForeColor = Color.DarkGray;
+            boxProvinsi.Location = new Point(102, 127);
+            boxProvinsi.Margin = new Padding(2);
+            boxProvinsi.Multiline = true;
+            boxProvinsi.Name = "boxProvinsi";
+            boxProvinsi.Size = new Size(266, 26);
+            boxProvinsi.TabIndex = 30;
+            boxProvinsi.Text = "Provinsi";
             // 
             // pictureBox4
             // 
             pictureBox4.BackColor = SystemColors.ButtonHighlight;
             pictureBox4.Image = (Image)resources.GetObject("pictureBox4.Image");
-            pictureBox4.Location = new Point(94, 143);
+            pictureBox4.Location = new Point(75, 114);
+            pictureBox4.Margin = new Padding(2);
             pictureBox4.Name = "pictureBox4";
-            pictureBox4.Size = new Size(381, 63);
+            pictureBox4.Size = new Size(305, 50);
             pictureBox4.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox4.TabIndex = 29;
             pictureBox4.TabStop = false;
@@ -179,143 +159,140 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Poppins", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(62, 68);
+            label1.Font = new Font("Microsoft Sans Serif", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.Location = new Point(50, 54);
+            label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(948, 49);
+            label1.Size = new Size(755, 29);
             label1.TabIndex = 39;
             label1.Text = "Sebelum Melanjutkan ke Tahap Berikutnya Isi Dulu Alamat Anda";
             // 
-            // textBox6
+            // boxRw
             // 
-            textBox6.BackColor = Color.White;
-            textBox6.BorderStyle = BorderStyle.None;
-            textBox6.Font = new Font("Poppins", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            textBox6.ForeColor = Color.DarkGray;
-            textBox6.Location = new Point(605, 308);
-            textBox6.Multiline = true;
-            textBox6.Name = "textBox6";
-            textBox6.Size = new Size(333, 33);
-            textBox6.TabIndex = 41;
-            textBox6.Text = "RW";
-            textBox6.TextChanged += textBox6_TextChanged;
+            boxRw.BackColor = Color.White;
+            boxRw.BorderStyle = BorderStyle.None;
+            boxRw.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            boxRw.ForeColor = Color.DarkGray;
+            boxRw.Location = new Point(484, 209);
+            boxRw.Margin = new Padding(2);
+            boxRw.Multiline = true;
+            boxRw.Name = "boxRw";
+            boxRw.Size = new Size(266, 26);
+            boxRw.TabIndex = 41;
+            boxRw.Text = "RW";
             // 
             // pictureBox1
             // 
             pictureBox1.BackColor = SystemColors.ButtonHighlight;
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(578, 292);
+            pictureBox1.Location = new Point(462, 197);
+            pictureBox1.Margin = new Padding(2);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(381, 63);
+            pictureBox1.Size = new Size(305, 50);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 40;
             pictureBox1.TabStop = false;
-            pictureBox1.Click += pictureBox1_Click;
             // 
             // pictureBox2
             // 
             pictureBox2.BackColor = SystemColors.ButtonHighlight;
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(579, 368);
+            pictureBox2.Location = new Point(463, 282);
+            pictureBox2.Margin = new Padding(2);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(381, 63);
+            pictureBox2.Size = new Size(305, 50);
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox2.TabIndex = 42;
             pictureBox2.TabStop = false;
             // 
-            // textBox7
+            // boxRt
             // 
-            textBox7.BackColor = Color.White;
-            textBox7.BorderStyle = BorderStyle.None;
-            textBox7.Font = new Font("Poppins", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            textBox7.ForeColor = Color.DarkGray;
-            textBox7.Location = new Point(605, 383);
-            textBox7.Multiline = true;
-            textBox7.Name = "textBox7";
-            textBox7.Size = new Size(333, 33);
-            textBox7.TabIndex = 43;
-            textBox7.Text = "RT";
+            boxRt.BackColor = Color.White;
+            boxRt.BorderStyle = BorderStyle.None;
+            boxRt.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            boxRt.ForeColor = Color.DarkGray;
+            boxRt.Location = new Point(484, 294);
+            boxRt.Margin = new Padding(2);
+            boxRt.Multiline = true;
+            boxRt.Name = "boxRt";
+            boxRt.Size = new Size(266, 26);
+            boxRt.TabIndex = 43;
+            boxRt.Text = "RT";
             // 
-            // textBox8
+            // btnSimpan
             // 
-            textBox8.BackColor = Color.White;
-            textBox8.BorderStyle = BorderStyle.None;
-            textBox8.Font = new Font("Poppins", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            textBox8.ForeColor = Color.DarkGray;
-            textBox8.Location = new Point(604, 233);
-            textBox8.Multiline = true;
-            textBox8.Name = "textBox8";
-            textBox8.Size = new Size(333, 33);
-            textBox8.TabIndex = 45;
-            textBox8.Text = "Jalan";
+            btnSimpan.Location = new Point(711, 380);
+            btnSimpan.Name = "btnSimpan";
+            btnSimpan.Size = new Size(94, 29);
+            btnSimpan.TabIndex = 44;
+            btnSimpan.Text = "Simpan";
+            btnSimpan.UseVisualStyleBackColor = true;
+            btnSimpan.Click += btnSimpan_Click;
             // 
-            // pictureBox8
+            // btnKeluar
             // 
-            pictureBox8.BackColor = SystemColors.ButtonHighlight;
-            pictureBox8.Image = (Image)resources.GetObject("pictureBox8.Image");
-            pictureBox8.Location = new Point(577, 217);
-            pictureBox8.Name = "pictureBox8";
-            pictureBox8.Size = new Size(381, 63);
-            pictureBox8.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox8.TabIndex = 44;
-            pictureBox8.TabStop = false;
+            btnKeluar.BackColor = Color.Transparent;
+            btnKeluar.IconChar = FontAwesome.Sharp.IconChar.Close;
+            btnKeluar.IconColor = Color.IndianRed;
+            btnKeluar.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnKeluar.IconSize = 30;
+            btnKeluar.Location = new Point(75, 380);
+            btnKeluar.Name = "btnKeluar";
+            btnKeluar.Size = new Size(45, 29);
+            btnKeluar.TabIndex = 45;
+            btnKeluar.UseVisualStyleBackColor = false;
+            btnKeluar.Click += btnKeluar_Click;
             // 
             // Regist_Alamat
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(1078, 544);
-            Controls.Add(textBox8);
-            Controls.Add(pictureBox8);
-            Controls.Add(textBox7);
+            ClientSize = new Size(862, 435);
+            Controls.Add(btnKeluar);
+            Controls.Add(btnSimpan);
+            Controls.Add(boxRt);
             Controls.Add(pictureBox2);
-            Controls.Add(textBox6);
+            Controls.Add(boxRw);
             Controls.Add(pictureBox1);
             Controls.Add(label1);
-            Controls.Add(textBox5);
+            Controls.Add(boxKelurahan);
             Controls.Add(pictureBox7);
-            Controls.Add(textBox1);
+            Controls.Add(boxKec);
             Controls.Add(pictureBox3);
-            Controls.Add(textBox4);
-            Controls.Add(pictureBox6);
-            Controls.Add(textBox3);
+            Controls.Add(boxKota);
             Controls.Add(pictureBox5);
-            Controls.Add(textBox2);
+            Controls.Add(boxProvinsi);
             Controls.Add(pictureBox4);
             FormBorderStyle = FormBorderStyle.None;
+            Margin = new Padding(2);
             Name = "Regist_Alamat";
             Text = "Regist_Alamat";
-            Load += Regist_Alamat_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox7).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox8).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-        private TextBox textBox5;
+        private TextBox boxKelurahan;
         private PictureBox pictureBox7;
-        private TextBox textBox1;
+        private TextBox boxKec;
         private PictureBox pictureBox3;
-        private TextBox textBox4;
-        private PictureBox pictureBox6;
-        private TextBox textBox3;
+        private TextBox boxKota;
         private PictureBox pictureBox5;
-        private TextBox textBox2;
+        private TextBox boxProvinsi;
         private PictureBox pictureBox4;
         private Label label1;
-        private TextBox textBox6;
+        private TextBox boxRw;
         private PictureBox pictureBox1;
         private PictureBox pictureBox2;
-        private TextBox textBox7;
-        private TextBox textBox8;
-        private PictureBox pictureBox8;
+        private TextBox boxRt;
+        private Button btnSimpan;
+        private FontAwesome.Sharp.IconButton btnKeluar;
     }
 }

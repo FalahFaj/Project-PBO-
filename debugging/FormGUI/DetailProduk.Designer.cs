@@ -99,7 +99,7 @@
             btnBeli.Name = "btnBeli";
             btnBeli.Size = new Size(138, 48);
             btnBeli.TabIndex = 5;
-            btnBeli.Text = "Beli";
+            btnBeli.Text = "Checkout";
             btnBeli.UseVisualStyleBackColor = false;
             btnBeli.Click += btnBeli_Click;
             // 

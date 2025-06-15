@@ -13,5 +13,6 @@ namespace debugging.Model
         public int id_keranjang { get; set; }
         public int id_customer { get; set; }
 
+        public virtual ICollection<Detail_keranjang> detail_keranjang { get; set; }
     }
 }

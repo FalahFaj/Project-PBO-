@@ -62,6 +62,8 @@ namespace debugging
             timer1 = new System.Windows.Forms.Timer(components);
             timer2 = new System.Windows.Forms.Timer(components);
             flowLayoutPanel3 = new FlowLayoutPanel();
+            PanelchatAdmin = new Panel();
+            TombolBukaChat = new FontAwesome.Sharp.IconButton();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             flowLayoutPanel1.SuspendLayout();
@@ -85,6 +87,8 @@ namespace debugging
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(32, 33, 36);
+            panel1.Controls.Add(PanelchatAdmin);
+            panel1.Controls.Add(TombolBukaChat);
             panel1.Controls.Add(label1);
             panel1.Controls.Add(pictureBox1);
             panel1.Dock = DockStyle.Top;
@@ -404,6 +408,27 @@ namespace debugging
             flowLayoutPanel3.Size = new Size(853, 550);
             flowLayoutPanel3.TabIndex = 7;
             // 
+            // PanelchatAdmin
+            // 
+            PanelchatAdmin.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+            PanelchatAdmin.AutoScroll = true;
+            PanelchatAdmin.Location = new Point(863, 50);
+            PanelchatAdmin.Name = "PanelchatAdmin";
+            PanelchatAdmin.Size = new Size(237, 507);
+            PanelchatAdmin.TabIndex = 0;
+            // 
+            // TombolBukaChat
+            // 
+            TombolBukaChat.IconChar = FontAwesome.Sharp.IconChar.Message;
+            TombolBukaChat.IconColor = Color.Black;
+            TombolBukaChat.IconFont = FontAwesome.Sharp.IconFont.Regular;
+            TombolBukaChat.IconSize = 35;
+            TombolBukaChat.Location = new Point(1030, 9);
+            TombolBukaChat.Name = "TombolBukaChat";
+            TombolBukaChat.Size = new Size(58, 38);
+            TombolBukaChat.TabIndex = 2;
+            TombolBukaChat.UseVisualStyleBackColor = true;
+            // 
             // DashboardUser
             // 
             AutoScaleMode = AutoScaleMode.None;
@@ -470,5 +495,7 @@ namespace debugging
         private Button button7;
         private System.Windows.Forms.Timer timer2;
         private FlowLayoutPanel flowLayoutPanel3;
+        private Panel PanelchatAdmin;
+        private FontAwesome.Sharp.IconButton TombolBukaChat;
     }
 }

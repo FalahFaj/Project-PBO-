@@ -19,13 +19,5 @@ namespace debugging.Model
         public string status_peminjaman { get; set; }
         [ForeignKey("id_customer")]
         public int id_customer { get; set; }
-        public Penyewaan(DateTime tanggal_sewa, DateTime tanggal_kembali, decimal pembayaran_dp, string status_dp, string status_peminjaman) 
-        {
-            this.tanggal_sewa = tanggal_sewa;
-            this.tanggal_kembali = tanggal_kembali;
-            this.pembayaran_dp = pembayaran_dp;
-            this.status_dp = status_dp;
-            this.status_peminjaman = status_peminjaman;
-        }
     }
 }

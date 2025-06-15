@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 using Npgsql;
+using debugging.Model;
+using debugging.Service;    
 
 namespace debugging
 {
@@ -18,10 +20,11 @@ namespace debugging
     {
         private DataTable tabelData = new DataTable();
         private DataView viewData;
+        private ServiceAkun serviceAkun; // Added declaration for 'serviceAkun'  
 
-        public Status()
+        public Status(ServiceAkun serviceAkun) // Added constructor to initialize 'serviceAkun'  
         {
-            DataTable tabelData = new DataTable();
+            this.serviceAkun = serviceAkun;
             InitializeComponent();
         }
 
@@ -40,7 +43,6 @@ namespace debugging
             comboBox1.Items.Add("Sewa");
             comboBox1.SelectedIndex = 0;
         }
-
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -64,8 +66,8 @@ namespace debugging
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Dashboard_Admin dashboard = new Dashboard_Admin();
-            dashboard.Show();     
+            dashboard_admin2 dashboard = new dashboard_admin2(serviceAkun, null); // Fixed constructor call  
+            dashboard.Show();
             this.Close();
         }
     }

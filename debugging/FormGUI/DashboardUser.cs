@@ -35,12 +35,13 @@ namespace debugging
             this.IsMdiContainer = true;
             this.serviceAkun = serviceAkun;
             this.akun = akun;
+            PanelchatAdmin.Visible = false;
 
             KoneksiDB koneksiDB = new KoneksiDB();
             IAksesProduk aksesproduk = new AksesProduk(koneksiDB);
             this.serviceProduk = new ServiceProduk(aksesproduk);
 
-            keranjang_ini = new Keranjang_ini();
+            keranjang_ini = new Keranjang_ini(akun);
             subMaharForm = new SubMahar(serviceProduk);
             subSeserahanForm = new SubSeserahan(serviceProduk);
             subSuvernirForm = new SubSuvernir(serviceProduk);
@@ -120,7 +121,7 @@ namespace debugging
                 }
             }
         }
-         
+
         private static Image FotoProduk(byte[] byteFoto)
         {
             try
@@ -133,14 +134,7 @@ namespace debugging
                     }
                 }
 
-                var fotoDefault = FotoDefault.GetFotoDefault();
-                if (fotoDefault != null && fotoDefault.Length > 0)
-                {
-                    using (var ms = new MemoryStream(fotoDefault))
-                    {
-                        return Image.FromStream(ms);
-                    }
-                }
+                return FotoDefault.GetFotoDefault();
             }
             catch
             {
@@ -245,7 +239,11 @@ namespace debugging
         {
             if (keranjang_ini == null)
             {
-                keranjang_ini = new Keranjang_ini();
+                flowLayoutPanel1.Hide();
+                flowLayoutPanel2.Hide();
+                flowLayoutPanel3.Hide();
+                keranjang_ini = new Keranjang_ini(akun);
+                keranjang_ini.BringToFront();
                 keranjang_ini.FormClosed += Keranjang_FormClosed;
                 keranjang_ini.MdiParent = this;
                 keranjang_ini.Dock = DockStyle.Fill;
@@ -296,14 +294,8 @@ namespace debugging
             subSuvernirForm.Hide();
             subMaharForm.Show();
             subMaharForm.BringToFront();
-            //flowLayoutPanel3.Controls.Clear();
-            //Tampilkan_Produk_Berdasar_Kategori(3);
         }
 
-        //private void SubMahar_FormClosed(object? sender, FormClosedEventArgs e)
-        //{
-        //    subMahar = null;
-        //}
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -311,14 +303,7 @@ namespace debugging
             subSuvernirForm.Hide();
             subSeserahanForm.Show();
             subSeserahanForm.BringToFront();
-            //flowLayoutPanel3.Controls.Clear();
-            //Tampilkan_Produk_Berdasar_Kategori(4);
         }
-
-        //private void SubSeserahan_FormClosed(object? sender, FormClosedEventArgs e)
-        //{
-        //    subSeserahan = null;
-        //}
 
         private void button7_Click(object sender, EventArgs e)
         {
@@ -326,21 +311,19 @@ namespace debugging
             subSeserahanForm.Hide();
             subSuvernirForm.Show();
             subSuvernirForm.BringToFront();
-            //flowLayoutPanel3.Controls.Clear();
-            //Tampilkan_Produk_Berdasar_Kategori(1);
         }
 
-        //private void SubSuvernir_FormClosed(object? sender, FormClosedEventArgs e)
-        //{
-        //    subSuvernir = null;
-        //}
 
         private void button3_Click(object sender, EventArgs e)
         {
             if (aboutUs == null)
             {
-                aboutUs = new AboutUs();
+                flowLayoutPanel1.Hide();
+                flowLayoutPanel2.Hide();
+                flowLayoutPanel3.Hide();
+                aboutUs = new AboutUs(akun);
                 aboutUs.FormClosed += AboutUs_FormClosed;
+                aboutUs.BringToFront();
                 aboutUs.MdiParent = this;
                 aboutUs.Dock = DockStyle.Fill;
                 aboutUs.Show();
@@ -366,6 +349,12 @@ namespace debugging
 
         private void DashboardUser_Load(object sender, EventArgs e)
         {
+
+        }
+
+        private void TombolBukaChat_Click(object sender, EventArgs e)
+        {
+            PanelchatAdmin.Visible = !PanelchatAdmin.Visible;
 
         }
     }

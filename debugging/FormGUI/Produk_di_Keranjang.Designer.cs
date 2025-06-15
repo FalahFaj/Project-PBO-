@@ -28,74 +28,71 @@
         /// </summary>
         private void InitializeComponent()
         {
-            pictureBox1 = new PictureBox();
-            label1 = new Label();
-            label2 = new Label();
-            label3 = new Label();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            fotoProduk = new PictureBox();
+            lblNama = new Label();
+            lblHarga = new Label();
+            lblJumlah = new Label();
+            ((System.ComponentModel.ISupportInitialize)fotoProduk).BeginInit();
             SuspendLayout();
             // 
-            // pictureBox1
+            // fotoProduk
             // 
-            pictureBox1.Location = new Point(21, 17);
-            pictureBox1.Margin = new Padding(2, 2, 2, 2);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(153, 117);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.TabIndex = 0;
-            pictureBox1.TabStop = false;
+            fotoProduk.Location = new Point(21, 17);
+            fotoProduk.Margin = new Padding(2);
+            fotoProduk.Name = "fotoProduk";
+            fotoProduk.Size = new Size(153, 117);
+            fotoProduk.SizeMode = PictureBoxSizeMode.Zoom;
+            fotoProduk.TabIndex = 0;
+            fotoProduk.TabStop = false;
             // 
-            // label1
+            // lblNama
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(319, 30);
-            label1.Margin = new Padding(2, 0, 2, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(50, 20);
-            label1.TabIndex = 1;
-            label1.Text = "label1";
+            lblNama.AutoSize = true;
+            lblNama.Location = new Point(319, 30);
+            lblNama.Margin = new Padding(2, 0, 2, 0);
+            lblNama.Name = "lblNama";
+            lblNama.Size = new Size(0, 20);
+            lblNama.TabIndex = 1;
             // 
-            // label2
+            // lblHarga
             // 
-            label2.AutoSize = true;
-            label2.Location = new Point(319, 69);
-            label2.Margin = new Padding(2, 0, 2, 0);
-            label2.Name = "label2";
-            label2.Size = new Size(50, 20);
-            label2.TabIndex = 2;
-            label2.Text = "label2";
+            lblHarga.AutoSize = true;
+            lblHarga.Location = new Point(319, 69);
+            lblHarga.Margin = new Padding(2, 0, 2, 0);
+            lblHarga.Name = "lblHarga";
+            lblHarga.Size = new Size(0, 20);
+            lblHarga.TabIndex = 2;
             // 
-            // label3
+            // lblJumlah
             // 
-            label3.AutoSize = true;
-            label3.Location = new Point(319, 110);
-            label3.Margin = new Padding(2, 0, 2, 0);
-            label3.Name = "label3";
-            label3.Size = new Size(50, 20);
-            label3.TabIndex = 3;
-            label3.Text = "label3";
+            lblJumlah.AutoSize = true;
+            lblJumlah.Location = new Point(319, 110);
+            lblJumlah.Margin = new Padding(2, 0, 2, 0);
+            lblJumlah.Name = "lblJumlah";
+            lblJumlah.Size = new Size(0, 20);
+            lblJumlah.TabIndex = 3;
             // 
             // Produk_di_Keranjang
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(label3);
-            Controls.Add(label2);
-            Controls.Add(label1);
-            Controls.Add(pictureBox1);
-            Margin = new Padding(2, 2, 2, 2);
+            Controls.Add(lblJumlah);
+            Controls.Add(lblHarga);
+            Controls.Add(lblNama);
+            Controls.Add(fotoProduk);
+            Margin = new Padding(2);
             Name = "Produk_di_Keranjang";
             Size = new Size(500, 157);
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)fotoProduk).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private PictureBox pictureBox1;
-        private Label label1;
-        private Label label2;
-        private Label label3;
+        private PictureBox fotoProduk;
+        private Label lblNama;
+        private Label lblHarga;
+        private Label lblJumlah;
     }
 }

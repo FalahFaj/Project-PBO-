@@ -1,5 +1,6 @@
 ﻿using System.Data;
 using debugging.PenghubungDB;
+using debugging.Model;
 
 namespace debugging
 {
