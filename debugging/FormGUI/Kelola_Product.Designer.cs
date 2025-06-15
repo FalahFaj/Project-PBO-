@@ -53,7 +53,7 @@
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.Size = new Size(1150, 312);
             dataGridView1.TabIndex = 2;
-            dataGridView1.CellClick += dataGridView1_CellClick;
+            //dataGridView1.CellClick += dataGridView1_CellClick;
             // 
             // label1
             // 
@@ -156,7 +156,7 @@
             txtDeskripsi.Name = "txtDeskripsi";
             txtDeskripsi.Size = new Size(999, 31);
             txtDeskripsi.TabIndex = 10;
-            txtDeskripsi.TextChanged += txtDeskripsi_TextChanged;
+            //txtDeskripsi.TextChanged += txtDeskripsi_TextChanged;
             // 
             // btnTambah
             // 
@@ -181,7 +181,7 @@
             btnUpdate.TabIndex = 12;
             btnUpdate.Text = "Update";
             btnUpdate.UseVisualStyleBackColor = false;
-            btnUpdate.Click += btnUpdate_Click;
+            //btnUpdate.Click += btnUpdate_Click;
             // 
             // btnHapus
             // 
@@ -193,7 +193,7 @@
             btnHapus.TabIndex = 13;
             btnHapus.Text = "Hapus";
             btnHapus.UseVisualStyleBackColor = false;
-            btnHapus.Click += btnHapus_Click;
+            //btnHapus.Click += btnHapus_Click;
             // 
             // label6
             // 

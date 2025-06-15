@@ -6,12 +6,15 @@ using MigraDoc.DocumentObjectModel.Tables;
 using MigraDoc.Rendering;
 using Color = MigraDoc.DocumentObjectModel.Color;
 using Font = MigraDoc.DocumentObjectModel.Font;
+using debugging.Model;
+using debugging.PenghubungDB;
 
 namespace debugging
 {
     [NotMapped]
     public partial class Riwayat_Transaksi : Form
     {
+        private readonly KoneksiDB db = new KoneksiDB();
         public Riwayat_Transaksi()
         {
             InitializeComponent();
@@ -34,6 +37,26 @@ namespace debugging
             comboBox1.Items.Add("Beli");
             comboBox1.Items.Add("Sewa");
             comboBox1.SelectedIndex = 0;
+            LoadRiwayatTransaksi();
+        }
+        private void LoadRiwayatTransaksi()
+        {
+            var data = (from p in db.penyewaan
+                        join c in db.customer on p.id_customer equals c.id_customer
+                        join d in db.item_penyewaan on p.id_penyewaan equals d.id_penyewaan
+                        join pr in db.produk on d.id_produk equals pr.id_produk
+                        select new
+                        {
+                            NamaPenyewaan = c.nama,
+                            TanggalPenyewaan = p.tanggal_sewa,
+                            TanggalPengembalian = p.tanggal_kembali,
+                            Produk = pr.nama,
+                            Nominal = p.pembayaran_dp,
+                            SatusPinjam = p.status_peminjaman,
+                            DurasiHari = d.durasi_hari,
+                            TotalHarga = d.jumlah * pr.harga
+                        }).ToList();
+            dataGridView1.DataSource = data;
         }
         public void ExportToPDF(DataGridView dataGridView)
         {

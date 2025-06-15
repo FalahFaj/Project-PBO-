@@ -12,14 +12,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using debugging.Service;
 
 namespace debugging
 {
     public partial class formhomeadmin : Form
     {
-        public formhomeadmin()
+
+        private readonly ServiceProduk serviceProduk;
+        public formhomeadmin(ServiceProduk serviceProduk)
         {
             InitializeComponent();
+            this.serviceProduk = serviceProduk;
         }
         // Ganti tanggalLabels jadi bulanLabels
         private readonly string[] bulanLabels = new[]
@@ -58,7 +62,7 @@ namespace debugging
                     LabelsPaint = new SolidColorPaint(SKColors.Black),
                     SeparatorsPaint = new SolidColorPaint(SKColors.LightGray),
                     LabelsRotation = 0,
-                    UnitWidth = 1, // biar 1 label per kolom
+                    UnitWidth = 1,
                     MinStep = 1
                 }
             };
@@ -180,6 +184,16 @@ namespace debugging
         }
 
         private void panel4_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void cartesianChart1_Load_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void formhomeadmin_Load(object sender, EventArgs e)
         {
 
         }

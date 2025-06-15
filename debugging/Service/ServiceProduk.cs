@@ -11,21 +11,31 @@ namespace debugging.Service
 {
     public class ServiceProduk
     {
-        private readonly IAksesProduk aksesProduk;
-        public ServiceProduk(IAksesProduk aksesProduk)
+        private readonly debugging.AksesLayer.IAksesProduk aksesProduk;
+
+        public ServiceProduk(debugging.AksesLayer.IAksesProduk aksesProduk)
         {
             this.aksesProduk = aksesProduk;
         }
+
         public List<Produk> GetAllProduk()
         {
             return aksesProduk.GetAllProduk();
         }
+
         public List<Produk> GetProdukByName(string nama)
         {
-            var semuaProduk = GetAllProduk();
-            return semuaProduk
-                .Where(p => p.nama.ToLower().Contains(nama.ToLower()))
-                .ToList();
+            return aksesProduk.GetAllProduk().Where(p => p.nama.Contains(nama)).ToList();
+        }
+
+        public Produk GetProdukBById(int id_produk)
+        {
+            return aksesProduk.GetProdukBById(id_produk);
+        }
+
+        public void TambahProduk(Produk produk)
+        {
+            aksesProduk.UpdateProduk(produk);
         }
     }
 }
