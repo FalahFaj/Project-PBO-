@@ -116,6 +116,7 @@
             grid_Produk.RowHeadersWidth = 51;
             grid_Produk.Size = new Size(678, 280);
             grid_Produk.TabIndex = 4;
+            grid_Produk.CellContentClick += grid_Produk_CellContentClick;
             // 
             // txtId
             // 

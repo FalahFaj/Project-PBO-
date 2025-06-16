@@ -47,7 +47,7 @@ namespace debugging.FormGUI
                         {
                             NamaProduk = produk.nama,
                             HargaProduk = produk.harga,
-                            FotoProduk = produk.foto != null ? Image.FromStream(new System.IO.MemoryStream(produk.foto)) : null,
+                            FotoProduk = !string.IsNullOrEmpty(produk.foto) && System.IO.File.Exists(produk.foto) ? Image.FromFile((produk.foto)) : null,
                             JumlahProduk = detail.jumlah
                         };
 

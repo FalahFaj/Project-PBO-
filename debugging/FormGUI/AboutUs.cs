@@ -23,46 +23,53 @@ namespace debugging
 
         private void AboutUs_Load(object sender, EventArgs e)
         {
-            this.ControlBox = false;
-            using (var db = new KoneksiDB())
+            try
             {
-                var customer = db.customer.FirstOrDefault(c => c.id_customer == akun.Id);
-                if (customer != null)
+                this.ControlBox = false;
+                using (var db = new KoneksiDB())
                 {
-                    lblNama.Text = customer.nama;
-                    lblEmail.Text = customer.email_address;
-                    lblNo_HP.Text = customer.no_hp;
-                    lblUsername.Text = customer.username;
-                    lblPassword.Text = customer.password;
-                    if (customer.rt == null && customer.rw == null && customer.kelurahan == null && customer.kecamatan == null && customer.kota == null)
+                    var customer = db.customer.FirstOrDefault(c => c.id_customer == akun.Id);
+                    if (customer != null)
                     {
-                        lblAlamat.Text = "Alamat tidak tersedia";
-                        var regis = MessageBox.Show(
-                            "Alamat Anda belum lengkap. Apakah Anda ingin mengisi alamat sekarang?",
-                            "Informasi Alamat",
-                            MessageBoxButtons.YesNo,
-                            MessageBoxIcon.Information);
-                        if (regis == DialogResult.Yes)
+                        lblNama.Text = customer.nama ?? "-";
+                        lblEmail.Text = customer.email_address ?? "-";
+                        lblNo_HP.Text = customer.no_hp ?? "-";
+                        lblUsername.Text = customer.username ?? "-";
+                        lblPassword.Text = customer.password ?? "-";
+                        if (customer.rt == null && customer.rw == null && customer.kelurahan == null && customer.kecamatan == null && customer.kota == null)
                         {
-                            this.Hide();
-                            Regist_Alamat alamatForm = new Regist_Alamat(akun);
-                            alamatForm.ShowDialog();
-                            this.BeginInvoke(new Action(() => this.Close()));
+                            lblAlamat.Text = "Alamat tidak tersedia";
+                            var regis = MessageBox.Show(
+                                "Alamat Anda belum lengkap. Apakah Anda ingin mengisi alamat sekarang?",
+                                "Informasi Alamat",
+                                MessageBoxButtons.YesNo,
+                                MessageBoxIcon.Information);
+                            if (regis == DialogResult.Yes)
+                            {
+                                this.Hide();
+                                Regist_Alamat alamatForm = new Regist_Alamat(akun);
+                                alamatForm.ShowDialog();
+                                this.BeginInvoke(new Action(() => this.Close()));
+                            }
+                            else
+                            {
+                                this.BeginInvoke(new Action(() => this.Close()));
+                            }
                         }
                         else
                         {
-                            this.BeginInvoke(new Action(() => this.Close()));
+                            lblAlamat.Text = $"{customer.rt}, {customer.rw}, {customer.kelurahan}, {customer.kecamatan}, {customer.kota}, {customer.provinsi}";
                         }
                     }
                     else
                     {
-                        lblAlamat.Text = $"{customer.rt}, {customer.rw}, {customer.kelurahan}, {customer.kecamatan}, {customer.kota}, {customer.provinsi}";
+                        MessageBox.Show("Data pengguna tidak ditemukan.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
-                else
-                {
-                    MessageBox.Show("Data pengguna tidak ditemukan.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+            }
+            catch
+            {
+                MessageBox.Show("Gagal mengambil data dari database: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

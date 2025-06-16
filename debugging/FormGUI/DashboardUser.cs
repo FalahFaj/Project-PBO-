@@ -122,16 +122,13 @@ namespace debugging
             }
         }
 
-        private static Image FotoProduk(byte[] byteFoto)
+        private static Image FotoProduk(string filePath)
         {
             try
             {
-                if (byteFoto != null && byteFoto.Length > 0)
+                if(!string.IsNullOrEmpty(filePath) && System.IO.File.Exists(filePath))
                 {
-                    using (var ms = new MemoryStream(byteFoto))
-                    {
-                        return Image.FromStream(ms);
-                    }
+                    return Image.FromFile(filePath);
                 }
 
                 return FotoDefault.GetFotoDefault();

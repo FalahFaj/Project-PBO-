@@ -87,21 +87,21 @@ namespace debugging
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(32, 33, 36);
-            panel1.Controls.Add(PanelchatAdmin);
             panel1.Controls.Add(TombolBukaChat);
+            panel1.Controls.Add(PanelchatAdmin);
             panel1.Controls.Add(label1);
             panel1.Controls.Add(pictureBox1);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1100, 50);
+            panel1.Size = new Size(1456, 50);
             panel1.TabIndex = 0;
             // 
             // PanelchatAdmin
             // 
             PanelchatAdmin.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
             PanelchatAdmin.AutoScroll = true;
-            PanelchatAdmin.Location = new Point(863, 50);
+            PanelchatAdmin.Location = new Point(1219, 50);
             PanelchatAdmin.Name = "PanelchatAdmin";
             PanelchatAdmin.Size = new Size(237, 507);
             PanelchatAdmin.TabIndex = 0;
@@ -112,7 +112,7 @@ namespace debugging
             TombolBukaChat.IconColor = Color.Black;
             TombolBukaChat.IconFont = FontAwesome.Sharp.IconFont.Regular;
             TombolBukaChat.IconSize = 35;
-            TombolBukaChat.Location = new Point(1030, 9);
+            TombolBukaChat.Location = new Point(1386, 6);
             TombolBukaChat.Name = "TombolBukaChat";
             TombolBukaChat.Size = new Size(58, 38);
             TombolBukaChat.TabIndex = 2;
@@ -153,7 +153,7 @@ namespace debugging
             flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
             flowLayoutPanel1.Location = new Point(0, 50);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(247, 550);
+            flowLayoutPanel1.Size = new Size(247, 749);
             flowLayoutPanel1.TabIndex = 1;
             // 
             // flowLayoutPanel2
@@ -426,14 +426,14 @@ namespace debugging
             flowLayoutPanel3.Dock = DockStyle.Fill;
             flowLayoutPanel3.Location = new Point(247, 50);
             flowLayoutPanel3.Name = "flowLayoutPanel3";
-            flowLayoutPanel3.Size = new Size(853, 550);
+            flowLayoutPanel3.Size = new Size(1209, 749);
             flowLayoutPanel3.TabIndex = 7;
             // 
             // DashboardUser
             // 
             AutoScaleMode = AutoScaleMode.None;
             BackColor = Color.White;
-            ClientSize = new Size(1100, 600);
+            ClientSize = new Size(1456, 799);
             Controls.Add(flowLayoutPanel3);
             Controls.Add(flowLayoutPanel1);
             Controls.Add(panel1);

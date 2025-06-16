@@ -15,7 +15,7 @@ namespace debugging.Model
         public string nama { get; set; }
         public decimal harga { get; set; }
         public int stok { get; set; }
-        public byte[]? foto { get; set; }
+        public string? foto { get; set; }
         [ForeignKey("id_kategori")]
         public int id_kategori { get; set; }
         public bool disewakan { get; set; }

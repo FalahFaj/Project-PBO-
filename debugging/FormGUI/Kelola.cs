@@ -18,8 +18,8 @@ namespace debugging
         public Kelola(ServiceProduk serviceProduk, AksesProduk aksesProduk)
         {
             InitializeComponent();
-            this.aksesProduk = aksesProduk; // Use the instance passed as a parameter
-            this.serviceProduk = serviceProduk; // Use the instance passed as a parameter
+            this.aksesProduk = aksesProduk; 
+            this.serviceProduk = serviceProduk; 
 
             Load += Kelola_Load;
             InitializeDataGridView();
@@ -40,12 +40,14 @@ namespace debugging
                 Name = "grid_Produk"
             };
 
-            dataGridViewProduk.Columns.Add("id_produk", "ID");
-            dataGridViewProduk.Columns.Add("nama", "Nama Produk");
-            dataGridViewProduk.Columns.Add("harga", "Harga");
-            dataGridViewProduk.Columns.Add("stok", "Stok");
-            dataGridViewProduk.Columns.Add("disewakan", "Disewakan");
-
+            //dataGridViewProduk.Columns.Add("id_produk", "ID");
+            //dataGridViewProduk.Columns.Add("nama", "Nama Produk");
+            //dataGridViewProduk.Columns.Add("harga", "Harga");
+            //dataGridViewProduk.Columns.Add("stok", "Stok");
+            //dataGridViewProduk.Columns.Add("disewakan", "Disewakan");
+            dataGridViewProduk.Left = (this.ClientSize.Width - dataGridViewProduk.Width) / 2;
+            dataGridViewProduk.Top = (this.ClientSize.Height - dataGridViewProduk.Height) / 2;
+            dataGridViewProduk.Anchor = AnchorStyles.None;
             Controls.Add(dataGridViewProduk);
         }
 
@@ -110,6 +112,11 @@ namespace debugging
         {
             update_Produk updateProdukForm = new update_Produk(serviceProduk);
             updateProdukForm.ShowDialog();
+        }
+
+        private void grid_Produk_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

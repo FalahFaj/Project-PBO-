@@ -37,16 +37,24 @@ namespace debugging.FormGUI
                 "Deskripsi belum tersedia";
         }
 
-        private Image FotoProduk(byte[] byteFoto)
+        private Image FotoProduk(string filePath)
         {
-            if (byteFoto != null && byteFoto.Length > 0)
+            try
             {
-                using (var ms = new MemoryStream(byteFoto))
+                if (!string.IsNullOrEmpty(filePath) && File.Exists(filePath))
                 {
-                    return Image.FromStream(ms);
+                    return Image.FromFile(filePath);
+                }
+                else
+                {
+                    return Image.FromStream(Assembly.GetExecutingAssembly().GetManifestResourceStream("debugging.Assets.FotoDefault.png"));
                 }
             }
-            return null;
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Gagal memuat gambar: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
         }
 
         private void btnBeli_Click(object sender, EventArgs e)

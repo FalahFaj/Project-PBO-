@@ -32,11 +32,11 @@ namespace debugging.FormGUI
 
             comboDisewakan.DataSource = new List<string> { "Ya", "Tidak" };
         }
-        private List<string> GetAllNamaKategori()
+        private List<Kategori> GetAllNamaKategori()
         {
             using (var db = new KoneksiDB())
             {
-                return db.kategori.Select(k => k.kategori).ToList();
+                return db.kategori.ToList();
             }
         }
 
