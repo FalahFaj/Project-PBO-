@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 using debugging.Service;
 using debugging.Model;
 using debugging.AksesLayer;
 using debugging.FormGUI;
-using debugging.PenghubungDB;
 
 namespace debugging
 {
@@ -13,42 +11,45 @@ namespace debugging
     {
         private readonly ServiceProduk serviceProduk;
         private readonly AksesProduk aksesProduk;
-        private DataGridView dataGridViewProduk;
 
         public Kelola(ServiceProduk serviceProduk, AksesProduk aksesProduk)
         {
             InitializeComponent();
-            this.aksesProduk = aksesProduk; 
-            this.serviceProduk = serviceProduk; 
-
-            Load += Kelola_Load;
-            InitializeDataGridView();
+            this.aksesProduk = aksesProduk;
+            this.serviceProduk = serviceProduk;
+            this.Load += Kelola_Load;
         }
 
         private void Kelola_Load(object sender, EventArgs e)
         {
+            this.grid_Produk.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            this.grid_Produk.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            this.grid_Produk.MultiSelect = false;
+            this.grid_Produk.ReadOnly = true;
+            this.grid_Produk.AutoGenerateColumns = false;
+
+            SetupDataGridViewColumns();
+            this.grid_Produk.CellFormatting += grid_Produk_CellFormatting;
             LoadDataProduk();
         }
 
-        private void InitializeDataGridView()
+        private void SetupDataGridViewColumns()
         {
-            dataGridViewProduk = new DataGridView
-            {
-                Dock = DockStyle.Fill,
-                AutoGenerateColumns = true,
-                ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize,
-                Name = "grid_Produk"
-            };
+            grid_Produk.Columns.Clear();
+            grid_Produk.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "ID", DataPropertyName = "id_produk" });
+            grid_Produk.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Nama Produk", DataPropertyName = "nama" });
+            grid_Produk.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Harga", DataPropertyName = "harga", DefaultCellStyle = { Format = "C0" } });
+            grid_Produk.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Stok", DataPropertyName = "stok" });
+            grid_Produk.Columns.Add(new DataGridViewTextBoxColumn { Name = "DisewakanColumn", HeaderText = "Disewakan", DataPropertyName = "disewakan" });
+        }
 
-            //dataGridViewProduk.Columns.Add("id_produk", "ID");
-            //dataGridViewProduk.Columns.Add("nama", "Nama Produk");
-            //dataGridViewProduk.Columns.Add("harga", "Harga");
-            //dataGridViewProduk.Columns.Add("stok", "Stok");
-            //dataGridViewProduk.Columns.Add("disewakan", "Disewakan");
-            dataGridViewProduk.Left = (this.ClientSize.Width - dataGridViewProduk.Width) / 2;
-            dataGridViewProduk.Top = (this.ClientSize.Height - dataGridViewProduk.Height) / 2;
-            dataGridViewProduk.Anchor = AnchorStyles.None;
-            Controls.Add(dataGridViewProduk);
+        private void grid_Produk_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (this.grid_Produk.Columns[e.ColumnIndex].Name == "DisewakanColumn" && e.Value is bool)
+            {
+                e.Value = (bool)e.Value ? "YA" : "TIDAK";
+                e.FormattingApplied = true;
+            }
         }
 
         private void LoadDataProduk()
@@ -56,62 +57,50 @@ namespace debugging
             try
             {
                 var produkList = serviceProduk.GetAllProduk();
-
-                if (produkList == null || produkList.Count == 0)
-                {
-                    MessageBox.Show("Tidak ada data produk ditemukan.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
-
-                dataGridViewProduk.AutoGenerateColumns = true;
-                dataGridViewProduk.DataSource = produkList;
+                grid_Produk.DataSource = produkList;
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Gagal memuat data produk: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private bool isDeleteMode = false;
-        private void btnHapus_Click(object sender, EventArgs e)
-        {
-            if (!isDeleteMode)
-            {
-                txtId.Enabled = true;
-                txtId.Focus();
-                isDeleteMode = true;
-                MessageBox.Show("Masukkan ID produk yang ingin dihapus, lalu tekan tombol Hapus lagi untuk konfirmasi.");
-                return;
-            }
-            if (int.TryParse(txtId.Text, out int id))
-            {
-                aksesProduk.HapusProduk(id);
-                MessageBox.Show("Produk berhasil dihapus.");
-                txtId.Text = "";
-                txtId.Enabled = false;
-                isDeleteMode = false;
-                LoadDataProduk();
-            }
-            else
-            {
-                MessageBox.Show("ID produk tidak valid.");
+                MessageBox.Show($"Gagal memuat data produk: {ex.Message}", "Error");
             }
         }
 
         private void btnTambah_Click(object sender, EventArgs e)
         {
-            Tambah_produk tambahProdukForm = new Tambah_produk(serviceProduk, aksesProduk);
-            tambahProdukForm.ShowDialog();
-            if (tambahProdukForm.DialogResult == DialogResult.OK)
+            using (Tambah_produk tambahProdukForm = new Tambah_produk(serviceProduk))
             {
-                LoadDataProduk();
+                if (tambahProdukForm.ShowDialog() == DialogResult.OK) { LoadDataProduk(); }
             }
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            update_Produk updateProdukForm = new update_Produk(serviceProduk);
-            updateProdukForm.ShowDialog();
+            // Karena form update akan mencari ID sendiri, kita tidak perlu memilih baris di sini.
+            // Cukup buka form update.
+            using (var updateForm = new update_Produk(this.serviceProduk))
+            {
+                // Gunakan ShowDialog() agar form Kelola menunggu sampai form update ditutup
+                updateForm.ShowDialog();
+
+
+                LoadDataProduk();
+            }
+        }
+
+        private void btnHapus_Click(object sender, EventArgs e)
+        {
+            if (grid_Produk.CurrentRow == null) { MessageBox.Show("Silakan pilih produk untuk dihapus."); return; }
+            var produkToDelete = (Produk)grid_Produk.CurrentRow.DataBoundItem;
+            var result = MessageBox.Show($"Yakin ingin menghapus '{produkToDelete.nama}'?", "Konfirmasi Hapus", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                try
+                {
+                    serviceProduk.HapusProduk(produkToDelete.id_produk);
+                    LoadDataProduk();
+                }
+                catch (Exception ex) { MessageBox.Show($"Gagal menghapus: {ex.Message}"); }
+            }
         }
 
         private void grid_Produk_CellContentClick(object sender, DataGridViewCellEventArgs e)

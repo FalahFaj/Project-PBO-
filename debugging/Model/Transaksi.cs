@@ -23,6 +23,8 @@ namespace debugging.Model
         public int? id_penyewaan { get; set; }
         [ForeignKey("id_jenis_transaksi")]
         public int id_jenis_transaksi { get; set; }
+        public string status { get; set; }   
+        public decimal Total { get; set; }
         public Customer customer { get; set; }
         public Jenis_transaksi jenis_transaksi { get; set; }
         public Penyewaan Penyewaan { get; set; }

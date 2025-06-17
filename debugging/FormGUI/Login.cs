@@ -1,88 +1,67 @@
-﻿using Microsoft.EntityFrameworkCore.Storage;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using debugging.PenghubungDB;
-using debugging.DAL;
+﻿using System;
+using System.Windows.Forms;
 using debugging.Service;
+using debugging.Model;
 
 namespace debugging
 {
     public partial class Login : Form
     {
+        public UserLogin LoggedInUser { get; private set; }
         private readonly ServiceAkun serviceAkun;
-        public Login()
+
+        public Login(ServiceAkun serviceAkun)
         {
             InitializeComponent();
-            
-            var koneksiDB = new KoneksiDB();
-            var akses_customer = new Akses_customer(koneksiDB);
-            serviceAkun = new ServiceAkun(akses_customer);
+            this.serviceAkun = serviceAkun;
+            //this.pictureBox3.Click += new System.EventHandler(this.btnLogin_Click);
         }
 
         private void Login_Load(object sender, EventArgs e)
         {
-            if (this.WindowState == FormWindowState.Maximized)
-            {
-                this.WindowState = FormWindowState.Minimized;
-            }
-            else if (this.WindowState == FormWindowState.Minimized)
-            {
-                this.WindowState = FormWindowState.Minimized;
-            }
+            this.WindowState = FormWindowState.Normal;
         }
 
         private void linkLabel1_LinkClicked_1(object sender, LinkLabelLinkClickedEventArgs e)
         {
             this.Hide();
-            Regis regis = new Regis();
-            regis.ShowDialog();
-            this.Hide();
+            using (Regis regis = new Regis())
+            {
+                regis.ShowDialog();
+            }
+            this.Show(); 
         }
 
-        private void pictureBox3_Click_1(object sender, EventArgs e)
+        private void btnLogin_Click(object sender, EventArgs e)
         {
             string username = textBox2.Text.Trim();
             string password = textBox3.Text.Trim();
 
-            if (username == "" || password == "")
+            if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
             {
-                MessageBox.Show("Username dan Password tidak boleh kosong", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Username dan Password tidak boleh kosong.", "Peringatan");
                 return;
             }
-            var akun = serviceAkun.Login(username, password);
-            if (akun != null)
+
+            try
             {
-                if (akun.Role == "Admin")
+                var akun = serviceAkun.Login(username, password);
+
+                if (akun != null)
                 {
-                    MessageBox.Show("Login Berhasil sebagai Admin", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.Hide();
-                    dashboard_admin2 dashboard = new dashboard_admin2(serviceAkun,akun);
-                    dashboard.ShowDialog();
-                    this.Close();
-                }
-                else if (akun.Role == "Customer")
-                {
-                    MessageBox.Show("Login Berhasil sebagai User", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.Hide();
-                    DashboardUser dashboardUser = new DashboardUser(serviceAkun, akun);
-                    dashboardUser.ShowDialog();
+                   
+                    this.LoggedInUser = akun;
+                    this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
                 else
                 {
-                    MessageBox.Show("Role tidak dikenali", "Kesalahan", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Username atau Password salah.", "Kesalahan");
                 }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Username atau Password salah", "Kesalahan", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Terjadi kesalahan: " + ex.Message, "Error");
             }
         }
     }

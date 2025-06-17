@@ -37,5 +37,18 @@ namespace debugging.Service
         {
             aksesProduk.UpdateProduk(produk);
         }
+        public void HapusProduk(int id)
+        {
+            aksesProduk.HapusProduk(id);
+        }
+
+        public void UpdateProduk(Produk produk)
+        {
+            aksesProduk.UpdateProduk(produk);
+        }
+        public List<Kategori> GetAllKategori()
+        {
+            return aksesProduk.GetAllKategori();
+        }
     }
 }

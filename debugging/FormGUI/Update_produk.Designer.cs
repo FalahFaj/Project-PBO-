@@ -42,10 +42,10 @@
             // tampilkan_id_grid
             // 
             tampilkan_id_grid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            tampilkan_id_grid.Location = new Point(117, 76);
+            tampilkan_id_grid.Location = new Point(112, 64);
             tampilkan_id_grid.Name = "tampilkan_id_grid";
             tampilkan_id_grid.RowHeadersWidth = 51;
-            tampilkan_id_grid.Size = new Size(526, 34);
+            tampilkan_id_grid.Size = new Size(526, 84);
             tampilkan_id_grid.TabIndex = 0;
             // 
             // Cari_id
@@ -88,7 +88,7 @@
             // 
             comboBoxkategori.FormattingEnabled = true;
             comboBoxkategori.Items.AddRange(new object[] { "Harga", "Stok", "Kategori" });
-            comboBoxkategori.Location = new Point(172, 116);
+            comboBoxkategori.Location = new Point(143, 154);
             comboBoxkategori.Name = "comboBoxkategori";
             comboBoxkategori.Size = new Size(160, 28);
             comboBoxkategori.TabIndex = 6;
