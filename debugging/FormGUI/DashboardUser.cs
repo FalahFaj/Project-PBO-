@@ -199,18 +199,32 @@ namespace debugging
                     string pesan = chat.pesan ?? "";
                     DateTime waktu = chat.waktu_dikirim.ToLocalTime();
                     Gelembung_chat gelembungChat = new Gelembung_chat(pesan, dariAdmin, waktu);
+                    gelembungChat.Margin = new Padding(0, 0, 0, 10);
+                    gelembungChat.AutoSize = true;
+                    gelembungChat.MaximumSize = new Size(flpChat.ClientSize.Width / 2, 0);
+
+                    var panel = new Panel();
+                    panel.Width = flpChat.ClientSize.Width;
+                    panel.Height = gelembungChat.PreferredSize.Height + 10;
+                    panel.Padding = new Padding(0);
+                    panel.BackColor = Color.Transparent;
+
+                    panel.Controls.Add(gelembungChat);
                     if (dariAdmin)
                     {
-                        var wrapper = gelembungChat.GetWrappedPanel(flpChat.ClientSize.Width, true);
+                        gelembungChat.Left = 10;
+                        gelembungChat.Anchor = AnchorStyles.Top | AnchorStyles.Left;
+                        //var wrapper = gelembungChat.GetWrappedPanel(flpChat.ClientSize.Width, true);
                     }
                     else
                     {
-                        var wrapper = gelembungChat.GetWrappedPanel(flpChat.ClientSize.Width, false);
+                        gelembungChat.Left = panel.Width - gelembungChat.PreferredSize.Width - 10;
+                        gelembungChat.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+                        //var wrapper = gelembungChat.GetWrappedPanel(flpChat.ClientSize.Width, false);
                     }
-                    gelembungChat.Margin = new Padding(0, 0, 0, 10);
-                    gelembungChat.Dock = DockStyle.Top;
-                    gelembungChat.AutoSize = true;
-                    flpChat.Controls.Add(gelembungChat);
+
+                    gelembungChat.BringToFront();
+                    flpChat.Controls.Add(panel);
                     flpChat.ScrollControlIntoView(gelembungChat);
                 }
             }
@@ -448,6 +462,7 @@ namespace debugging
         {
             PanelchatAdmin.Visible = !PanelchatAdmin.Visible;
             PanelchatAdmin.BringToFront();
+            Load_Chat();
         }
     }
 }
