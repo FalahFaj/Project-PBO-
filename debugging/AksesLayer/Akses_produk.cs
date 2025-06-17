@@ -13,7 +13,10 @@ namespace debugging.AksesLayer
         List<Produk> GetAllProduk();
         Produk GetProdukBById(int id_produk);
         void UpdateProduk(Produk produk);
+        void HapusProduk(int id_produk);
+        List<Kategori> GetAllKategori();
     }
+
     public class AksesProduk : IAksesProduk
     {
         private readonly KoneksiDB db;
@@ -53,10 +56,12 @@ namespace debugging.AksesLayer
                 db.SaveChanges();
             }
         }
+
         public List<Produk> GetAllProduk()
         {
             return db.produk.ToList();
         }
+
         public List<Kategori> GetAllKategori()
         {
             return db.kategori.ToList();

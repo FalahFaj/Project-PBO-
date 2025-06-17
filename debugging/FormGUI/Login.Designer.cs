@@ -140,7 +140,7 @@
             pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox3.TabIndex = 11;
             pictureBox3.TabStop = false;
-            pictureBox3.Click += pictureBox3_Click_1;
+            //pictureBox3.Click += pictureBox3_Click_1;
             // 
             // label2
             // 

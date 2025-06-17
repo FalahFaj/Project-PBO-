@@ -43,6 +43,9 @@
             panel4 = new Panel();
             pictureBox4 = new PictureBox();
             button3 = new Button();
+            flowLayoutPanel2 = new FlowLayoutPanel();
+            panel3 = new Panel();
+            pictureBox3 = new PictureBox();
             button2 = new Button();
             panel5 = new Panel();
             pictureBox6 = new PictureBox();
@@ -52,9 +55,6 @@
             button6 = new Button();
             timer1 = new System.Windows.Forms.Timer(components);
             timer2 = new System.Windows.Forms.Timer(components);
-            pictureBox3 = new PictureBox();
-            panel3 = new Panel();
-            flowLayoutPanel2 = new FlowLayoutPanel();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox8).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -65,13 +65,13 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
+            flowLayoutPanel2.SuspendLayout();
+            panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
             panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox7).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
-            panel3.SuspendLayout();
-            flowLayoutPanel2.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
@@ -112,7 +112,6 @@
             // 
             // flowLayoutPanel1
             // 
-            flowLayoutPanel1.AutoScroll = true;
             flowLayoutPanel1.BackColor = Color.FromArgb(23, 24, 29);
             flowLayoutPanel1.Controls.Add(panel2);
             flowLayoutPanel1.Controls.Add(pnlogout);
@@ -124,7 +123,7 @@
             flowLayoutPanel1.Location = new Point(0, 40);
             flowLayoutPanel1.Margin = new Padding(2);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(176, 440);
+            flowLayoutPanel1.Size = new Size(220, 440);
             flowLayoutPanel1.TabIndex = 3;
             flowLayoutPanel1.Paint += flowLayoutPanel1_Paint;
             // 
@@ -239,13 +238,45 @@
             button3.UseVisualStyleBackColor = false;
             button3.Click += button3_Click;
             // 
+            // flowLayoutPanel2
+            // 
+            flowLayoutPanel2.BackColor = Color.FromArgb(32, 33, 36);
+            flowLayoutPanel2.Controls.Add(panel3);
+            flowLayoutPanel2.Location = new Point(2, 155);
+            flowLayoutPanel2.Margin = new Padding(2);
+            flowLayoutPanel2.Name = "flowLayoutPanel2";
+            flowLayoutPanel2.Size = new Size(153, 42);
+            flowLayoutPanel2.TabIndex = 13;
+            flowLayoutPanel2.Paint += flowLayoutPanel2_Paint;
+            // 
+            // panel3
+            // 
+            panel3.Controls.Add(pictureBox3);
+            panel3.Controls.Add(button2);
+            panel3.Location = new Point(0, 0);
+            panel3.Margin = new Padding(0);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(153, 47);
+            panel3.TabIndex = 9;
+            // 
+            // pictureBox3
+            // 
+            pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
+            pictureBox3.Location = new Point(1, 7);
+            pictureBox3.Margin = new Padding(2);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new Size(42, 24);
+            pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox3.TabIndex = 2;
+            pictureBox3.TabStop = false;
+            // 
             // button2
             // 
             button2.BackColor = Color.FromArgb(23, 24, 29);
             button2.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             button2.ForeColor = Color.White;
             button2.ImageAlign = ContentAlignment.MiddleLeft;
-            button2.Location = new Point(-9, -16);
+            button2.Location = new Point(-4, -18);
             button2.Margin = new Padding(2);
             button2.Name = "button2";
             button2.Size = new Size(183, 75);
@@ -259,7 +290,7 @@
             // 
             panel5.Controls.Add(pictureBox6);
             panel5.Controls.Add(button5);
-            panel5.Location = new Point(2, 209);
+            panel5.Location = new Point(2, 201);
             panel5.Margin = new Padding(2);
             panel5.Name = "panel5";
             panel5.Size = new Size(153, 47);
@@ -296,7 +327,7 @@
             // 
             panel6.Controls.Add(pictureBox7);
             panel6.Controls.Add(button6);
-            panel6.Location = new Point(2, 260);
+            panel6.Location = new Point(2, 252);
             panel6.Margin = new Padding(2);
             panel6.Name = "panel6";
             panel6.Size = new Size(153, 47);
@@ -338,38 +369,6 @@
             // 
             timer2.Interval = 10;
             // 
-            // pictureBox3
-            // 
-            pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
-            pictureBox3.Location = new Point(1, 7);
-            pictureBox3.Margin = new Padding(2);
-            pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(42, 24);
-            pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox3.TabIndex = 2;
-            pictureBox3.TabStop = false;
-            // 
-            // panel3
-            // 
-            panel3.Controls.Add(pictureBox3);
-            panel3.Controls.Add(button2);
-            panel3.Location = new Point(0, 0);
-            panel3.Margin = new Padding(0);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(153, 47);
-            panel3.TabIndex = 9;
-            // 
-            // flowLayoutPanel2
-            // 
-            flowLayoutPanel2.BackColor = Color.FromArgb(32, 33, 36);
-            flowLayoutPanel2.Controls.Add(panel3);
-            flowLayoutPanel2.Location = new Point(2, 155);
-            flowLayoutPanel2.Margin = new Padding(2);
-            flowLayoutPanel2.Name = "flowLayoutPanel2";
-            flowLayoutPanel2.Size = new Size(153, 50);
-            flowLayoutPanel2.TabIndex = 13;
-            flowLayoutPanel2.Paint += flowLayoutPanel2_Paint;
-            // 
             // dashboard_admin2
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -394,13 +393,13 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
+            flowLayoutPanel2.ResumeLayout(false);
+            panel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             panel5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
             panel6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox7).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
-            panel3.ResumeLayout(false);
-            flowLayoutPanel2.ResumeLayout(false);
             ResumeLayout(false);
         }
 

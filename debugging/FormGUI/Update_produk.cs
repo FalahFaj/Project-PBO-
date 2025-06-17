@@ -1,59 +1,73 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using debugging.Service;
 using debugging.Model;
 using debugging.PenghubungDB;
-using debugging.AksesLayer;
+using debugging.Service;
+using System.Drawing; 
 
 namespace debugging
 {
     public partial class update_Produk : Form
     {
         private readonly ServiceProduk serviceProduk;
-        private readonly AksesLayer.IAksesProduk aksesProduk;
-        private Produk produkTerpilih;
-        public update_Produk(ServiceProduk serviceProduk)
+        private Produk produkTerpilih; 
+
+        public update_Produk(ServiceProduk service)
         {
             InitializeComponent();
-            this.serviceProduk = serviceProduk ?? throw new ArgumentNullException(nameof(serviceProduk));
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-            comboBoxkategori.Items.AddRange(new string[] { "Nama", "Harga", "Stok", "Disewakan" });
+            this.serviceProduk = service;
+            this.Load += new System.EventHandler(this.update_Produk_Load);
+            this.btn_ok.Click += new System.EventHandler(this.btn_ok_Click); 
+            this.button1.Click += new System.EventHandler(this.button1_Click); 
+            this.comboBoxkategori.SelectedIndexChanged += new System.EventHandler(this.comboBoxkategori_SelectedIndexChanged);
         }
 
         private void update_Produk_Load(object sender, EventArgs e)
         {
-            comboBoxkategori.Items.AddRange(new string[] { "Nama", "Harga", "Stok", "Disewakan" });
+            SetupGrid();
+            this.tampilkan_id_grid.CellFormatting += UpdateGrid_CellFormatting;
 
-            comboBoxKategoriUpdate.DataSource = GetAllKategori();
-            comboBoxKategoriUpdate.DisplayMember = "kategori";
-            comboBoxKategoriUpdate.ValueMember = "id_kategori";
-            comboBoxKategoriUpdate.Enabled = false;
-        }
-        private List<Kategori> GetAllKategori()
-        {
-            using (var db = new KoneksiDB())
+            comboBoxkategori.Items.AddRange(new string[] { "Nama", "Harga", "Stok", "Disewakan", "Kategori" });
+
+            try
             {
-                return db.kategori.ToList();
+                comboBoxKategoriUpdate.DataSource = serviceProduk.GetAllKategori();
+                comboBoxKategoriUpdate.DisplayMember = "nama_kategori"; 
+                comboBoxKategoriUpdate.ValueMember = "id_kategori";
+                comboBoxKategoriUpdate.Enabled = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Gagal memuat data kategori: " + ex.Message);
             }
         }
-        private void comboBoxkategori_SelectedIndexChanged(object sender, EventArgs e)
+
+        private void SetupGrid()
         {
-            comboBoxKategoriUpdate.Enabled = comboBoxkategori.SelectedItem?.ToString() == "Kategori";
-            textBoxUpdateValue.Enabled = comboBoxkategori.SelectedItem?.ToString() != "Kategori";
+            tampilkan_id_grid.Columns.Clear();
+            tampilkan_id_grid.AutoGenerateColumns = false;
+            tampilkan_id_grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+
+            tampilkan_id_grid.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "ID", DataPropertyName = "id_produk" });
+            tampilkan_id_grid.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Nama Produk", DataPropertyName = "nama" });
+            tampilkan_id_grid.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Harga", DataPropertyName = "harga", DefaultCellStyle = { Format = "C0" } });
+            tampilkan_id_grid.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Stok", DataPropertyName = "stok" });
+            tampilkan_id_grid.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "ID Kategori", DataPropertyName = "id_kategori" });
+            tampilkan_id_grid.Columns.Add(new DataGridViewTextBoxColumn { Name = "StatusDisewakan", HeaderText = "Disewakan", DataPropertyName = "disewakan" });
+        }
+        private void UpdateGrid_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (this.tampilkan_id_grid.Columns[e.ColumnIndex].Name == "StatusDisewakan" && e.Value is bool)
+            {
+                e.Value = (bool)e.Value ? "YA" : "TIDAK";
+                e.FormattingApplied = true;
+            }
         }
         private void btn_ok_Click(object sender, EventArgs e)
         {
-            if (int.TryParse(lblCari_id.Text, out int id))
+            if (int.TryParse(lblCari_id.Text.Trim(), out int id))
             {
                 produkTerpilih = serviceProduk.GetProdukBById(id);
                 if (produkTerpilih != null)
@@ -62,7 +76,7 @@ namespace debugging
                 }
                 else
                 {
-                    MessageBox.Show("Produk tidak ditemukan.");
+                    MessageBox.Show("Produk dengan ID tersebut tidak ditemukan.");
                     tampilkan_id_grid.DataSource = null;
                 }
             }
@@ -71,48 +85,55 @@ namespace debugging
                 MessageBox.Show("ID produk harus berupa angka.");
             }
         }
+        private void comboBoxkategori_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string pilihan = comboBoxkategori.SelectedItem?.ToString();
+            comboBoxKategoriUpdate.Enabled = pilihan == "Kategori";
+            textBoxUpdateValue.Enabled = pilihan != "Kategori";
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
             if (produkTerpilih == null)
             {
-                MessageBox.Show("Cari produk terlebih dahulu.");
+                MessageBox.Show("Cari produk berdasarkan ID terlebih dahulu.", "Produk Belum Dipilih", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            string field = comboBoxkategori.SelectedItem?.ToString();
+            string fieldToUpdate = comboBoxkategori.SelectedItem?.ToString();
+
+            if (string.IsNullOrEmpty(fieldToUpdate))
+            {
+                MessageBox.Show("Pilih field yang ingin diupdate dari daftar.", "Field Belum Dipilih", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             try
             {
-                switch (field)
+                switch (fieldToUpdate)
                 {
-                    case "Nama":
-                        produkTerpilih.nama = textBoxUpdateValue.Text;
-                        break;
-                    case "Harga":
-                        produkTerpilih.harga = decimal.Parse(textBoxUpdateValue.Text);
-                        break;
-                    case "Stok":
-                        produkTerpilih.stok = int.Parse(textBoxUpdateValue.Text);
-                        break;
-                    case "Disewakan":
-                        produkTerpilih.disewakan = textBoxUpdateValue.Text.ToLower() == "ya" || textBoxUpdateValue.Text.ToLower() == "true";
-                        break;
-                    case "Kategori":
-                        produkTerpilih.id_kategori = (int)comboBoxKategoriUpdate.SelectedValue;
-                        break;
-                    default:
-                        MessageBox.Show("Pilih field yang ingin diupdate.");
-                        return;
+                    case "Nama": produkTerpilih.nama = textBoxUpdateValue.Text; break;
+                    case "Harga": produkTerpilih.harga = decimal.Parse(textBoxUpdateValue.Text); break;
+                    case "Stok": produkTerpilih.stok = int.Parse(textBoxUpdateValue.Text); break;
+                    case "Disewakan": produkTerpilih.disewakan = textBoxUpdateValue.Text.Trim().ToLower() == "ya" || textBoxUpdateValue.Text.Trim().ToLower() == "true"; break;
+                    case "Kategori": produkTerpilih.id_kategori = (int)comboBoxKategoriUpdate.SelectedValue; break;
+                    default: MessageBox.Show("Field yang dipilih tidak valid."); return;
                 }
-                aksesProduk.UpdateProduk(produkTerpilih);
 
+                serviceProduk.UpdateProduk(produkTerpilih);
+
+                MessageBox.Show($"Produk '{produkTerpilih.nama}' berhasil diupdate.", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                tampilkan_id_grid.DataSource = null;
                 tampilkan_id_grid.DataSource = new List<Produk> { produkTerpilih };
-                MessageBox.Show("Produk berhasil diupdate.");
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Format nilai baru tidak valid. Pastikan Harga dan Stok adalah angka.", "Error Format", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Gagal update: {ex.Message}");
+                MessageBox.Show($"Terjadi kesalahan saat mengupdate: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

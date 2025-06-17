@@ -114,7 +114,7 @@
             grid_Produk.Location = new Point(1, 0);
             grid_Produk.Name = "grid_Produk";
             grid_Produk.RowHeadersWidth = 51;
-            grid_Produk.Size = new Size(678, 280);
+            grid_Produk.Size = new Size(678, 277);
             grid_Produk.TabIndex = 4;
             grid_Produk.CellContentClick += grid_Produk_CellContentClick;
             // 
@@ -138,6 +138,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoScroll = true;
             ClientSize = new Size(679, 341);
             Controls.Add(btn_hapus);
             Controls.Add(txtId);
