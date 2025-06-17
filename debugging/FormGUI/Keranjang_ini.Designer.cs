@@ -64,6 +64,7 @@
             // btnBeli
             // 
             btnBeli.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnBeli.AutoSize = true;
             btnBeli.Location = new Point(692, 13);
             btnBeli.Margin = new Padding(2);
             btnBeli.Name = "btnBeli";
@@ -71,6 +72,7 @@
             btnBeli.TabIndex = 3;
             btnBeli.Text = "Beli";
             btnBeli.UseVisualStyleBackColor = true;
+            btnBeli.Click += btnBeli_Click;
             // 
             // label1
             // 
@@ -112,17 +114,20 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoSize = true;
             ClientSize = new Size(846, 500);
             Controls.Add(panel1);
             Controls.Add(label1);
             Controls.Add(panel2);
             Controls.Add(panel3);
             Controls.Add(flpProduk_keranjang);
+            FormBorderStyle = FormBorderStyle.None;
             Name = "Keranjang_ini";
             Text = "Keranjang_ini";
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel3.ResumeLayout(false);
+            panel3.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }

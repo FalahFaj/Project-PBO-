@@ -97,6 +97,10 @@ namespace debugging.PenghubungDB
                 .HasOne(dk => dk.Keranjang)
                 .WithMany(k => k.detail_keranjang)
                 .HasForeignKey(dk => dk.id_keranjang);
+            modelBuilder.Entity<Detail_keranjang>()
+                .HasOne(d => d.Produk)
+                .WithMany()
+                .HasForeignKey(d => d.id_produk);
 
             // Jenis Transaksi  
             modelBuilder.Entity<Jenis_transaksi>();

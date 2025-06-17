@@ -34,10 +34,13 @@ namespace debugging
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DashboardUser));
             panel1 = new Panel();
-            PanelchatAdmin = new Panel();
             TombolBukaChat = new FontAwesome.Sharp.IconButton();
             label1 = new Label();
             pictureBox1 = new PictureBox();
+            PanelchatAdmin = new Panel();
+            btnSend = new FontAwesome.Sharp.IconButton();
+            flpChat = new FlowLayoutPanel();
+            txtPesan = new TextBox();
             flowLayoutPanel1 = new FlowLayoutPanel();
             flowLayoutPanel2 = new FlowLayoutPanel();
             pnCategories = new Panel();
@@ -66,6 +69,7 @@ namespace debugging
             flowLayoutPanel3 = new FlowLayoutPanel();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            PanelchatAdmin.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
             flowLayoutPanel2.SuspendLayout();
             pnCategories.SuspendLayout();
@@ -88,35 +92,27 @@ namespace debugging
             // 
             panel1.BackColor = Color.FromArgb(32, 33, 36);
             panel1.Controls.Add(TombolBukaChat);
-            panel1.Controls.Add(PanelchatAdmin);
             panel1.Controls.Add(label1);
             panel1.Controls.Add(pictureBox1);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1456, 50);
+            panel1.Size = new Size(1461, 50);
             panel1.TabIndex = 0;
-            // 
-            // PanelchatAdmin
-            // 
-            PanelchatAdmin.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
-            PanelchatAdmin.AutoScroll = true;
-            PanelchatAdmin.Location = new Point(1219, 50);
-            PanelchatAdmin.Name = "PanelchatAdmin";
-            PanelchatAdmin.Size = new Size(237, 507);
-            PanelchatAdmin.TabIndex = 0;
             // 
             // TombolBukaChat
             // 
+            TombolBukaChat.Dock = DockStyle.Right;
             TombolBukaChat.IconChar = FontAwesome.Sharp.IconChar.Message;
             TombolBukaChat.IconColor = Color.Black;
             TombolBukaChat.IconFont = FontAwesome.Sharp.IconFont.Regular;
             TombolBukaChat.IconSize = 35;
-            TombolBukaChat.Location = new Point(1386, 6);
+            TombolBukaChat.Location = new Point(1403, 0);
             TombolBukaChat.Name = "TombolBukaChat";
-            TombolBukaChat.Size = new Size(58, 38);
+            TombolBukaChat.Size = new Size(58, 50);
             TombolBukaChat.TabIndex = 2;
             TombolBukaChat.UseVisualStyleBackColor = true;
+            TombolBukaChat.Click += TombolBukaChat_Click_1;
             // 
             // label1
             // 
@@ -142,9 +138,50 @@ namespace debugging
             pictureBox1.TabStop = false;
             pictureBox1.Click += pictureBox1_Click;
             // 
+            // PanelchatAdmin
+            // 
+            PanelchatAdmin.AutoScroll = true;
+            PanelchatAdmin.Controls.Add(btnSend);
+            PanelchatAdmin.Controls.Add(flpChat);
+            PanelchatAdmin.Controls.Add(txtPesan);
+            PanelchatAdmin.Location = new Point(3, 3);
+            PanelchatAdmin.Name = "PanelchatAdmin";
+            PanelchatAdmin.Size = new Size(308, 507);
+            PanelchatAdmin.TabIndex = 0;
+            // 
+            // btnSend
+            // 
+            btnSend.IconChar = FontAwesome.Sharp.IconChar.PaperPlane;
+            btnSend.IconColor = Color.FromArgb(128, 255, 128);
+            btnSend.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnSend.IconSize = 35;
+            btnSend.Location = new Point(246, 463);
+            btnSend.Name = "btnSend";
+            btnSend.Size = new Size(52, 29);
+            btnSend.TabIndex = 0;
+            btnSend.UseVisualStyleBackColor = true;
+            // 
+            // flpChat
+            // 
+            flpChat.AutoScroll = true;
+            flpChat.BackColor = Color.FromArgb(192, 255, 255);
+            flpChat.ForeColor = Color.Transparent;
+            flpChat.Location = new Point(0, 0);
+            flpChat.Name = "flpChat";
+            flpChat.Size = new Size(308, 463);
+            flpChat.TabIndex = 0;
+            // 
+            // txtPesan
+            // 
+            txtPesan.Location = new Point(2, 463);
+            txtPesan.Name = "txtPesan";
+            txtPesan.Size = new Size(253, 27);
+            txtPesan.TabIndex = 7;
+            // 
             // flowLayoutPanel1
             // 
             flowLayoutPanel1.BackColor = Color.FromArgb(23, 24, 29);
+            flowLayoutPanel1.Controls.Add(PanelchatAdmin);
             flowLayoutPanel1.Controls.Add(flowLayoutPanel2);
             flowLayoutPanel1.Controls.Add(pnbarang);
             flowLayoutPanel1.Controls.Add(pnAboutus);
@@ -153,7 +190,7 @@ namespace debugging
             flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
             flowLayoutPanel1.Location = new Point(0, 50);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(247, 749);
+            flowLayoutPanel1.Size = new Size(247, 674);
             flowLayoutPanel1.TabIndex = 1;
             // 
             // flowLayoutPanel2
@@ -163,7 +200,7 @@ namespace debugging
             flowLayoutPanel2.Controls.Add(subpnMahar);
             flowLayoutPanel2.Controls.Add(subpnSeserahan);
             flowLayoutPanel2.Controls.Add(subpnSuvernir);
-            flowLayoutPanel2.Location = new Point(0, 0);
+            flowLayoutPanel2.Location = new Point(0, 513);
             flowLayoutPanel2.Margin = new Padding(0);
             flowLayoutPanel2.Name = "flowLayoutPanel2";
             flowLayoutPanel2.Size = new Size(191, 59);
@@ -311,7 +348,7 @@ namespace debugging
             // 
             pnbarang.Controls.Add(pictureBox3);
             pnbarang.Controls.Add(button2);
-            pnbarang.Location = new Point(3, 62);
+            pnbarang.Location = new Point(3, 575);
             pnbarang.Name = "pnbarang";
             pnbarang.Size = new Size(191, 59);
             pnbarang.TabIndex = 4;
@@ -345,7 +382,7 @@ namespace debugging
             // 
             pnAboutus.Controls.Add(pictureBox4);
             pnAboutus.Controls.Add(button3);
-            pnAboutus.Location = new Point(3, 127);
+            pnAboutus.Location = new Point(317, 3);
             pnAboutus.Name = "pnAboutus";
             pnAboutus.Size = new Size(191, 59);
             pnAboutus.TabIndex = 4;
@@ -379,7 +416,7 @@ namespace debugging
             // 
             pnlogout.Controls.Add(pictureBox5);
             pnlogout.Controls.Add(button4);
-            pnlogout.Location = new Point(3, 192);
+            pnlogout.Location = new Point(317, 68);
             pnlogout.Name = "pnlogout";
             pnlogout.Size = new Size(191, 59);
             pnlogout.TabIndex = 5;
@@ -426,14 +463,14 @@ namespace debugging
             flowLayoutPanel3.Dock = DockStyle.Fill;
             flowLayoutPanel3.Location = new Point(247, 50);
             flowLayoutPanel3.Name = "flowLayoutPanel3";
-            flowLayoutPanel3.Size = new Size(1209, 749);
+            flowLayoutPanel3.Size = new Size(1214, 674);
             flowLayoutPanel3.TabIndex = 7;
             // 
             // DashboardUser
             // 
             AutoScaleMode = AutoScaleMode.None;
             BackColor = Color.White;
-            ClientSize = new Size(1456, 799);
+            ClientSize = new Size(1461, 724);
             Controls.Add(flowLayoutPanel3);
             Controls.Add(flowLayoutPanel1);
             Controls.Add(panel1);
@@ -445,6 +482,8 @@ namespace debugging
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            PanelchatAdmin.ResumeLayout(false);
+            PanelchatAdmin.PerformLayout();
             flowLayoutPanel1.ResumeLayout(false);
             flowLayoutPanel2.ResumeLayout(false);
             pnCategories.ResumeLayout(false);
@@ -497,5 +536,8 @@ namespace debugging
         private FlowLayoutPanel flowLayoutPanel3;
         private Panel PanelchatAdmin;
         private FontAwesome.Sharp.IconButton TombolBukaChat;
+        private FlowLayoutPanel flpChat;
+        private TextBox txtPesan;
+        private FontAwesome.Sharp.IconButton btnSend;
     }
 }

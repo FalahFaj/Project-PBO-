@@ -67,7 +67,7 @@ namespace debugging
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("Gagal mengambil data dari database: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

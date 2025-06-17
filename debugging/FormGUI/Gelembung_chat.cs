@@ -19,7 +19,9 @@ namespace debugging
             InitializeComponent();
 
             lblPesan.Text = pesan;
+            lblPesan.ForeColor = Color.Black;
             lblWaktu.Text = waktu.ToLocalTime().ToString("HH:mm");
+            lblWaktu.ForeColor = Color.Black;
 
             lblPesan.MaximumSize = new Size(250, 0);
             lblPesan.AutoSize = true;
@@ -52,7 +54,7 @@ namespace debugging
             wrappeer.AutoSize = true;
             wrappeer.AutoSizeMode = AutoSizeMode.GrowAndShrink;
 
-            //this.Dock = dariAdmin ? DockStyle.Right : DockStyle.Left;
+            this.Dock = dariAdmin ? DockStyle.Right : DockStyle.Left;
             if (dariAdmin)
             {
                 this.Dock = DockStyle.Left;

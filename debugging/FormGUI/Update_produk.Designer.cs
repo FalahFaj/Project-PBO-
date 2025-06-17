@@ -36,32 +36,38 @@
             comboBoxkategori = new ComboBox();
             textBoxUpdateValue = new TextBox();
             comboBoxKategoriUpdate = new ComboBox();
+            panel1 = new Panel();
+            panel2 = new Panel();
             ((System.ComponentModel.ISupportInitialize)tampilkan_id_grid).BeginInit();
+            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // tampilkan_id_grid
             // 
             tampilkan_id_grid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            tampilkan_id_grid.Location = new Point(112, 64);
+            tampilkan_id_grid.Location = new Point(149, 152);
+            tampilkan_id_grid.Margin = new Padding(4, 4, 4, 4);
             tampilkan_id_grid.Name = "tampilkan_id_grid";
             tampilkan_id_grid.RowHeadersWidth = 51;
-            tampilkan_id_grid.Size = new Size(526, 84);
+            tampilkan_id_grid.Size = new Size(658, 42);
             tampilkan_id_grid.TabIndex = 0;
             // 
             // Cari_id
             // 
             Cari_id.AutoSize = true;
-            Cari_id.Location = new Point(93, 31);
+            Cari_id.Location = new Point(119, 96);
+            Cari_id.Margin = new Padding(4, 0, 4, 0);
             Cari_id.Name = "Cari_id";
-            Cari_id.Size = new Size(54, 20);
+            Cari_id.Size = new Size(65, 25);
             Cari_id.TabIndex = 1;
             Cari_id.Text = "Cari ID";
             // 
             // button1
             // 
-            button1.Location = new Point(649, 363);
+            button1.Location = new Point(828, 19);
+            button1.Margin = new Padding(4, 4, 4, 4);
             button1.Name = "button1";
-            button1.Size = new Size(94, 29);
+            button1.Size = new Size(118, 36);
             button1.TabIndex = 2;
             button1.Text = "Update ";
             button1.UseVisualStyleBackColor = true;
@@ -69,16 +75,18 @@
             // 
             // lblCari_id
             // 
-            lblCari_id.Location = new Point(172, 31);
+            lblCari_id.Location = new Point(218, 96);
+            lblCari_id.Margin = new Padding(4, 4, 4, 4);
             lblCari_id.Name = "lblCari_id";
-            lblCari_id.Size = new Size(66, 27);
+            lblCari_id.Size = new Size(82, 31);
             lblCari_id.TabIndex = 3;
             // 
             // btn_ok
             // 
-            btn_ok.Location = new Point(265, 31);
+            btn_ok.Location = new Point(334, 96);
+            btn_ok.Margin = new Padding(4, 4, 4, 4);
             btn_ok.Name = "btn_ok";
-            btn_ok.Size = new Size(38, 27);
+            btn_ok.Size = new Size(48, 34);
             btn_ok.TabIndex = 4;
             btn_ok.Text = "OK";
             btn_ok.UseVisualStyleBackColor = true;
@@ -88,43 +96,69 @@
             // 
             comboBoxkategori.FormattingEnabled = true;
             comboBoxkategori.Items.AddRange(new object[] { "Harga", "Stok", "Kategori" });
-            comboBoxkategori.Location = new Point(143, 154);
+            comboBoxkategori.Location = new Point(218, 202);
+            comboBoxkategori.Margin = new Padding(4, 4, 4, 4);
             comboBoxkategori.Name = "comboBoxkategori";
-            comboBoxkategori.Size = new Size(160, 28);
+            comboBoxkategori.Size = new Size(199, 33);
             comboBoxkategori.TabIndex = 6;
             // 
             // textBoxUpdateValue
             // 
-            textBoxUpdateValue.Location = new Point(126, 216);
+            textBoxUpdateValue.Location = new Point(161, 327);
+            textBoxUpdateValue.Margin = new Padding(4, 4, 4, 4);
             textBoxUpdateValue.Name = "textBoxUpdateValue";
-            textBoxUpdateValue.Size = new Size(340, 27);
+            textBoxUpdateValue.Size = new Size(424, 31);
             textBoxUpdateValue.TabIndex = 13;
             // 
             // comboBoxKategoriUpdate
             // 
             comboBoxKategoriUpdate.FormattingEnabled = true;
-            comboBoxKategoriUpdate.Location = new Point(126, 249);
+            comboBoxKategoriUpdate.Location = new Point(161, 368);
+            comboBoxKategoriUpdate.Margin = new Padding(4, 4, 4, 4);
             comboBoxKategoriUpdate.Name = "comboBoxKategoriUpdate";
-            comboBoxKategoriUpdate.Size = new Size(340, 28);
+            comboBoxKategoriUpdate.Size = new Size(424, 33);
             comboBoxKategoriUpdate.TabIndex = 14;
+            // 
+            // panel1
+            // 
+            panel1.BackColor = Color.FromArgb(32, 33, 36);
+            panel1.Dock = DockStyle.Top;
+            panel1.ForeColor = Color.Coral;
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(1000, 74);
+            panel1.TabIndex = 15;
+            // 
+            // panel2
+            // 
+            panel2.BackColor = Color.FromArgb(32, 33, 36);
+            panel2.Controls.Add(button1);
+            panel2.Dock = DockStyle.Bottom;
+            panel2.Location = new Point(0, 437);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(1000, 68);
+            panel2.TabIndex = 16;
             // 
             // update_Produk
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 404);
+            ClientSize = new Size(1000, 505);
+            Controls.Add(panel2);
+            Controls.Add(panel1);
             Controls.Add(comboBoxKategoriUpdate);
             Controls.Add(textBoxUpdateValue);
             Controls.Add(comboBoxkategori);
             Controls.Add(btn_ok);
             Controls.Add(lblCari_id);
-            Controls.Add(button1);
             Controls.Add(Cari_id);
             Controls.Add(tampilkan_id_grid);
+            Margin = new Padding(4, 4, 4, 4);
             Name = "update_Produk";
             Text = "update_Produk";
             Load += update_Produk_Load;
             ((System.ComponentModel.ISupportInitialize)tampilkan_id_grid).EndInit();
+            panel2.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -146,5 +180,7 @@
         private TextBox textBoxUpdateValue;
         private ComboBox comboBoxKategoriUpdate;
         private Label id_kategori;
+        private Panel panel1;
+        private Panel panel2;
     }
 }
