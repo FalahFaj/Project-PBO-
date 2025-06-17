@@ -1,59 +1,19 @@
-using debugging.AksesLayer;
-using debugging.DAL;
-using debugging.Model;
-using debugging.PenghubungDB;
-using debugging.Service;
-using debugging;
-using System.Windows.Forms;
-using System; // Pastikan ini juga ada
+using Project_PBO_Kel_5;
 
-[STAThread]
-static void Main()
+namespace debugging
 {
-    try
+    internal static class Program
     {
-        ApplicationConfiguration.Initialize();
-
-        KoneksiDB db = new KoneksiDB(); // Pastikan tidak ada error di konstruktor ini lagi
-        Akses_customer aksesCustomer = new Akses_customer(db);
-        IAksesProduk aksesProduk = new AksesProduk(db);
-        ServiceAkun serviceAkun = new ServiceAkun(aksesCustomer); // serviceAkun ini dibuat di sini
-        ServiceProduk serviceProduk = new ServiceProduk(aksesProduk);
-        IServiceRiwayat serviceRiwayat = new ServiceRiwayat(db);
-        MessageBox.Show("Mencoba menampilkan form Login...", "Debug Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-        using (Login loginForm = new Login(serviceAkun)) // <-- DAN serviceAkun ini DITERUSKAN DI SINI
+        /// <summary>
+        ///  The main entry point for the application.
+        /// </summary>
+        [STAThread]
+        static void Main()
         {
-            MessageBox.Show("Login form berhasil dibuat. Mencoba ShowDialog()...", "Debug Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-            if (loginForm.ShowDialog() == DialogResult.OK)
-            {
-                MessageBox.Show("Login berhasil! Role: " + loginForm.LoggedInUser.Role, "Debug Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                UserLogin loggedInUser = loginForm.LoggedInUser;
-                if (loggedInUser.Role == "Admin")
-                {
-                    Application.Run(new dashboard_admin2(
-                        serviceAkun,
-                        serviceProduk,
-                        aksesProduk,
-                        serviceRiwayat,
-                        loggedInUser
-                    ));
-                }
-                else if (loggedInUser.Role == "Customer")
-                {
-                    Application.Run(new DashboardUser(serviceAkun, loggedInUser));
-                }
-            }
-            else
-            {
-                MessageBox.Show("Login dibatalkan atau gagal. Aplikasi akan keluar.", "Debug Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+            // To customize application configuration such as set high DPI settings or default font,
+            // see https://aka.ms/applicationconfiguration.
+            ApplicationConfiguration.Initialize();
+            Application.Run(new Login());
         }
-    }
-    catch (Exception ex)
-    {
-        MessageBox.Show($"Aplikasi mengalami kesalahan fatal: {ex.Message}\n\nStack Trace:\n{ex.StackTrace}", "Critical Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
     }
 }
