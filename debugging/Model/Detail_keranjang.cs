@@ -15,7 +15,9 @@ namespace debugging.Model
         public int id_keranjang { get; set; }
         public int id_produk { get; set; }
         public int jumlah { get; set; }
+        [ForeignKey(nameof(id_keranjang))]
         public virtual Keranjang Keranjang { get; set; }
+        [ForeignKey(nameof(id_produk))]
         public virtual Produk Produk { get; set; }
     }
 }

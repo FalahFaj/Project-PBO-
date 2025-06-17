@@ -7,7 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using debugging.Assets;
 using debugging.Model;
+using debugging.Service;
 using debugging.PenghubungDB;
 
 namespace debugging.FormGUI
@@ -15,15 +17,26 @@ namespace debugging.FormGUI
     public partial class Keranjang_ini : Form
     {
         private UserLogin akun;
-        public Keranjang_ini(UserLogin userLogin)
+        private ServiceAkun serviceAkun;
+
+        public Keranjang_ini(UserLogin userLogin, ServiceAkun serviceAkun) 
         {
             InitializeComponent();
             this.akun = userLogin;
+            this.serviceAkun = serviceAkun; 
+            this.Load += Keranjang_Load;
         }
+
+        private void Keranjang_ini_Load(object? sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
         private void Keranjang_Load(object sender, EventArgs e)
         {
             LoadKeranjang();
         }
+
         private void LoadKeranjang()
         {
             flpProduk_keranjang.Controls.Clear();
@@ -47,7 +60,7 @@ namespace debugging.FormGUI
                         {
                             NamaProduk = produk.nama,
                             HargaProduk = produk.harga,
-                            FotoProduk = !string.IsNullOrEmpty(produk.foto) && System.IO.File.Exists(produk.foto) ? Image.FromFile((produk.foto)) : null,
+                            FotoProduk = !string.IsNullOrEmpty(produk.foto) && System.IO.File.Exists(produk.foto) ? Image.FromFile((produk.foto)) : FotoDefault.GetFotoDefault(),
                             JumlahProduk = detail.jumlah
                         };
 
@@ -55,6 +68,14 @@ namespace debugging.FormGUI
                     }
                 }
             }
+        }
+
+        private void btnBeli_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Pembayaran pembayaran = new Pembayaran(serviceAkun, akun);
+            pembayaran.ShowDialog();
+            this.Hide();
         }
     }
 }

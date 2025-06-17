@@ -76,36 +76,44 @@ namespace debugging.FormGUI
 
         private void btnKeranjang_Click(object sender, EventArgs e)
         {
-            using (var db = new KoneksiDB())
+            try
             {
-                var keranjang = db.keranjang.FirstOrDefault(k => k.id_customer == akun.Id);
-                if (keranjang == null)
+                using (var db = new KoneksiDB())
                 {
-                    keranjang = new Keranjang
+                    var keranjang = db.keranjang.FirstOrDefault(k => k.id_customer == akun.Id);
+                    if (keranjang == null)
                     {
-                        id_customer = akun.Id,
-                    };
-                    db.keranjang.Add(keranjang);
+                        keranjang = new Keranjang
+                        {
+                            id_customer = akun.Id,
+                        };
+                        db.keranjang.Add(keranjang);
+                        db.SaveChanges();
+                        keranjang = db.keranjang.FirstOrDefault(k => k.id_customer == akun.Id);
+                    }
+                    var detailKeranjang = db.detail_keranjang.FirstOrDefault(dk => dk.id_produk == produk.id_produk && dk.id_keranjang == keranjang.id_keranjang);
+                    if (detailKeranjang != null)
+                    {
+                        detailKeranjang.jumlah += 1;
+                    }
+                    else
+                    {
+                        detailKeranjang = new Detail_keranjang
+                        {
+                            id_produk = produk.id_produk,
+                            id_keranjang = keranjang.id_keranjang,
+                            jumlah = 1
+                        };
+                        db.detail_keranjang.Add(detailKeranjang);
+                    }
                     db.SaveChanges();
                 }
-                var detailKeranjang = db.detail_keranjang.FirstOrDefault(dk => dk.id_produk == produk.id_produk && dk.id_keranjang == keranjang.id_keranjang);
-                if (detailKeranjang != null)
-                {
-                    detailKeranjang.jumlah += 1;
-                }
-                else
-                {
-                    detailKeranjang = new Detail_keranjang
-                    {
-                        id_produk = produk.id_produk,
-                        id_keranjang = keranjang.id_keranjang,
-                        jumlah = 1
-                    };
-                    db.detail_keranjang.Add(detailKeranjang);
-                }
-                db.SaveChanges();
+                MessageBox.Show("Produk telah ditambahkan ke keranjang.", "Berhasil", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            MessageBox.Show("Produk telah ditambahkan ke keranjang.", "Berhasil", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            catch(Exception ex)
+            {
+                MessageBox.Show($"Terjadi error pada {ex.Message}, dengan detail {ex.InnerException}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

@@ -20,6 +20,9 @@ namespace debugging
 {
     public partial class Pembayaran : Form
     {
+        private readonly Produk _produk;
+        private readonly UserLogin _userLogin;
+        private readonly servicePembayaran _servicePembayaran;
         private bool sidebarexpand;
         private Panel sidebar = new Panel();
         private System.Windows.Forms.Timer sidebarTimer;
@@ -36,6 +39,7 @@ namespace debugging
             this.produk = produk;
             this.serviceAkun = serviceAkun;
             this.userLogin = userLogin;
+            this._servicePembayaran = new servicePembayaran();
         }
         public Pembayaran(ServiceAkun serviceAkun, UserLogin userLogin)
         {
@@ -44,6 +48,7 @@ namespace debugging
             this.serviceAkun = serviceAkun;
             this.userLogin = userLogin;
             this.produk = null;
+            this._servicePembayaran = new servicePembayaran();
         }
 
         private void Pembayaran_Load(object sender, EventArgs e)
@@ -81,12 +86,10 @@ namespace debugging
 
             sidebarexpand = false;
 
-            using (var db = new KoneksiDB())
-            {
-                metode_pembayaran = db.metode_pembayaran.ToList();
-            }
+            var metodes = _servicePembayaran.GetAllMetodePembayaran();
+            this.metode_pembayaran = metodes;
             comboBox1.Items.Clear();
-            foreach (var metode in metode_pembayaran)
+            foreach (var metode in metodes)
             {
                 comboBox1.Items.Add(metode.metode_pembayaran);
             }
@@ -102,16 +105,16 @@ namespace debugging
             }
             else
             {
-                GridViewProduk.Visible = true;
                 using (var db = new KoneksiDB())
                 {
                     var idUser = userLogin.Id;
-                    var keranjang = db.keranjang.Where(k => k.id_customer == idUser).ToList();
+                    var keranjang = db.keranjang.FirstOrDefault(k => k.id_customer == idUser);
                     if (keranjang != null)
                     {
                         var detailKeranjang = db.detail_keranjang
-                            .Where(dk => keranjang.Any(k => k.id_keranjang == dk.id_keranjang))
+                            .Where(dk => dk.id_keranjang == keranjang.id_keranjang)
                             .ToList();
+
                         var produkList = (from dk in detailKeranjang
                                           join p in db.produk on dk.id_produk equals p.id_produk
                                           select new
@@ -169,21 +172,6 @@ namespace debugging
             this.Hide();
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboBox1.SelectedItem != null)
@@ -225,31 +213,24 @@ namespace debugging
                     return;
                 }
 
-                var transaksi = new Transaksi
-                {
-                    tanggal = DateTime.UtcNow,
-                    nominal = 0,
-                    id_customer = idCustomer,
-                    id_metode_pembayaran = idMetode,
-                    id_jenis_transaksi = 1
-                };
-                db.transaksi.Add(transaksi);
-                db.SaveChanges();
+                //var transaksi = new Transaksi
+                //{
+                //    tanggal = DateTime.UtcNow,
+                //    nominal = 0,
+                //    id_customer = idCustomer,
+                //    id_metode_pembayaran = idMetode,
+                //    id_jenis_transaksi = 1
+                //};
+                //db.transaksi.Add(transaksi);
+                //db.SaveChanges();
 
-                decimal total = 0;
+                var servicePembayaran = new servicePembayaran();
+
                 if (produk != null)
                 {
-                    var item = new Item_transaksi
-                    {
-                        id_item_transaksi = 0,
-                        id_produk = produk.id_produk,
-                        jumlah = 1,
-                        id_transaksi = transaksi.id_transaksi
-                    };
-                    db.item_transaksi.Add(item);
-                    total = produk.harga;
-                    transaksi.nominal = total;
-                    db.SaveChanges();
+                    decimal total = produk.harga * numericUpDown1.Value;
+                    var transaksi = servicePembayaran.SimpanTransaksiSatu(produk, idCustomer, idMetode);
+
                     var result = MessageBox.Show(
                         "Pembelian berhasil.\nApakah Anda ingin mencetak struk?",
                         "Cetak Struk",
@@ -274,36 +255,61 @@ namespace debugging
                 }
                 else
                 {
-                    var keranjang = db.keranjang.FirstOrDefault(k => k.id_customer == idCustomer);
-                    if (keranjang != null)
+                    var transaksi = servicePembayaran.SimpanTransaksiKeranjang(idCustomer, idMetode);
+
+                    if (transaksi != null)
                     {
-                        var detailKeranjang = db.detail_keranjang
-                            .Where(dk => dk.id_keranjang == keranjang.id_keranjang)
-                            .ToList();
-                        foreach (var dk in detailKeranjang)
+                        using (var db2 = new KoneksiDB())
                         {
-                            var produkItem = db.produk.FirstOrDefault(p => p.id_produk == dk.id_produk);
-                            if (produkItem != null)
+                            var keranjang = db2.keranjang.FirstOrDefault(k => k.id_customer == idCustomer);
+                            var detailKeranjang = db2.detail_keranjang
+                                .Where(dk => dk.id_keranjang == keranjang.id_keranjang)
+                                .ToList();
+
+                            var produkList = (from dk in detailKeranjang
+                                              join p in db2.produk on dk.id_produk equals p.id_produk
+                                              select new ProdukDiStruk
+                                              {
+                                                  NamaProduk = p.nama,
+                                                  HargaProduk = p.harga,
+                                                  Jumlah = dk.jumlah
+                                              }).ToList();
+
+                            decimal total_keranjang = produkList.Sum(p => p.HargaProduk * p.Jumlah);
+
+                            var result = MessageBox.Show(
+                                $"Pembayaran berhasil. Total: Rp {total_keranjang:N0}\nCetak struk?",
+                                "Cetak Struk",
+                                MessageBoxButtons.YesNo,
+                                MessageBoxIcon.Question
+                            );
+                            if (result == DialogResult.Yes)
                             {
-                                var item = new Item_transaksi
-                                {
-                                    id_item_transaksi = 0,
-                                    id_produk = produkItem.id_produk,
-                                    jumlah = dk.jumlah,
-                                    id_transaksi = transaksi.id_transaksi
-                                };
-                                db.item_transaksi.Add(item);
-                                total += produkItem.harga * dk.jumlah;
+                                // Pastikan fungsi ini menerima list produk, jumlah, total, dst.
+                                debugging.Service.Cetak_Struk.BuatStrukPembelianKeranjang(
+                                    userLogin.Name,
+                                    produkList,
+                                    total_keranjang,
+                                    transaksi.tanggal,
+                                    metode.metode_pembayaran,
+                                    metode.no_rekening
+                                );
+                                MessageBox.Show($"Struk berhasil dicetak ke file struk_pemmbelian.pdf dan disimpan di {Environment.CurrentDirectory}");
                             }
                         }
+                        this.Close();
                     }
-                    transaksi.nominal = total;
-                    db.SaveChanges();
-                    db.detail_keranjang.RemoveRange(db.detail_keranjang.Where(dk => dk.id_keranjang == keranjang.id_keranjang));
-                    db.keranjang.Remove(keranjang);
-                    db.SaveChanges();
-                    MessageBox.Show($"Pembayaran berhasil. Total: Rp {total:N0}");
-                    this.Close();
+                    else
+                    {
+                        MessageBox.Show("Tidak ada item di keranjang.");
+                    }
+                    //transaksi.nominal = total;
+                    //db.SaveChanges();
+                    //db.detail_keranjang.RemoveRange(db.detail_keranjang.Where(dk => dk.id_keranjang == keranjang.id_keranjang));
+                    //db.keranjang.Remove(keranjang);
+                    //db.SaveChanges();
+                    //MessageBox.Show($"Pembayaran berhasil. Total: Rp {total:N0}");
+                    //this.Close();
                 }
             }
         }
@@ -316,6 +322,11 @@ namespace debugging
                 decimal total = produk.harga * jumlah;
                 lblTotal.Text = $"Rp {total:N0}";
             }
+        }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
         public static implicit operator Pembayaran(Panel v)

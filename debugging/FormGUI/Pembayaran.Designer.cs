@@ -179,7 +179,6 @@
             GridViewProduk.RowHeadersWidth = 62;
             GridViewProduk.Size = new Size(710, 170);
             GridViewProduk.TabIndex = 10;
-            GridViewProduk.CellContentClick += dataGridView1_CellContentClick;
             // 
             // kolomBarang
             // 
