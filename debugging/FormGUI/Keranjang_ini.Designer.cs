@@ -40,7 +40,7 @@
             // 
             btnBeli.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnBeli.AutoSize = true;
-            btnBeli.Location = new Point(693, 7);
+            btnBeli.Location = new Point(692, 13);
             btnBeli.Margin = new Padding(2);
             btnBeli.Name = "btnBeli";
             btnBeli.Size = new Size(143, 49);
@@ -54,7 +54,7 @@
             label1.AutoSize = true;
             label1.Font = new Font("Microsoft Sans Serif", 16F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.Gray;
-            label1.Location = new Point(5, 11);
+            label1.Location = new Point(0, 15);
             label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
             label1.Size = new Size(228, 31);
@@ -65,14 +65,14 @@
             // 
             flpProduk_keranjang.AutoScroll = true;
             flpProduk_keranjang.FlowDirection = FlowDirection.TopDown;
-            flpProduk_keranjang.Location = new Point(0, 61);
+            flpProduk_keranjang.Location = new Point(0, 62);
             flpProduk_keranjang.Name = "flpProduk_keranjang";
-            flpProduk_keranjang.Size = new Size(846, 370);
+            flpProduk_keranjang.Size = new Size(846, 383);
             flpProduk_keranjang.TabIndex = 6;
             // 
             // panel2
             // 
-            panel2.Location = new Point(0, 4);
+            panel2.Location = new Point(0, 8);
             panel2.Name = "panel2";
             panel2.Size = new Size(846, 51);
             panel2.TabIndex = 7;

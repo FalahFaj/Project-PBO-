@@ -39,40 +39,17 @@ namespace debugging
             IAksesProduk aksesproduk = new AksesProduk(koneksiDB);
             this.serviceProduk = new ServiceProduk(aksesproduk);
 
-            //subMaharForm = new SubMahar(serviceProduk);
-            //subSeserahanForm = new SubSeserahan(serviceProduk);
-            //subSuvernirForm = new SubSuvernir(serviceProduk);
-
-            //subMaharForm.TopLevel = false;
-            //subMaharForm.FormBorderStyle = FormBorderStyle.None;
-            //subMaharForm.Dock = DockStyle.Fill;
-            //flowLayoutPanel3.Controls.Add(subMaharForm);
-
-            //subSeserahanForm.TopLevel = false;
-            //subSeserahanForm.FormBorderStyle = FormBorderStyle.None;
-            //subSeserahanForm.Dock = DockStyle.Fill;
-            //flowLayoutPanel3.Controls.Add(subSeserahanForm);
-
-            //subSuvernirForm.TopLevel = false;
-            //subSuvernirForm.FormBorderStyle = FormBorderStyle.None;
-            //subSuvernirForm.Dock = DockStyle.Fill;
-            //flowLayoutPanel3.Controls.Add(subSuvernirForm);
-
-            // Tambahkan ke Controls form utama jika belum
             if (!this.Controls.Contains(PanelchatAdmin))
                 this.Controls.Add(PanelchatAdmin);
 
-            // Atur ukuran panel chat admin
             PanelchatAdmin.Size = new Size(308, 507);
 
-            // Atur posisi di kanan bawah
             PanelchatAdmin.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             PanelchatAdmin.Location = new Point(
-                this.ClientSize.Width - PanelchatAdmin.Width - 20, // 20 = margin dari kanan
-                this.ClientSize.Height - PanelchatAdmin.Height - 20 // 20 = margin dari bawah
+                this.ClientSize.Width - PanelchatAdmin.Width - 20,
+                this.ClientSize.Height - PanelchatAdmin.Height - 20 
             );
 
-            // Pastikan panel tetap di posisi saat resize
             this.Resize += (s, e) =>
             {
                 PanelchatAdmin.Location = new Point(
@@ -153,10 +130,7 @@ namespace debugging
 
                 return FotoDefault.GetFotoDefault();
             }
-            catch
-            {
-                // Log or handle the exception if necessary  
-            }
+            catch { }
 
             return null;
         }

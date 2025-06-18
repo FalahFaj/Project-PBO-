@@ -285,7 +285,6 @@ namespace debugging
                             );
                             if (result == DialogResult.Yes)
                             {
-                                // Pastikan fungsi ini menerima list produk, jumlah, total, dst.
                                 debugging.Service.Cetak_Struk.BuatStrukPembelianKeranjang(
                                     userLogin.Name,
                                     produkList,

@@ -18,6 +18,7 @@ namespace debugging
         public Riwayat_Transaksi()
         {
             InitializeComponent();
+            dataGridView1.AutoGenerateColumns = true;
 
         }
 
@@ -41,6 +42,7 @@ namespace debugging
         }
         private void LoadRiwayatTransaksi()
         {
+            dataGridView1.Columns.Clear();
             var data = (from p in db.penyewaan
                         join c in db.customer on p.id_customer equals c.id_customer
                         join d in db.item_penyewaan on p.id_penyewaan equals d.id_penyewaan

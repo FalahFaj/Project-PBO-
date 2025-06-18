@@ -40,7 +40,9 @@
             grid_Produk = new DataGridView();
             txtId = new TextBox();
             btn_hapus = new Button();
+            flowLayoutPanel1 = new FlowLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)grid_Produk).BeginInit();
+            flowLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
             // Id
@@ -80,7 +82,7 @@
             // 
             // btnTambah
             // 
-            btnTambah.Location = new Point(1, 309);
+            btnTambah.Location = new Point(3, 3);
             btnTambah.Name = "btnTambah";
             btnTambah.Size = new Size(94, 29);
             btnTambah.TabIndex = 1;
@@ -90,7 +92,7 @@
             // 
             // btnUpdate
             // 
-            btnUpdate.Location = new Point(101, 309);
+            btnUpdate.Location = new Point(103, 3);
             btnUpdate.Name = "btnUpdate";
             btnUpdate.Size = new Size(94, 29);
             btnUpdate.TabIndex = 2;
@@ -100,7 +102,7 @@
             // 
             // btnHapus
             // 
-            btnHapus.Location = new Point(201, 309);
+            btnHapus.Location = new Point(203, 3);
             btnHapus.Name = "btnHapus";
             btnHapus.Size = new Size(94, 29);
             btnHapus.TabIndex = 3;
@@ -111,50 +113,62 @@
             // grid_Produk
             // 
             grid_Produk.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            grid_Produk.Location = new Point(1, 0);
+            grid_Produk.Dock = DockStyle.Fill;
+            grid_Produk.Location = new Point(0, 0);
             grid_Produk.Name = "grid_Produk";
             grid_Produk.RowHeadersWidth = 51;
-            grid_Produk.Size = new Size(678, 280);
+            grid_Produk.Size = new Size(679, 302);
             grid_Produk.TabIndex = 4;
             grid_Produk.CellContentClick += grid_Produk_CellContentClick;
             // 
             // txtId
             // 
-            txtId.Location = new Point(319, 311);
+            txtId.Location = new Point(303, 3);
             txtId.Name = "txtId";
             txtId.Size = new Size(44, 27);
             txtId.TabIndex = 5;
             // 
             // btn_hapus
             // 
-            btn_hapus.Location = new Point(382, 311);
+            btn_hapus.Location = new Point(353, 3);
             btn_hapus.Name = "btn_hapus";
             btn_hapus.Size = new Size(67, 29);
             btn_hapus.TabIndex = 6;
             btn_hapus.Text = "hapus";
             btn_hapus.UseVisualStyleBackColor = true;
             // 
+            // flowLayoutPanel1
+            // 
+            flowLayoutPanel1.Controls.Add(btnTambah);
+            flowLayoutPanel1.Controls.Add(btnUpdate);
+            flowLayoutPanel1.Controls.Add(btnHapus);
+            flowLayoutPanel1.Controls.Add(txtId);
+            flowLayoutPanel1.Controls.Add(btn_hapus);
+            flowLayoutPanel1.Dock = DockStyle.Bottom;
+            flowLayoutPanel1.Location = new Point(0, 302);
+            flowLayoutPanel1.Name = "flowLayoutPanel1";
+            flowLayoutPanel1.Size = new Size(679, 39);
+            flowLayoutPanel1.TabIndex = 7;
+            // 
             // Kelola
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(679, 341);
-            Controls.Add(btn_hapus);
-            Controls.Add(txtId);
             Controls.Add(grid_Produk);
-            Controls.Add(btnHapus);
-            Controls.Add(btnUpdate);
-            Controls.Add(btnTambah);
+            Controls.Add(flowLayoutPanel1);
+            FormBorderStyle = FormBorderStyle.None;
             Name = "Kelola";
             Text = "Kelola";
             ((System.ComponentModel.ISupportInitialize)grid_Produk).EndInit();
+            flowLayoutPanel1.ResumeLayout(false);
+            flowLayoutPanel1.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
-        private DataGridView dataGridView1;
+        //private DataGridView dataGridView1;
         private DataGridViewTextBoxColumn Id;
         private DataGridViewTextBoxColumn Nama;
         private DataGridViewTextBoxColumn Column2;
@@ -166,5 +180,6 @@
         private DataGridView grid_Produk;
         private TextBox txtId;
         private Button btn_hapus;
+        private FlowLayoutPanel flowLayoutPanel1;
     }
 }

@@ -38,9 +38,9 @@ namespace debugging
             label1 = new Label();
             pictureBox1 = new PictureBox();
             PanelchatAdmin = new Panel();
+            txtPesan = new TextBox();
             btnSend = new FontAwesome.Sharp.IconButton();
             flpChat = new FlowLayoutPanel();
-            txtPesan = new TextBox();
             flowLayoutPanel1 = new FlowLayoutPanel();
             flowLayoutPanel2 = new FlowLayoutPanel();
             pnCategories = new Panel();
@@ -141,13 +141,20 @@ namespace debugging
             // PanelchatAdmin
             // 
             PanelchatAdmin.AutoScroll = true;
+            PanelchatAdmin.Controls.Add(txtPesan);
             PanelchatAdmin.Controls.Add(btnSend);
             PanelchatAdmin.Controls.Add(flpChat);
-            PanelchatAdmin.Controls.Add(txtPesan);
             PanelchatAdmin.Location = new Point(3, 3);
             PanelchatAdmin.Name = "PanelchatAdmin";
-            PanelchatAdmin.Size = new Size(308, 507);
+            PanelchatAdmin.Size = new Size(428, 513);
             PanelchatAdmin.TabIndex = 0;
+            // 
+            // txtPesan
+            // 
+            txtPesan.Location = new Point(2, 463);
+            txtPesan.Name = "txtPesan";
+            txtPesan.Size = new Size(392, 27);
+            txtPesan.TabIndex = 7;
             // 
             // btnSend
             // 
@@ -155,7 +162,7 @@ namespace debugging
             btnSend.IconColor = Color.FromArgb(128, 255, 128);
             btnSend.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnSend.IconSize = 35;
-            btnSend.Location = new Point(246, 463);
+            btnSend.Location = new Point(400, 463);
             btnSend.Name = "btnSend";
             btnSend.Size = new Size(52, 29);
             btnSend.TabIndex = 0;
@@ -165,18 +172,12 @@ namespace debugging
             // 
             flpChat.AutoScroll = true;
             flpChat.BackColor = Color.FromArgb(192, 255, 255);
+            flpChat.Dock = DockStyle.Fill;
             flpChat.ForeColor = Color.Transparent;
             flpChat.Location = new Point(0, 0);
             flpChat.Name = "flpChat";
-            flpChat.Size = new Size(308, 463);
+            flpChat.Size = new Size(452, 492);
             flpChat.TabIndex = 0;
-            // 
-            // txtPesan
-            // 
-            txtPesan.Location = new Point(2, 463);
-            txtPesan.Name = "txtPesan";
-            txtPesan.Size = new Size(253, 27);
-            txtPesan.TabIndex = 7;
             // 
             // flowLayoutPanel1
             // 
@@ -200,7 +201,7 @@ namespace debugging
             flowLayoutPanel2.Controls.Add(subpnMahar);
             flowLayoutPanel2.Controls.Add(subpnSeserahan);
             flowLayoutPanel2.Controls.Add(subpnSuvernir);
-            flowLayoutPanel2.Location = new Point(0, 513);
+            flowLayoutPanel2.Location = new Point(0, 519);
             flowLayoutPanel2.Margin = new Padding(0);
             flowLayoutPanel2.Name = "flowLayoutPanel2";
             flowLayoutPanel2.Size = new Size(191, 59);
@@ -348,7 +349,7 @@ namespace debugging
             // 
             pnbarang.Controls.Add(pictureBox3);
             pnbarang.Controls.Add(button2);
-            pnbarang.Location = new Point(3, 575);
+            pnbarang.Location = new Point(3, 581);
             pnbarang.Name = "pnbarang";
             pnbarang.Size = new Size(191, 59);
             pnbarang.TabIndex = 4;
@@ -382,7 +383,7 @@ namespace debugging
             // 
             pnAboutus.Controls.Add(pictureBox4);
             pnAboutus.Controls.Add(button3);
-            pnAboutus.Location = new Point(317, 3);
+            pnAboutus.Location = new Point(437, 3);
             pnAboutus.Name = "pnAboutus";
             pnAboutus.Size = new Size(191, 59);
             pnAboutus.TabIndex = 4;
@@ -416,7 +417,7 @@ namespace debugging
             // 
             pnlogout.Controls.Add(pictureBox5);
             pnlogout.Controls.Add(button4);
-            pnlogout.Location = new Point(317, 68);
+            pnlogout.Location = new Point(437, 68);
             pnlogout.Name = "pnlogout";
             pnlogout.Size = new Size(191, 59);
             pnlogout.TabIndex = 5;

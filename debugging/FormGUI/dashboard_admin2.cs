@@ -28,7 +28,6 @@ namespace debugging
         private Riwayat_Transaksi? history;
         private formhomeadmin? formHomeAdmin;
         private Kelola? kelolaForm;
-        private Status? status;
         private Chat_admin? chatadmin;
         private Kelola_Product? kelolaProduct;
         private readonly ServiceAkun serviceAkun;
@@ -44,7 +43,7 @@ namespace debugging
             this.akun = akun;
             this.IsMdiContainer = true;
             var db = new KoneksiDB();
-            var aksesProduk = new AksesProduk(db);
+            this.aksesProduk = new AksesProduk(db);
             serviceProduk = new ServiceProduk(aksesProduk as AksesLayer.IAksesProduk);
         }
 
@@ -67,7 +66,7 @@ namespace debugging
             else
             {
                 flowLayoutPanel1.Width -= 5;
-                if (flowLayoutPanel1.Width <= 94)
+                if (flowLayoutPanel1.Width <= 50)
                 {
                     timer1.Stop();
                     sidebarExpand = false;
@@ -145,22 +144,6 @@ namespace debugging
         private void flowLayoutPanel2_Paint(object sender, PaintEventArgs e)
         {
         }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            if (status == null)
-            {
-                status = new Status(serviceAkun);
-                status.FormClosed += (s, args) => status = null;
-                status.MdiParent = this;
-                status.Dock = DockStyle.Fill;
-                status.Show();
-            }
-            else
-            {
-                status.Activate();
-            }
-        }
         private void History_FormClosed(object sender, FormClosedEventArgs e)
         {
             history = null;
@@ -218,7 +201,7 @@ namespace debugging
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error membuka form Kelola: {ex.Message}");
+                MessageBox.Show($"Error membuka form Kelola: {ex.Message}\nDetail: {ex.InnerException?.Message}");
             }
         }
     }
