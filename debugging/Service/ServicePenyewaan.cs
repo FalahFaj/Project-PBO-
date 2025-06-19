@@ -76,6 +76,7 @@ namespace debugging.Service
                     durasi_hari = (tanggalKembali - tanggalSewa).Days
                 };
                 db.item_penyewaan.Add(item_penyewaan);
+                db.produk.FirstOrDefault(p => p.id_produk == _produk.id_produk).stok -= jumlah;
                 db.SaveChanges();
 
                 var metode = db.metode_pembayaran.FirstOrDefault(m => m.metode_pembayaran == metodePembayaran);

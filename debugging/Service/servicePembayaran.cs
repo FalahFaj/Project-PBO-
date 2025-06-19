@@ -22,7 +22,7 @@ namespace debugging.Service
         {
             return _db.metode_pembayaran.ToList();
         }
-        public Transaksi SimpanTransaksiSatu(Produk produk, int idCustomer, int idMetode)
+        public Transaksi SimpanTransaksiSatu(Produk produk, int idCustomer, int idMetode, int jumlah)
         {
             var transaksi = new Transaksi
             {
@@ -39,10 +39,10 @@ namespace debugging.Service
             var item = new Item_transaksi
             {
                 id_produk = produk.id_produk,
-                jumlah = 1,
+                jumlah = jumlah,
                 id_transaksi = transaksi.id_transaksi
             };
-
+            _db.produk.FirstOrDefault(p => p.id_produk == produk.id_produk).stok -= jumlah;
             _db.item_transaksi.Add(item);
             _db.SaveChanges();
             return transaksi;
@@ -85,70 +85,11 @@ namespace debugging.Service
                 }
             }
             transaksi.nominal = total;
-            _db.SaveChanges();
             _db.detail_keranjang.RemoveRange(detailKeranjang);
             _db.keranjang.Remove(keranjang);
             _db.SaveChanges();
 
             return transaksi;
         }
-        //public void SimpanTransaksi(int idCustomer, int idMetode, Produk produk = null)
-        //{
-        //    using (var db = new KoneksiDB())
-        //    {
-        //        var transaksi = new Transaksi
-        //        {
-        //            tanggal = DateTime.UtcNow,
-        //            nominal = 0,
-        //            id_customer = idCustomer,
-        //            id_metode_pembayaran = idMetode,
-        //            id_jenis_transaksi = 1
-        //        };
-
-        //        db.transaksi.Add(transaksi);
-        //        db.SaveChanges();
-
-        //        if (produk != null)
-        //        {
-        //            var item = new Item_transaksi
-        //            {
-        //                id_produk = produk.id_produk,
-        //                jumlah = 1,
-        //                id_transaksi = transaksi.id_transaksi
-        //            };
-        //            db.item_transaksi.Add(item);
-        //            transaksi.nominal = produk.harga;
-        //        }
-        //        else
-        //        {
-        //            var keranjang = db.keranjang.FirstOrDefault(k => k.id_customer == idCustomer);
-        //            if (keranjang != null)
-        //            {
-        //                var detailKeranjang = db.detail_keranjang
-        //                    .Where(dk => dk.id_keranjang == keranjang.id_keranjang).ToList();
-
-        //                foreach (var dk in detailKeranjang)
-        //                {
-        //                    var item = new Item_transaksi
-        //                    {
-        //                        id_produk = dk.id_produk,
-        //                        jumlah = dk.jumlah,
-        //                        id_transaksi = transaksi.id_transaksi
-        //                    };
-        //                    db.item_transaksi.Add(item);
-        //                }
-        //                transaksi.nominal = detailKeranjang.Sum(dk =>
-        //                {
-        //                    var p = db.produk.Find(dk.id_produk);
-        //                    return p?.harga ?? 0;
-        //                });
-
-        //                db.detail_keranjang.RemoveRange(detailKeranjang);
-        //                db.keranjang.Remove(keranjang);
-        //            }
-        //        }
-        //        db.SaveChanges();
-        //    }
-        //}
     }
 }

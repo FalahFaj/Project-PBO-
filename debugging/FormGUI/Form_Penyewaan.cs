@@ -23,12 +23,14 @@ namespace debugging
         private List<Metode_pembayaran> metodePembayaran;
         private PenyewaanService penyewaanService;
         private decimal totalSewa;
-        public Form_Penyewaan(Produk produk, UserLogin userLogin, ServiceAkun serviceAkun)
+        private int jumlah;
+        public Form_Penyewaan(Produk produk, UserLogin userLogin, ServiceAkun serviceAkun, int jumlah)
         {
             InitializeComponent();
             this.produk = produk;
             this.akun = userLogin;
             this.serviceAkun = serviceAkun;
+            this.jumlah = jumlah;
             penyewaanService = new PenyewaanService(akun, produk);
 
             this.Load += Penyewaan_Load;
@@ -55,8 +57,9 @@ namespace debugging
         private void Load_Data_Penyewaan()
         {
             lblProduk.Text = produk.nama;
-            numericUpDownJumlah.Minimum = 1;
+            numericUpDownJumlah.Minimum = jumlah;
             numericUpDownJumlah.Maximum = produk.stok;
+            numericUpDownJumlah.Value = jumlah;
 
             var customer = penyewaanService.GetCustomerData();
             if (customer == null || !penyewaanService.ValidateAlamat(customer))
