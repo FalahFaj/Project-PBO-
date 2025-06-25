@@ -14,7 +14,9 @@ namespace debugging.AksesLayer
         Produk GetProdukBById(int id_produk);
         void UpdateProduk(Produk produk);
         void HapusProduk(int id_produk);
+        void TambahProduk(Produk produk);
         List<Kategori> GetAllKategori();
+        List<Produk> ProdukDiSewa(int id_customer);
     }
 
     public class AksesProduk : IAksesProduk
@@ -65,6 +67,15 @@ namespace debugging.AksesLayer
         public List<Kategori> GetAllKategori()
         {
             return db.kategori.ToList();
+        }
+        public List<Produk> ProdukDiSewa(int id_customer)
+        {
+            var hasil = (from p in db.produk
+                        join i in db.item_penyewaan on p.id_produk equals i.id_produk
+                        join se in db.penyewaan on i.id_penyewaan equals se.id_penyewaan
+                        where se.id_customer == id_customer
+                        select p).ToList();
+            return hasil;
         }
     }
 }

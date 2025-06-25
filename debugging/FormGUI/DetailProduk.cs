@@ -35,6 +35,9 @@ namespace debugging.FormGUI
             label3.Text = produk.GetType().GetProperty("deskripsi") != null ?
                 (string)produk.GetType().GetProperty("deskripsi").GetValue(produk) :
                 "Deskripsi belum tersedia";
+
+            numericUpDownJumlah.Enabled = true;
+            numericUpDownJumlah.Maximum = produk.stok;
         }
 
         private Image FotoProduk(string filePath)
@@ -62,13 +65,14 @@ namespace debugging.FormGUI
             this.Hide();
             if (produk.disewakan)
             {
-                btnBeli.Text = "Sewa";
-                Form_Penyewaan penyewaan = new Form_Penyewaan(produk, akun, serviceAkun);
+                int jumlah = (int)numericUpDownJumlah.Value;
+                Form_Penyewaan penyewaan = new Form_Penyewaan(produk, akun, serviceAkun, jumlah);
                 penyewaan.ShowDialog();
             }
             else
             {
-                Pembayaran pembayaran = new Pembayaran(produk, serviceAkun, akun);
+                int jumlah = (int)numericUpDownJumlah.Value;
+                Pembayaran pembayaran = new Pembayaran(produk, serviceAkun, akun, jumlah);
                 pembayaran.ShowDialog();
             }
             this.Show();
@@ -76,43 +80,23 @@ namespace debugging.FormGUI
 
         private void btnKeranjang_Click(object sender, EventArgs e)
         {
-            try
+            int jumlah = (int)numericUpDownJumlah.Value;
+            string error;
+            if (jumlah <= 0)
             {
-                using (var db = new KoneksiDB())
+                bool sukses = ServiceKeranjang.TambahKeranjang(akun.Id, produk.id_produk, jumlah, out error);
+                if (sukses)
                 {
-                    var keranjang = db.keranjang.FirstOrDefault(k => k.id_customer == akun.Id);
-                    if (keranjang == null)
-                    {
-                        keranjang = new Keranjang
-                        {
-                            id_customer = akun.Id,
-                        };
-                        db.keranjang.Add(keranjang);
-                        db.SaveChanges();
-                        keranjang = db.keranjang.FirstOrDefault(k => k.id_customer == akun.Id);
-                    }
-                    var detailKeranjang = db.detail_keranjang.FirstOrDefault(dk => dk.id_produk == produk.id_produk && dk.id_keranjang == keranjang.id_keranjang);
-                    if (detailKeranjang != null)
-                    {
-                        detailKeranjang.jumlah += 1;
-                    }
-                    else
-                    {
-                        detailKeranjang = new Detail_keranjang
-                        {
-                            id_produk = produk.id_produk,
-                            id_keranjang = keranjang.id_keranjang,
-                            jumlah = 1
-                        };
-                        db.detail_keranjang.Add(detailKeranjang);
-                    }
-                    db.SaveChanges();
+                    MessageBox.Show("Produk berhasil ditambahkan ke keranjang", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                MessageBox.Show("Produk telah ditambahkan ke keranjang.", "Berhasil", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                else
+                {
+                    MessageBox.Show(error, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-            catch(Exception ex)
+            else
             {
-                MessageBox.Show($"Terjadi error pada {ex.Message}, dengan detail {ex.InnerException}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Jumlah produk harus lebih dari 0", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
     }

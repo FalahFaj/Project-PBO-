@@ -28,7 +28,6 @@ namespace debugging
         private Riwayat_Transaksi? history;
         private formhomeadmin? formHomeAdmin;
         private Kelola? kelolaForm;
-        private Status? status;
         private Chat_admin? chatadmin;
         private Kelola_Product? kelolaProduct;
         private readonly ServiceAkun serviceAkun;
@@ -51,6 +50,9 @@ namespace debugging
             this.serviceRiwayat = serviceRiwayat;
             this.akun = akun;
             this.IsMdiContainer = true;
+            var db = new KoneksiDB();
+            this.aksesProduk = new AksesProduk(db);
+            serviceProduk = new ServiceProduk(aksesProduk as AksesLayer.IAksesProduk);
         }
 
 
@@ -161,21 +163,21 @@ namespace debugging
         {
         }
 
-        private void button5_Click(object sender, EventArgs e)
-        {
-            if (status == null || status.IsDisposed)
-            {
-                status = new Status(this.serviceRiwayat); 
-                status.FormClosed += (s, args) => status = null;
-                status.MdiParent = this;
-                status.Dock = DockStyle.Fill;
-                status.Show();
-            }
-            else
-            {
-                status.Activate();
-            }
-        }
+//         private void button5_Click(object sender, EventArgs e)
+//         {
+//             if (status == null || status.IsDisposed)
+//             {
+//                 status = new Status(this.serviceRiwayat); 
+//                 status.FormClosed += (s, args) => status = null;
+//                 status.MdiParent = this;
+//                 status.Dock = DockStyle.Fill;
+//                 status.Show();
+//             }
+//             else
+//             {
+//                 status.Activate();
+//             }
+//         }
         private void History_FormClosed(object sender, FormClosedEventArgs e)
         {
             history = null;
@@ -204,7 +206,26 @@ namespace debugging
 
         private void button2_Click(object sender, EventArgs e)
         {
-            ShowChildForm(ref kelolaForm, () => new Kelola(serviceProduk, aksesProduk as AksesProduk));
+            try
+            {
+                if (kelolaForm == null || kelolaForm.IsDisposed)
+                {
+                    kelolaForm = new Kelola(serviceProduk, aksesProduk);
+                    kelolaForm.FormClosed += (s, args) => kelolaForm = null;
+                    kelolaForm.MdiParent = this;
+                    kelolaForm.Dock = DockStyle.Fill;
+                    kelolaForm.Show();
+                    kelolaForm.BringToFront();
+                }
+                else
+                {
+                    kelolaForm.Activate();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error membuka form Kelola: {ex.Message}\nDetail: {ex.InnerException?.Message}");
+            }
         }
     }
 }

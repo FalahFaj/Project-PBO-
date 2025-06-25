@@ -70,21 +70,35 @@ namespace debugging
                     DateTime waktu = chat.waktu_dikirim.ToLocalTime();
 
                     Gelembung_chat gelembungChat = new Gelembung_chat(pesan, dariAdmin, waktu);
+                    gelembungChat.Margin = new Padding(0, 0, 0, 10);
+                    //gelembungChat.Dock = DockStyle.Top;
+                    gelembungChat.AutoSize = true;
+                    gelembungChat.MaximumSize = new Size(flpKolomChat.ClientSize.Width / 2, 0);
+
+                    var panel = new Panel();
+                    panel.Width = flpKolomChat.ClientSize.Width;
+                    panel.Height = gelembungChat.PreferredSize.Height + 10;
+                    panel.Padding = new Padding(0);
+                    panel.BackColor = Color.Transparent;
+
+                    panel.Controls.Add(gelembungChat);
+                    gelembungChat.Top = 0;
                     if (dariAdmin)
                     {
-                        var wrapper = gelembungChat.GetWrappedPanel(flpKolomChat.ClientSize.Width, true);
+                        gelembungChat.Left = panel.Width - gelembungChat.PreferredSize.Width - 10;
+                        gelembungChat.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+                        //var wrapper = gelembungChat.GetWrappedPanel(flpKolomChat.ClientSize.Width, true);
                     }
                     else
                     {
-                        var wrapper = gelembungChat.GetWrappedPanel(flpKolomChat.ClientSize.Width, false);
+                        gelembungChat.Left = 10;
+                        gelembungChat.Anchor = AnchorStyles.Top | AnchorStyles.Left;
+                        //var wrapper = gelembungChat.GetWrappedPanel(flpKolomChat.ClientSize.Width, false);
                     }
 
-                    gelembungChat.Margin = new Padding(0, 0, 0, 10);
-                    gelembungChat.Dock = DockStyle.Top;
-                    gelembungChat.AutoSize = true;
-
-                    flpKolomChat.Controls.Add(gelembungChat);
-                    flpKolomChat.ScrollControlIntoView(gelembungChat);
+                    gelembungChat.BringToFront();
+                    flpKolomChat.Controls.Add(panel);
+                    flpKolomChat.ScrollControlIntoView(panel);
                 }
             }
         }

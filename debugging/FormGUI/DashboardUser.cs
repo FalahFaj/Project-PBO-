@@ -20,8 +20,10 @@ namespace debugging
     {
         AboutUs aboutUs;
         Keranjang keranjang;
+        Pengembalian pengembalian;
         private readonly ServiceProduk serviceProduk;
         private readonly ServiceAkun serviceAkun;
+        private readonly PenyewaanService servicePenyewaan;
         private readonly UserLogin akun;
         private System.Windows.Forms.Timer produkTimer;
         private Keranjang_ini keranjang_ini;
@@ -39,40 +41,17 @@ namespace debugging
             IAksesProduk aksesproduk = new AksesProduk(koneksiDB);
             this.serviceProduk = new ServiceProduk(aksesproduk);
 
-            //subMaharForm = new SubMahar(serviceProduk);
-            //subSeserahanForm = new SubSeserahan(serviceProduk);
-            //subSuvernirForm = new SubSuvernir(serviceProduk);
-
-            //subMaharForm.TopLevel = false;
-            //subMaharForm.FormBorderStyle = FormBorderStyle.None;
-            //subMaharForm.Dock = DockStyle.Fill;
-            //flowLayoutPanel3.Controls.Add(subMaharForm);
-
-            //subSeserahanForm.TopLevel = false;
-            //subSeserahanForm.FormBorderStyle = FormBorderStyle.None;
-            //subSeserahanForm.Dock = DockStyle.Fill;
-            //flowLayoutPanel3.Controls.Add(subSeserahanForm);
-
-            //subSuvernirForm.TopLevel = false;
-            //subSuvernirForm.FormBorderStyle = FormBorderStyle.None;
-            //subSuvernirForm.Dock = DockStyle.Fill;
-            //flowLayoutPanel3.Controls.Add(subSuvernirForm);
-
-            // Tambahkan ke Controls form utama jika belum
             if (!this.Controls.Contains(PanelchatAdmin))
                 this.Controls.Add(PanelchatAdmin);
 
-            // Atur ukuran panel chat admin
             PanelchatAdmin.Size = new Size(308, 507);
 
-            // Atur posisi di kanan bawah
             PanelchatAdmin.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             PanelchatAdmin.Location = new Point(
-                this.ClientSize.Width - PanelchatAdmin.Width - 20, // 20 = margin dari kanan
-                this.ClientSize.Height - PanelchatAdmin.Height - 20 // 20 = margin dari bawah
+                this.ClientSize.Width - PanelchatAdmin.Width - 20,
+                this.ClientSize.Height - PanelchatAdmin.Height - 20
             );
 
-            // Pastikan panel tetap di posisi saat resize
             this.Resize += (s, e) =>
             {
                 PanelchatAdmin.Location = new Point(
@@ -153,19 +132,17 @@ namespace debugging
 
                 return FotoDefault.GetFotoDefault();
             }
-            catch
-            {
-                // Log or handle the exception if necessary  
-            }
+            catch { }
 
             return null;
         }
         private void btnSend_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtPesan.Text))
-            {
-                btnSend.Enabled = false;
-            }
+            //if (string.IsNullOrWhiteSpace(txtPesan.Text))
+            //{
+            //    btnSend.Enabled = false;
+            //    return;
+            //}
             using (var db = new KoneksiDB())
             {
                 var chat = new Data_chat
@@ -199,20 +176,37 @@ namespace debugging
                     string pesan = chat.pesan ?? "";
                     DateTime waktu = chat.waktu_dikirim.ToLocalTime();
                     Gelembung_chat gelembungChat = new Gelembung_chat(pesan, dariAdmin, waktu);
+                    gelembungChat.Margin = new Padding(0, 0, 0, 10);
+                    gelembungChat.AutoSize = true;
+                    gelembungChat.MaximumSize = new Size(flpChat.ClientSize.Width / 2, 0);
+
+                    var panel = new Panel();
+                    panel.Width = flpChat.ClientSize.Width;
+                    panel.Height = gelembungChat.PreferredSize.Height + 10;
+                    panel.Padding = new Padding(0);
+                    panel.BackColor = Color.Transparent;
+
+                    panel.Controls.Add(gelembungChat);
                     if (dariAdmin)
                     {
-                        var wrapper = gelembungChat.GetWrappedPanel(flpChat.ClientSize.Width, true);
+                        gelembungChat.Left = 10;
+                        gelembungChat.Anchor = AnchorStyles.Top | AnchorStyles.Left;
                     }
                     else
                     {
-                        var wrapper = gelembungChat.GetWrappedPanel(flpChat.ClientSize.Width, false);
+                        gelembungChat.Left = panel.Width - gelembungChat.PreferredSize.Width - 10;
+                        gelembungChat.Anchor = AnchorStyles.Top | AnchorStyles.Right;
                     }
-                    gelembungChat.Margin = new Padding(0, 0, 0, 10);
-                    gelembungChat.Dock = DockStyle.Top;
-                    gelembungChat.AutoSize = true;
-                    flpChat.Controls.Add(gelembungChat);
-                    flpChat.ScrollControlIntoView(gelembungChat);
+
+                    gelembungChat.BringToFront();
+                    flpChat.Controls.Add(panel);
+                    //flpChat.ScrollControlIntoView(gelembungChat);
                 }
+            }
+            if (flpChat.Controls.Count > 0)
+            {
+                var akhir = flpChat.Controls[flpChat.Controls.Count - 1];
+                flpChat.ScrollControlIntoView(akhir);
             }
         }
 
@@ -315,7 +309,7 @@ namespace debugging
             if (keranjang_ini == null)
             {
                 flowLayoutPanel3.Hide();
-                keranjang_ini = new Keranjang_ini(akun,serviceAkun);
+                keranjang_ini = new Keranjang_ini(akun, serviceAkun);
                 keranjang_ini.FormClosed += Keranjang_FormClosed;
                 keranjang_ini.MdiParent = this;
                 keranjang_ini.Dock = DockStyle.Fill;
@@ -421,13 +415,12 @@ namespace debugging
 
         private void DashboardUser_Load(object sender, EventArgs e)
         {
-            btnSend.Click += btnSend_Click;
             Load_Chat();
         }
 
         private void TombolBukaChat_Click(object sender, EventArgs e)
         {
-            
+
         }
         private void TampilkanSemula()
         {
@@ -441,6 +434,11 @@ namespace debugging
                 keranjang_ini.Close();
                 keranjang_ini = null;
             }
+            if (pengembalian != null)
+            {
+                pengembalian.Close();
+                pengembalian = null;
+            }
             flowLayoutPanel3.Show();
         }
 
@@ -448,6 +446,43 @@ namespace debugging
         {
             PanelchatAdmin.Visible = !PanelchatAdmin.Visible;
             PanelchatAdmin.BringToFront();
+            Load_Chat();
+        }
+
+        private void txtPesan_TextChanged(object sender, EventArgs e)
+        {
+            btnSend.Enabled = !string.IsNullOrWhiteSpace(txtPesan.Text);
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (pengembalian == null)
+                {
+                    var userLogin = akun;
+                    var produk = new Produk();
+
+                    var servicepenyewaan = new PenyewaanService(userLogin, produk);
+                    pengembalian = new Pengembalian(serviceProduk, servicepenyewaan, akun);
+                    pengembalian.MdiParent = this;
+                    pengembalian.Dock = DockStyle.Fill;
+                    pengembalian.FormClosed += Pengembalian_FormClosed;
+                    pengembalian.Show();
+                }
+                else
+                {
+                    pengembalian.Activate();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Gagal membuka fitur pengembalian: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void Pengembalian_FormClosed(object? sender, FormClosedEventArgs e)
+        {
+            pengembalian = null;
         }
     }
 }

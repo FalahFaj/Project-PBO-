@@ -20,8 +20,8 @@ namespace debugging
 {
     public partial class Pembayaran : Form
     {
-        private readonly Produk _produk;
-        private readonly UserLogin _userLogin;
+        //private readonly Produk _produk;
+        //private readonly UserLogin _userLogin;
         private readonly servicePembayaran _servicePembayaran;
         private bool sidebarexpand;
         private Panel sidebar = new Panel();
@@ -31,14 +31,16 @@ namespace debugging
         private Akses_customer aksesCustomer;
         private Produk produk;
         private List<Metode_pembayaran> metode_pembayaran;
+        private int jumlah;
 
-        public Pembayaran(Produk produk, ServiceAkun serviceAkun, UserLogin userLogin)
+        public Pembayaran(Produk produk, ServiceAkun serviceAkun, UserLogin userLogin, int jumlah)
         {
             InitializeComponent();
             SidebarContainer.Visible = true;
             this.produk = produk;
             this.serviceAkun = serviceAkun;
             this.userLogin = userLogin;
+            this.jumlah = jumlah;
             this._servicePembayaran = new servicePembayaran();
         }
         public Pembayaran(ServiceAkun serviceAkun, UserLogin userLogin)
@@ -98,9 +100,8 @@ namespace debugging
                 GridViewProduk.Visible = false;
                 lblProduk.Text = produk.nama;
                 lblHarga.Text = $"Rp {produk.harga:N0}";
-                numericUpDown1.Minimum = 1;
+                numericUpDown1.Minimum = jumlah;
                 numericUpDown1.Maximum = produk.stok;
-                numericUpDown1.Value = 1;
                 lblTotal.Text = $"Rp {produk.harga:N0}";
             }
             else
@@ -213,23 +214,12 @@ namespace debugging
                     return;
                 }
 
-                //var transaksi = new Transaksi
-                //{
-                //    tanggal = DateTime.UtcNow,
-                //    nominal = 0,
-                //    id_customer = idCustomer,
-                //    id_metode_pembayaran = idMetode,
-                //    id_jenis_transaksi = 1
-                //};
-                //db.transaksi.Add(transaksi);
-                //db.SaveChanges();
-
                 var servicePembayaran = new servicePembayaran();
 
                 if (produk != null)
                 {
                     decimal total = produk.harga * numericUpDown1.Value;
-                    var transaksi = servicePembayaran.SimpanTransaksiSatu(produk, idCustomer, idMetode);
+                    var transaksi = servicePembayaran.SimpanTransaksiSatu(produk, idCustomer, idMetode, jumlah);
 
                     var result = MessageBox.Show(
                         "Pembelian berhasil.\nApakah Anda ingin mencetak struk?",
@@ -285,7 +275,6 @@ namespace debugging
                             );
                             if (result == DialogResult.Yes)
                             {
-                                // Pastikan fungsi ini menerima list produk, jumlah, total, dst.
                                 debugging.Service.Cetak_Struk.BuatStrukPembelianKeranjang(
                                     userLogin.Name,
                                     produkList,

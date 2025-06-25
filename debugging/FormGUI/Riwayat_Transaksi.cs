@@ -15,10 +15,12 @@ namespace debugging
         public Riwayat_Transaksi(IServiceRiwayat serviceRiwayat)
         {
             InitializeComponent();
-            this.serviceRiwayat = serviceRiwayat;
-            this.Load += new System.EventHandler(this.Riwayat_Transaksi_Load);
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
-            this.button4.Click += new System.EventHandler(this.button4_Click); 
+//             this.serviceRiwayat = serviceRiwayat;
+//             this.Load += new System.EventHandler(this.Riwayat_Transaksi_Load);
+//             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+//             this.button4.Click += new System.EventHandler(this.button4_Click); 
+            dataGridView1.AutoGenerateColumns = true;
+
         }
 
         private void Riwayat_Transaksi_Load(object sender, EventArgs e)
@@ -32,14 +34,30 @@ namespace debugging
         private void SetupDataGridView()
         {
             dataGridView1.Columns.Clear();
-            dataGridView1.AutoGenerateColumns = false;
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridView1.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Tipe", DataPropertyName = "Tipe" });
-            dataGridView1.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "ID", DataPropertyName = "IdTransaksi" });
-            dataGridView1.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Nama Pelanggan", DataPropertyName = "NamaPelanggan" });
-            dataGridView1.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Tanggal", DataPropertyName = "Tanggal", DefaultCellStyle = { Format = "dd-MM-yyyy" } });
-            dataGridView1.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Keterangan", DataPropertyName = "KeteranganProduk" });
-            dataGridView1.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Status", DataPropertyName = "Status" });
+//             dataGridView1.AutoGenerateColumns = false;
+//             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+//             dataGridView1.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Tipe", DataPropertyName = "Tipe" });
+//             dataGridView1.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "ID", DataPropertyName = "IdTransaksi" });
+//             dataGridView1.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Nama Pelanggan", DataPropertyName = "NamaPelanggan" });
+//             dataGridView1.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Tanggal", DataPropertyName = "Tanggal", DefaultCellStyle = { Format = "dd-MM-yyyy" } });
+//             dataGridView1.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Keterangan", DataPropertyName = "KeteranganProduk" });
+//             dataGridView1.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Status", DataPropertyName = "Status" });
+            var data = (from p in db.penyewaan
+                        join c in db.customer on p.id_customer equals c.id_customer
+                        join d in db.item_penyewaan on p.id_penyewaan equals d.id_penyewaan
+                        join pr in db.produk on d.id_produk equals pr.id_produk
+                        select new
+                        {
+                            NamaPenyewaan = c.nama,
+                            TanggalPenyewaan = p.tanggal_sewa,
+                            TanggalPengembalian = p.tanggal_kembali,
+                            Produk = pr.nama,
+                            Nominal = p.pembayaran_dp,
+                            SatusPinjam = p.status_peminjaman,
+                            DurasiHari = d.durasi_hari,
+                            TotalHarga = d.jumlah * pr.harga
+                        }).ToList();
+            dataGridView1.DataSource = data;
         }
         private void LoadData()
         {

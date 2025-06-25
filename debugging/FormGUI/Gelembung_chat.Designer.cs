@@ -30,15 +30,15 @@
         {
             lblPesan = new Label();
             lblWaktu = new Label();
-            panelPesan = new Panel();
-            panelPesan.SuspendLayout();
+            flpPesan = new FlowLayoutPanel();
+            flpPesan.SuspendLayout();
             SuspendLayout();
             // 
             // lblPesan
             // 
             lblPesan.AutoSize = true;
             lblPesan.Font = new Font("Segoe UI", 10F);
-            lblPesan.Location = new Point(10, 10);
+            lblPesan.Location = new Point(3, 0);
             lblPesan.MaximumSize = new Size(250, 0);
             lblPesan.Name = "lblPesan";
             lblPesan.Size = new Size(54, 23);
@@ -49,27 +49,27 @@
             // lblWaktu
             // 
             lblWaktu.AutoSize = true;
+            lblWaktu.Dock = DockStyle.Bottom;
             lblWaktu.Font = new Font("Segoe UI", 7F, FontStyle.Italic);
             lblWaktu.ForeColor = Color.Gray;
-            lblWaktu.Location = new Point(0, 0);
+            lblWaktu.Location = new Point(3, 23);
             lblWaktu.Name = "lblWaktu";
             lblWaktu.Size = new Size(34, 15);
             lblWaktu.TabIndex = 1;
             lblWaktu.Text = "12:34";
             // 
-            // panelPesan
+            // flpPesan
             // 
-            panelPesan.AutoSize = true;
-            panelPesan.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            panelPesan.BackColor = Color.WhiteSmoke;
-            panelPesan.Controls.Add(lblPesan);
-            panelPesan.Controls.Add(lblWaktu);
-            panelPesan.Location = new Point(0, 0);
-            panelPesan.Margin = new Padding(5);
-            panelPesan.Name = "panelPesan";
-            panelPesan.Padding = new Padding(10);
-            panelPesan.Size = new Size(77, 43);
-            panelPesan.TabIndex = 0;
+            flpPesan.Controls.Add(lblPesan);
+            flpPesan.Controls.Add(lblWaktu);
+            flpPesan.Location = new Point(3, 3);
+            flpPesan.Name = "flpPesan";
+            //flpPesan.Size = new Size(94, 42);
+            flpPesan.TabIndex = 2;
+            flpPesan.AutoSize = true;
+            flpPesan.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            flpPesan.FlowDirection = FlowDirection.TopDown;
+            flpPesan.WrapContents = false;
             // 
             // Gelembung_chat
             // 
@@ -77,20 +77,20 @@
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            Controls.Add(panelPesan);
+            Controls.Add(flpPesan);
             Margin = new Padding(5);
             Name = "Gelembung_chat";
-            Size = new Size(82, 48);
-            panelPesan.ResumeLayout(false);
-            panelPesan.PerformLayout();
+            Size = new Size(100, 48);
+            flpPesan.ResumeLayout(false);
+            flpPesan.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
         private System.Windows.Forms.Label lblPesan;
         private System.Windows.Forms.Label lblWaktu;
-        private Panel panelPesan;
+        private FlowLayoutPanel flpPean;
+        private FlowLayoutPanel flpPesan;
     }
 }

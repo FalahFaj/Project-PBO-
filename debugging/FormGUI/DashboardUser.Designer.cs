@@ -38,9 +38,9 @@ namespace debugging
             label1 = new Label();
             pictureBox1 = new PictureBox();
             PanelchatAdmin = new Panel();
+            txtPesan = new TextBox();
             btnSend = new FontAwesome.Sharp.IconButton();
             flpChat = new FlowLayoutPanel();
-            txtPesan = new TextBox();
             flowLayoutPanel1 = new FlowLayoutPanel();
             flowLayoutPanel2 = new FlowLayoutPanel();
             pnCategories = new Panel();
@@ -55,6 +55,9 @@ namespace debugging
             subpnSuvernir = new Panel();
             pictureBox8 = new PictureBox();
             button7 = new Button();
+            panel2 = new Panel();
+            pictureBox9 = new PictureBox();
+            button8 = new Button();
             pnbarang = new Panel();
             pictureBox3 = new PictureBox();
             button2 = new Button();
@@ -80,12 +83,15 @@ namespace debugging
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             subpnSuvernir.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox8).BeginInit();
+            panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox9).BeginInit();
             pnbarang.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             pnAboutus.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             pnlogout.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
+            flowLayoutPanel3.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
@@ -141,13 +147,21 @@ namespace debugging
             // PanelchatAdmin
             // 
             PanelchatAdmin.AutoScroll = true;
+            PanelchatAdmin.AutoSize = true;
+            PanelchatAdmin.Controls.Add(txtPesan);
             PanelchatAdmin.Controls.Add(btnSend);
             PanelchatAdmin.Controls.Add(flpChat);
-            PanelchatAdmin.Controls.Add(txtPesan);
             PanelchatAdmin.Location = new Point(3, 3);
             PanelchatAdmin.Name = "PanelchatAdmin";
-            PanelchatAdmin.Size = new Size(308, 507);
+            PanelchatAdmin.Size = new Size(458, 495);
             PanelchatAdmin.TabIndex = 0;
+            // 
+            // txtPesan
+            // 
+            txtPesan.Location = new Point(2, 463);
+            txtPesan.Name = "txtPesan";
+            txtPesan.Size = new Size(392, 27);
+            txtPesan.TabIndex = 7;
             // 
             // btnSend
             // 
@@ -155,11 +169,12 @@ namespace debugging
             btnSend.IconColor = Color.FromArgb(128, 255, 128);
             btnSend.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnSend.IconSize = 35;
-            btnSend.Location = new Point(246, 463);
+            btnSend.Location = new Point(400, 463);
             btnSend.Name = "btnSend";
             btnSend.Size = new Size(52, 29);
             btnSend.TabIndex = 0;
             btnSend.UseVisualStyleBackColor = true;
+            btnSend.Click += btnSend_Click;
             // 
             // flpChat
             // 
@@ -168,21 +183,14 @@ namespace debugging
             flpChat.ForeColor = Color.Transparent;
             flpChat.Location = new Point(0, 0);
             flpChat.Name = "flpChat";
-            flpChat.Size = new Size(308, 463);
+            flpChat.Size = new Size(455, 457);
             flpChat.TabIndex = 0;
-            // 
-            // txtPesan
-            // 
-            txtPesan.Location = new Point(2, 463);
-            txtPesan.Name = "txtPesan";
-            txtPesan.Size = new Size(253, 27);
-            txtPesan.TabIndex = 7;
             // 
             // flowLayoutPanel1
             // 
             flowLayoutPanel1.BackColor = Color.FromArgb(23, 24, 29);
-            flowLayoutPanel1.Controls.Add(PanelchatAdmin);
             flowLayoutPanel1.Controls.Add(flowLayoutPanel2);
+            flowLayoutPanel1.Controls.Add(panel2);
             flowLayoutPanel1.Controls.Add(pnbarang);
             flowLayoutPanel1.Controls.Add(pnAboutus);
             flowLayoutPanel1.Controls.Add(pnlogout);
@@ -190,7 +198,7 @@ namespace debugging
             flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
             flowLayoutPanel1.Location = new Point(0, 50);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(247, 674);
+            flowLayoutPanel1.Size = new Size(247, 679);
             flowLayoutPanel1.TabIndex = 1;
             // 
             // flowLayoutPanel2
@@ -200,7 +208,7 @@ namespace debugging
             flowLayoutPanel2.Controls.Add(subpnMahar);
             flowLayoutPanel2.Controls.Add(subpnSeserahan);
             flowLayoutPanel2.Controls.Add(subpnSuvernir);
-            flowLayoutPanel2.Location = new Point(0, 513);
+            flowLayoutPanel2.Location = new Point(0, 0);
             flowLayoutPanel2.Margin = new Padding(0);
             flowLayoutPanel2.Name = "flowLayoutPanel2";
             flowLayoutPanel2.Size = new Size(191, 59);
@@ -344,11 +352,45 @@ namespace debugging
             button7.UseVisualStyleBackColor = false;
             button7.Click += button7_Click;
             // 
+            // panel2
+            // 
+            panel2.Controls.Add(pictureBox9);
+            panel2.Controls.Add(button8);
+            panel2.Location = new Point(3, 62);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(191, 59);
+            panel2.TabIndex = 5;
+            // 
+            // pictureBox9
+            // 
+            pictureBox9.Image = (Image)resources.GetObject("pictureBox9.Image");
+            pictureBox9.Location = new Point(1, 9);
+            pictureBox9.Name = "pictureBox9";
+            pictureBox9.Size = new Size(53, 30);
+            pictureBox9.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox9.TabIndex = 2;
+            pictureBox9.TabStop = false;
+            // 
+            // button8
+            // 
+            button8.BackColor = Color.FromArgb(23, 24, 29);
+            button8.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button8.ForeColor = Color.White;
+            button8.ImageAlign = ContentAlignment.MiddleLeft;
+            button8.Location = new Point(-4, -31);
+            button8.Name = "button8";
+            button8.Size = new Size(229, 120);
+            button8.TabIndex = 2;
+            button8.Text = "             Pengembalian";
+            button8.TextAlign = ContentAlignment.MiddleLeft;
+            button8.UseVisualStyleBackColor = false;
+            button8.Click += button8_Click;
+            // 
             // pnbarang
             // 
             pnbarang.Controls.Add(pictureBox3);
             pnbarang.Controls.Add(button2);
-            pnbarang.Location = new Point(3, 575);
+            pnbarang.Location = new Point(3, 127);
             pnbarang.Name = "pnbarang";
             pnbarang.Size = new Size(191, 59);
             pnbarang.TabIndex = 4;
@@ -382,7 +424,7 @@ namespace debugging
             // 
             pnAboutus.Controls.Add(pictureBox4);
             pnAboutus.Controls.Add(button3);
-            pnAboutus.Location = new Point(317, 3);
+            pnAboutus.Location = new Point(3, 192);
             pnAboutus.Name = "pnAboutus";
             pnAboutus.Size = new Size(191, 59);
             pnAboutus.TabIndex = 4;
@@ -416,7 +458,7 @@ namespace debugging
             // 
             pnlogout.Controls.Add(pictureBox5);
             pnlogout.Controls.Add(button4);
-            pnlogout.Location = new Point(317, 68);
+            pnlogout.Location = new Point(3, 257);
             pnlogout.Name = "pnlogout";
             pnlogout.Size = new Size(191, 59);
             pnlogout.TabIndex = 5;
@@ -460,17 +502,18 @@ namespace debugging
             // 
             flowLayoutPanel3.AutoScroll = true;
             flowLayoutPanel3.AutoSize = true;
+            flowLayoutPanel3.Controls.Add(PanelchatAdmin);
             flowLayoutPanel3.Dock = DockStyle.Fill;
             flowLayoutPanel3.Location = new Point(247, 50);
             flowLayoutPanel3.Name = "flowLayoutPanel3";
-            flowLayoutPanel3.Size = new Size(1214, 674);
+            flowLayoutPanel3.Size = new Size(1214, 679);
             flowLayoutPanel3.TabIndex = 7;
             // 
             // DashboardUser
             // 
             AutoScaleMode = AutoScaleMode.None;
             BackColor = Color.White;
-            ClientSize = new Size(1461, 724);
+            ClientSize = new Size(1461, 729);
             Controls.Add(flowLayoutPanel3);
             Controls.Add(flowLayoutPanel1);
             Controls.Add(panel1);
@@ -494,12 +537,16 @@ namespace debugging
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             subpnSuvernir.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox8).EndInit();
+            panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox9).EndInit();
             pnbarang.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             pnAboutus.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             pnlogout.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
+            flowLayoutPanel3.ResumeLayout(false);
+            flowLayoutPanel3.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -539,5 +586,8 @@ namespace debugging
         private FlowLayoutPanel flpChat;
         private TextBox txtPesan;
         private FontAwesome.Sharp.IconButton btnSend;
+        private Panel panel2;
+        private PictureBox pictureBox9;
+        private Button button8;
     }
 }

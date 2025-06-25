@@ -36,7 +36,10 @@
             btnBeli = new Button();
             panel1 = new Panel();
             panel2 = new Panel();
+            numericUpDownJumlah = new NumericUpDown();
+            lblJumlah = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDownJumlah).BeginInit();
             SuspendLayout();
             // 
             // pictureBox1
@@ -123,11 +126,29 @@
             panel2.Size = new Size(800, 40);
             panel2.TabIndex = 7;
             // 
+            // numericUpDownJumlah
+            // 
+            numericUpDownJumlah.Location = new Point(413, 200);
+            numericUpDownJumlah.Name = "numericUpDownJumlah";
+            numericUpDownJumlah.Size = new Size(68, 27);
+            numericUpDownJumlah.TabIndex = 8;
+            // 
+            // lblJumlah
+            // 
+            lblJumlah.AutoSize = true;
+            lblJumlah.Location = new Point(328, 202);
+            lblJumlah.Name = "lblJumlah";
+            lblJumlah.Size = new Size(55, 20);
+            lblJumlah.TabIndex = 9;
+            lblJumlah.Text = "Jumlah";
+            // 
             // DetailProduk
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(lblJumlah);
+            Controls.Add(numericUpDownJumlah);
             Controls.Add(panel2);
             Controls.Add(panel1);
             Controls.Add(btnBeli);
@@ -139,6 +160,7 @@
             Name = "DetailProduk";
             Text = "DetailProduk";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDownJumlah).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -153,5 +175,7 @@
         private Button btnBeli;
         private Panel panel1;
         private Panel panel2;
+        private NumericUpDown numericUpDownJumlah;
+        private Label lblJumlah;
     }
 }

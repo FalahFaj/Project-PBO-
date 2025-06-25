@@ -43,12 +43,13 @@ namespace debugging
             lblPassword = new Label();
             lblEmail = new Label();
             lblAlamat = new Label();
+            panel1 = new Panel();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(68, 51);
+            label1.Location = new Point(68, 56);
             label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
             label1.Size = new Size(49, 20);
@@ -58,7 +59,7 @@ namespace debugging
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(68, 93);
+            label2.Location = new Point(68, 98);
             label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
             label2.Size = new Size(52, 20);
@@ -68,7 +69,7 @@ namespace debugging
             // fufufafa
             // 
             fufufafa.AutoSize = true;
-            fufufafa.Location = new Point(68, 140);
+            fufufafa.Location = new Point(68, 145);
             fufufafa.Margin = new Padding(2, 0, 2, 0);
             fufufafa.Name = "fufufafa";
             fufufafa.Size = new Size(75, 20);
@@ -78,7 +79,7 @@ namespace debugging
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(68, 187);
+            label4.Location = new Point(68, 192);
             label4.Margin = new Padding(2, 0, 2, 0);
             label4.Name = "label4";
             label4.Size = new Size(70, 20);
@@ -88,7 +89,7 @@ namespace debugging
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(68, 237);
+            label3.Location = new Point(68, 242);
             label3.Margin = new Padding(2, 0, 2, 0);
             label3.Name = "label3";
             label3.Size = new Size(46, 20);
@@ -98,7 +99,7 @@ namespace debugging
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(68, 286);
+            label5.Location = new Point(68, 291);
             label5.Margin = new Padding(2, 0, 2, 0);
             label5.Name = "label5";
             label5.Size = new Size(57, 20);
@@ -108,7 +109,7 @@ namespace debugging
             // lblNama
             // 
             lblNama.AutoSize = true;
-            lblNama.Location = new Point(243, 51);
+            lblNama.Location = new Point(243, 56);
             lblNama.Margin = new Padding(2, 0, 2, 0);
             lblNama.Name = "lblNama";
             lblNama.Size = new Size(0, 20);
@@ -117,7 +118,7 @@ namespace debugging
             // lblNo_HP
             // 
             lblNo_HP.AutoSize = true;
-            lblNo_HP.Location = new Point(243, 93);
+            lblNo_HP.Location = new Point(243, 98);
             lblNo_HP.Margin = new Padding(2, 0, 2, 0);
             lblNo_HP.Name = "lblNo_HP";
             lblNo_HP.Size = new Size(0, 20);
@@ -126,7 +127,7 @@ namespace debugging
             // lblUsername
             // 
             lblUsername.AutoSize = true;
-            lblUsername.Location = new Point(243, 140);
+            lblUsername.Location = new Point(243, 145);
             lblUsername.Margin = new Padding(2, 0, 2, 0);
             lblUsername.Name = "lblUsername";
             lblUsername.Size = new Size(0, 20);
@@ -135,7 +136,7 @@ namespace debugging
             // lblPassword
             // 
             lblPassword.AutoSize = true;
-            lblPassword.Location = new Point(243, 187);
+            lblPassword.Location = new Point(243, 192);
             lblPassword.Margin = new Padding(2, 0, 2, 0);
             lblPassword.Name = "lblPassword";
             lblPassword.Size = new Size(0, 20);
@@ -144,7 +145,7 @@ namespace debugging
             // lblEmail
             // 
             lblEmail.AutoSize = true;
-            lblEmail.Location = new Point(243, 237);
+            lblEmail.Location = new Point(243, 242);
             lblEmail.Margin = new Padding(2, 0, 2, 0);
             lblEmail.Name = "lblEmail";
             lblEmail.Size = new Size(0, 20);
@@ -153,17 +154,24 @@ namespace debugging
             // lblAlamat
             // 
             lblAlamat.AutoSize = true;
-            lblAlamat.Location = new Point(243, 286);
+            lblAlamat.Location = new Point(243, 291);
             lblAlamat.Margin = new Padding(2, 0, 2, 0);
             lblAlamat.Name = "lblAlamat";
             lblAlamat.Size = new Size(0, 20);
             lblAlamat.TabIndex = 11;
             // 
+            // panel1
+            // 
+            panel1.Location = new Point(211, 319);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(462, 295);
+            panel1.TabIndex = 12;
+            // 
             // AboutUs
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(640, 360);
+            ClientSize = new Size(885, 560);
             Controls.Add(lblAlamat);
             Controls.Add(lblEmail);
             Controls.Add(lblPassword);
@@ -176,6 +184,7 @@ namespace debugging
             Controls.Add(fufufafa);
             Controls.Add(label2);
             Controls.Add(label1);
+            Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(2);
             Name = "AboutUs";
@@ -199,5 +208,6 @@ namespace debugging
         private Label lblPassword;
         private Label lblEmail;
         private Label lblAlamat;
+        private Panel panel1;
     }
 }

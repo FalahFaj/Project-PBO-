@@ -47,9 +47,6 @@
             panel3 = new Panel();
             pictureBox3 = new PictureBox();
             button2 = new Button();
-            panel5 = new Panel();
-            pictureBox6 = new PictureBox();
-            button5 = new Button();
             panel6 = new Panel();
             pictureBox7 = new PictureBox();
             button6 = new Button();
@@ -68,8 +65,11 @@
             flowLayoutPanel2.SuspendLayout();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
-            panel5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
+// <<<<<<< master
+//             panel5.SuspendLayout();
+//             ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
+// =======
+// >>>>>>> master
             panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox7).BeginInit();
             SuspendLayout();
@@ -117,7 +117,6 @@
             flowLayoutPanel1.Controls.Add(pnlogout);
             flowLayoutPanel1.Controls.Add(panel4);
             flowLayoutPanel1.Controls.Add(flowLayoutPanel2);
-            flowLayoutPanel1.Controls.Add(panel5);
             flowLayoutPanel1.Controls.Add(panel6);
             flowLayoutPanel1.Dock = DockStyle.Left;
             flowLayoutPanel1.Location = new Point(0, 40);
@@ -245,7 +244,11 @@
             flowLayoutPanel2.Location = new Point(2, 155);
             flowLayoutPanel2.Margin = new Padding(2);
             flowLayoutPanel2.Name = "flowLayoutPanel2";
-            flowLayoutPanel2.Size = new Size(153, 42);
+// <<<<<<< master
+//             flowLayoutPanel2.Size = new Size(153, 42);
+// =======
+            flowLayoutPanel2.Size = new Size(153, 50);
+// >>>>>>> master
             flowLayoutPanel2.TabIndex = 13;
             flowLayoutPanel2.Paint += flowLayoutPanel2_Paint;
             // 
@@ -286,48 +289,55 @@
             button2.UseVisualStyleBackColor = false;
             button2.Click += button2_Click;
             // 
-            // panel5
-            // 
-            panel5.Controls.Add(pictureBox6);
-            panel5.Controls.Add(button5);
-            panel5.Location = new Point(2, 201);
-            panel5.Margin = new Padding(2);
-            panel5.Name = "panel5";
-            panel5.Size = new Size(153, 47);
-            panel5.TabIndex = 11;
-            // 
-            // pictureBox6
-            // 
-            pictureBox6.Image = (Image)resources.GetObject("pictureBox6.Image");
-            pictureBox6.Location = new Point(1, 7);
-            pictureBox6.Margin = new Padding(2);
-            pictureBox6.Name = "pictureBox6";
-            pictureBox6.Size = new Size(42, 24);
-            pictureBox6.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox6.TabIndex = 2;
-            pictureBox6.TabStop = false;
-            // 
-            // button5
-            // 
-            button5.BackColor = Color.FromArgb(23, 24, 29);
-            button5.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button5.ForeColor = Color.White;
-            button5.ImageAlign = ContentAlignment.MiddleLeft;
-            button5.Location = new Point(-4, -25);
-            button5.Margin = new Padding(2);
-            button5.Name = "button5";
-            button5.Size = new Size(183, 96);
-            button5.TabIndex = 2;
-            button5.Text = "             History";
-            button5.TextAlign = ContentAlignment.MiddleLeft;
-            button5.UseVisualStyleBackColor = false;
-            button5.Click += button5_Click;
-            // 
+// <<<<<<< master
+//             // panel5
+//             // 
+//             panel5.Controls.Add(pictureBox6);
+//             panel5.Controls.Add(button5);
+//             panel5.Location = new Point(2, 201);
+//             panel5.Margin = new Padding(2);
+//             panel5.Name = "panel5";
+//             panel5.Size = new Size(153, 47);
+//             panel5.TabIndex = 11;
+//             // 
+//             // pictureBox6
+//             // 
+//             pictureBox6.Image = (Image)resources.GetObject("pictureBox6.Image");
+//             pictureBox6.Location = new Point(1, 7);
+//             pictureBox6.Margin = new Padding(2);
+//             pictureBox6.Name = "pictureBox6";
+//             pictureBox6.Size = new Size(42, 24);
+//             pictureBox6.SizeMode = PictureBoxSizeMode.Zoom;
+//             pictureBox6.TabIndex = 2;
+//             pictureBox6.TabStop = false;
+//             // 
+//             // button5
+//             // 
+//             button5.BackColor = Color.FromArgb(23, 24, 29);
+//             button5.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+//             button5.ForeColor = Color.White;
+//             button5.ImageAlign = ContentAlignment.MiddleLeft;
+//             button5.Location = new Point(-4, -25);
+//             button5.Margin = new Padding(2);
+//             button5.Name = "button5";
+//             button5.Size = new Size(183, 96);
+//             button5.TabIndex = 2;
+//             button5.Text = "             History";
+//             button5.TextAlign = ContentAlignment.MiddleLeft;
+//             button5.UseVisualStyleBackColor = false;
+//             button5.Click += button5_Click;
+//             // 
+// =======
+// >>>>>>> master
             // panel6
             // 
             panel6.Controls.Add(pictureBox7);
             panel6.Controls.Add(button6);
-            panel6.Location = new Point(2, 252);
+// <<<<<<< master
+//             panel6.Location = new Point(2, 252);
+// =======
+            panel6.Location = new Point(2, 209);
+// >>>>>>> master
             panel6.Margin = new Padding(2);
             panel6.Name = "panel6";
             panel6.Size = new Size(153, 47);
@@ -396,8 +406,11 @@
             flowLayoutPanel2.ResumeLayout(false);
             panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
-            panel5.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
+// <<<<<<< master
+//             panel5.ResumeLayout(false);
+//             ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
+// =======
+// >>>>>>> master
             panel6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox7).EndInit();
             ResumeLayout(false);
@@ -418,9 +431,6 @@
         private Panel panel4;
         private PictureBox pictureBox4;
         private Button button3;
-        private Panel panel5;
-        private PictureBox pictureBox6;
-        private Button button5;
         private Panel panel6;
         private PictureBox pictureBox7;
         private Button button6;
