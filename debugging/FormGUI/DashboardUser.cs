@@ -20,8 +20,10 @@ namespace debugging
     {
         AboutUs aboutUs;
         Keranjang keranjang;
+        Pengembalian pengembalian;
         private readonly ServiceProduk serviceProduk;
         private readonly ServiceAkun serviceAkun;
+        private readonly PenyewaanService servicePenyewaan;
         private readonly UserLogin akun;
         private System.Windows.Forms.Timer produkTimer;
         private Keranjang_ini keranjang_ini;
@@ -47,7 +49,7 @@ namespace debugging
             PanelchatAdmin.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             PanelchatAdmin.Location = new Point(
                 this.ClientSize.Width - PanelchatAdmin.Width - 20,
-                this.ClientSize.Height - PanelchatAdmin.Height - 20 
+                this.ClientSize.Height - PanelchatAdmin.Height - 20
             );
 
             this.Resize += (s, e) =>
@@ -136,10 +138,11 @@ namespace debugging
         }
         private void btnSend_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtPesan.Text))
-            {
-                btnSend.Enabled = false;
-            }
+            //if (string.IsNullOrWhiteSpace(txtPesan.Text))
+            //{
+            //    btnSend.Enabled = false;
+            //    return;
+            //}
             using (var db = new KoneksiDB())
             {
                 var chat = new Data_chat
@@ -188,19 +191,22 @@ namespace debugging
                     {
                         gelembungChat.Left = 10;
                         gelembungChat.Anchor = AnchorStyles.Top | AnchorStyles.Left;
-                        //var wrapper = gelembungChat.GetWrappedPanel(flpChat.ClientSize.Width, true);
                     }
                     else
                     {
                         gelembungChat.Left = panel.Width - gelembungChat.PreferredSize.Width - 10;
                         gelembungChat.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-                        //var wrapper = gelembungChat.GetWrappedPanel(flpChat.ClientSize.Width, false);
                     }
 
                     gelembungChat.BringToFront();
                     flpChat.Controls.Add(panel);
-                    flpChat.ScrollControlIntoView(gelembungChat);
+                    //flpChat.ScrollControlIntoView(gelembungChat);
                 }
+            }
+            if (flpChat.Controls.Count > 0)
+            {
+                var akhir = flpChat.Controls[flpChat.Controls.Count - 1];
+                flpChat.ScrollControlIntoView(akhir);
             }
         }
 
@@ -303,7 +309,7 @@ namespace debugging
             if (keranjang_ini == null)
             {
                 flowLayoutPanel3.Hide();
-                keranjang_ini = new Keranjang_ini(akun,serviceAkun);
+                keranjang_ini = new Keranjang_ini(akun, serviceAkun);
                 keranjang_ini.FormClosed += Keranjang_FormClosed;
                 keranjang_ini.MdiParent = this;
                 keranjang_ini.Dock = DockStyle.Fill;
@@ -409,13 +415,12 @@ namespace debugging
 
         private void DashboardUser_Load(object sender, EventArgs e)
         {
-            btnSend.Click += btnSend_Click;
             Load_Chat();
         }
 
         private void TombolBukaChat_Click(object sender, EventArgs e)
         {
-            
+
         }
         private void TampilkanSemula()
         {
@@ -429,6 +434,11 @@ namespace debugging
                 keranjang_ini.Close();
                 keranjang_ini = null;
             }
+            if (pengembalian != null)
+            {
+                pengembalian.Close();
+                pengembalian = null;
+            }
             flowLayoutPanel3.Show();
         }
 
@@ -437,6 +447,42 @@ namespace debugging
             PanelchatAdmin.Visible = !PanelchatAdmin.Visible;
             PanelchatAdmin.BringToFront();
             Load_Chat();
+        }
+
+        private void txtPesan_TextChanged(object sender, EventArgs e)
+        {
+            btnSend.Enabled = !string.IsNullOrWhiteSpace(txtPesan.Text);
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (pengembalian == null)
+                {
+                    var userLogin = akun;
+                    var produk = new Produk();
+
+                    var servicepenyewaan = new PenyewaanService(userLogin, produk);
+                    pengembalian = new Pengembalian(serviceProduk, servicepenyewaan, akun);
+                    pengembalian.MdiParent = this;
+                    pengembalian.Dock = DockStyle.Fill;
+                    pengembalian.FormClosed += Pengembalian_FormClosed;
+                    pengembalian.Show();
+                }
+                else
+                {
+                    pengembalian.Activate();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Gagal membuka fitur pengembalian: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void Pengembalian_FormClosed(object? sender, FormClosedEventArgs e)
+        {
+            pengembalian = null;
         }
     }
 }

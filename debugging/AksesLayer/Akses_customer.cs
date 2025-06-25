@@ -38,5 +38,21 @@ namespace debugging.DAL
             _koneksiDB.customer.Add(customer);
             _koneksiDB.SaveChanges();
         }
+        public string GetEmail(string email)
+        {
+            var customer = _koneksiDB.customer.FirstOrDefault(c => c.email_address == email);
+            return customer?.email_address ?? string.Empty;
+        }
+        public bool UpdatePassword(string email, string newPassword)
+        {
+            var customer = _koneksiDB.customer.FirstOrDefault(c => c.email_address == email);
+            if (customer != null)
+            {
+                customer.password = newPassword;
+                _koneksiDB.SaveChanges();
+                return true;
+            }
+            return false;
+        }  
     }
 }

@@ -101,5 +101,56 @@ namespace debugging.Service
                     errorMessage += $"\nDetail: {ex.InnerException.Message}";
             }
         }
+        public List<Penyewaan> DapatkanDataPenyewaan(int customerId)
+        {
+            using var db = new KoneksiDB();
+            return db.penyewaan
+                .Where(p => p.id_customer == customerId)
+                .OrderByDescending(p => p.tanggal_sewa)
+                .ToList();
+        }
+        public bool KembalikanBarang(int idPenyewaan, decimal denda, out string errorMessage)
+        {
+            errorMessage = null;
+            try
+            {
+                using var db = new KoneksiDB();
+                var penyewaan = db.penyewaan.FirstOrDefault(p => p.id_penyewaan == idPenyewaan);
+                if (penyewaan == null)
+                {
+                    errorMessage = "Penyewaan tidak ditemukan.";
+                    return false;
+                }
+                penyewaan.status_peminjaman = "Selesai";
+                db.SaveChanges();
+                var itemPenyewaan = db.item_penyewaan.FirstOrDefault(i => i.id_penyewaan == idPenyewaan);
+                if (itemPenyewaan != null)
+                {
+                    var produk = db.produk.FirstOrDefault(p => p.id_produk == itemPenyewaan.id_produk);
+                    if (produk != null)
+                    {
+                        produk.stok += itemPenyewaan.jumlah;
+                        db.SaveChanges();
+                    }
+                }
+                var transaksiPengembalian = new Transaksi
+                {
+                    tanggal = DateTime.UtcNow,
+                    nominal = denda,
+                    id_customer = _userLogin.Id,
+                    id_metode_pembayaran = 5,
+                    id_penyewaan = idPenyewaan,
+                    id_jenis_transaksi = 4 
+                };
+                db.transaksi.Add(transaksiPengembalian);
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                errorMessage = $"Terjadi kesalahan saat mengembalikan barang: {ex.Message}";
+                return false;
+            }
+        }
     }
 }

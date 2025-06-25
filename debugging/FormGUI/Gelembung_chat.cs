@@ -23,27 +23,27 @@ namespace debugging
             lblWaktu.Text = waktu.ToLocalTime().ToString("HH:mm");
             lblWaktu.ForeColor = Color.Black;
 
-            lblPesan.MaximumSize = new Size(250, 0);
+            lblPesan.MaximumSize = new Size(350, 0);
             lblPesan.AutoSize = true;
             lblWaktu.AutoSize = true;
-            panelPesan.BackColor = dariAdmin ? Color.LightGreen : Color.WhiteSmoke;
+            flpPesan.BackColor = dariAdmin ? Color.LightGreen : Color.WhiteSmoke;
             //this.Dock = DockStyle.Right;
             this.Margin = new Padding(5);
 
-            lblWaktu.Location = new Point(lblPesan.Left, lblPesan.Bottom + 5);
+            //lblWaktu.Location = new Point(lblPesan.Left, lblPesan.Bottom + 5);
             if (dariAdmin)
             {
                 //panelPesan.BackColor = Color.LightGreen;
                 //this.Dock = DockStyle.None;
                 this.Anchor = AnchorStyles.Left;
-                this.Padding = new Padding(10, 5, 50, 5);
+                this.Padding = new Padding(10, 5, 20, 5);
             }
             else
             {
                 //panelPesan.BackColor = Color.WhiteSmoke;
                 //this.Dock = DockStyle.None;
                 this.Anchor = AnchorStyles.Right;
-                this.Padding = new Padding(50, 5, 10, 5);
+                this.Padding = new Padding(20, 5, 10, 5);
             }
         }
         public Panel GetWrappedPanel(int lebarContainer, bool dariAdmin)

@@ -17,10 +17,11 @@ namespace debugging
     public partial class Login : Form
     {
         private readonly ServiceAkun serviceAkun;
+        private readonly Akses_customer akses_customer;
         public Login()
         {
             InitializeComponent();
-            
+
             var koneksiDB = new KoneksiDB();
             var akses_customer = new Akses_customer(koneksiDB);
             serviceAkun = new ServiceAkun(akses_customer);
@@ -63,7 +64,7 @@ namespace debugging
                 {
                     MessageBox.Show("Login Berhasil sebagai Admin", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Hide();
-                    dashboard_admin2 dashboard = new dashboard_admin2(serviceAkun,akun);
+                    dashboard_admin2 dashboard = new dashboard_admin2(serviceAkun, akun);
                     dashboard.ShowDialog();
                     this.Close();
                 }
@@ -83,7 +84,69 @@ namespace debugging
             else
             {
                 MessageBox.Show("Username atau Password salah", "Kesalahan", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                linkLupaPass.Visible = true;
             }
+        }
+        private void linkLupaPass_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            panel1.Visible = false;
+            pnlLupaPass.Visible = true;
+            pnlLupaPass.BringToFront();
+        }
+
+        private void btnCek_Click(object sender, EventArgs e)
+        {
+            string email = txtEmailLupa.Text.Trim();
+            if (string.IsNullOrEmpty(email))
+            {
+                MessageBox.Show("Email tidak boleh kosong", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string emailDB = serviceAkun.GetEmail(email);
+            if (emailDB != null && emailDB.Equals(email, StringComparison.OrdinalIgnoreCase))
+            {
+                MessageBox.Show("Email ditemukan. Silakan masukkan password baru.", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtPassBaru.Visible = true;
+                txtPassBaru.Enabled = true;
+                pictureBox8.Visible = true;
+                btnNewPass.Visible = true;
+            }
+            else
+            {
+                MessageBox.Show("Email tidak terdaftar.", "Kesalahan", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void btnNewPass_Click(object sender, EventArgs e)
+        {
+            string email = txtEmailLupa.Text.Trim();
+            string newPassword = txtPassBaru.Text.Trim();
+            if (string.IsNullOrEmpty(newPassword))
+            {
+                MessageBox.Show("Password baru tidak boleh kosong", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            try
+            {
+                bool sukses = serviceAkun.UpdatePassword(email, newPassword);
+                if (sukses)
+                {
+                    MessageBox.Show("Password berhasil diubah. Silakan login kembali.", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    pnlLupaPass.Visible = false;
+                    panel1.Visible = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Gagal mengubah password. {ex.Message}.", "Kesalahan", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+        }
+
+        private void btnKembali_Click(object sender, EventArgs e)
+        {
+            pnlLupaPass.Visible = false;
+            panel1.Visible = true;
         }
     }
 }

@@ -51,5 +51,17 @@ namespace debugging.Service
             aksesCustomer.RegisterCustomer(customer);
             return true;
         }
+        public bool EmailTerdaftar(string email)
+        {
+            return aksesCustomer.EmailTerdaftar(email);
+        }
+        public string GetEmail(string email)
+        {
+            return aksesCustomer.GetEmail(email);
+        }
+        public bool UpdatePassword(string email, string newPassword)
+        {
+            return aksesCustomer.UpdatePassword(email, newPassword);
+        }
     }
 }
