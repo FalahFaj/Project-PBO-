@@ -1,34 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using debugging.Model;
-using debugging.PenghubungDB;
 using debugging.Service;
 using debugging.AksesLayer;
 
-namespace debugging.FormGUI
+namespace debugging.FormGUI 
 {
     public partial class Tambah_produk : Form
     {
         private readonly ServiceProduk serviceProduk;
+//         public Tambah_produk(ServiceProduk serviceProduk)
         private readonly AksesLayer.IAksesProduk aksesProduk;
-
 
         public Tambah_produk(ServiceProduk serviceProduk, AksesLayer.IAksesProduk aksesProduk)
         {
             InitializeComponent();
             this.serviceProduk = serviceProduk;
-            this.aksesProduk = aksesProduk;
         }
 
         private void Tambah_produk_Load(object sender, EventArgs e)
         {
+//             try
+//             {
+//                 comboKategori.DataSource = serviceProduk.GetAllKategori();
+//                 comboKategori.DisplayMember = "nama_kategori"; 
+//                 comboKategori.ValueMember = "id_kategori";
+//             }
+//             catch (Exception ex)
+//             {
+//                 MessageBox.Show("Gagal memuat data kategori: " + ex.Message, "Error");
+//                 this.Close();
+//             }
 
             if (comboKategori != null)
             {
@@ -53,16 +57,17 @@ namespace debugging.FormGUI
             }
         }
 
-        private List<Kategori> GetAllNamaKategori()
-        {
-            using (var db = new KoneksiDB())
-            {
-                return db.kategori.ToList();
-            }
-        }
-
         private void btnSimpan_Click(object sender, EventArgs e)
+//         private List<Kategori> GetAllNamaKategori()
         {
+            if (string.IsNullOrWhiteSpace(boxNamaProduk.Text) ||
+                string.IsNullOrWhiteSpace(boxHarga.Text) ||
+                string.IsNullOrWhiteSpace(boxStok.Text))
+            {
+                MessageBox.Show("Semua field harus diisi.", "Input Tidak Lengkap", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             try
             {
                 if (string.IsNullOrWhiteSpace(boxNamaProduk.Text))
@@ -113,6 +118,10 @@ namespace debugging.FormGUI
                 MessageBox.Show("Produk berhasil ditambahkan.", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.DialogResult = DialogResult.OK;
                 this.Close();
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Format Harga atau Stok tidak valid. Harap masukkan angka.", "Error Format", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {

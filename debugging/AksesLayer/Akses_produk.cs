@@ -18,6 +18,7 @@ namespace debugging.AksesLayer
         List<Kategori> GetAllKategori();
         List<Produk> ProdukDiSewa(int id_customer);
     }
+
     public class AksesProduk : IAksesProduk
     {
         private readonly KoneksiDB db;
@@ -57,10 +58,12 @@ namespace debugging.AksesLayer
                 db.SaveChanges();
             }
         }
+
         public List<Produk> GetAllProduk()
         {
             return db.produk.ToList();
         }
+
         public List<Kategori> GetAllKategori()
         {
             return db.kategori.ToList();

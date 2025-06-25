@@ -117,7 +117,7 @@
             grid_Produk.Location = new Point(0, 0);
             grid_Produk.Name = "grid_Produk";
             grid_Produk.RowHeadersWidth = 51;
-            grid_Produk.Size = new Size(679, 302);
+            grid_Produk.Size = new Size(678, 277);
             grid_Produk.TabIndex = 4;
             grid_Produk.CellContentClick += grid_Produk_CellContentClick;
             // 
@@ -154,6 +154,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoScroll = true;
             ClientSize = new Size(679, 341);
             Controls.Add(grid_Produk);
             Controls.Add(flowLayoutPanel1);

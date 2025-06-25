@@ -408,7 +408,7 @@ namespace debugging
         private void button4_Click_1(object sender, EventArgs e)
         {
             this.Hide();
-            Login login = new Login();
+            Login login = new Login(this.serviceAkun);
             login.ShowDialog();
             this.Show();
         }

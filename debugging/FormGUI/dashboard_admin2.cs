@@ -31,15 +31,23 @@ namespace debugging
         private Chat_admin? chatadmin;
         private Kelola_Product? kelolaProduct;
         private readonly ServiceAkun serviceAkun;
-        private readonly UserLogin akun;
         private readonly ServiceProduk serviceProduk;
-        private readonly AksesProduk aksesProduk;
+        private readonly IAksesProduk aksesProduk;
+        private readonly IServiceRiwayat serviceRiwayat;
+        private readonly UserLogin akun;
 
-        public dashboard_admin2(ServiceAkun serviceAkun, UserLogin akun)
+        public dashboard_admin2(
+              ServiceAkun serviceAkun,
+              ServiceProduk serviceProduk,
+              IAksesProduk aksesProduk,
+              IServiceRiwayat serviceRiwayat,
+              UserLogin akun)
         {
             InitializeComponent();
-
             this.serviceAkun = serviceAkun;
+            this.serviceProduk = serviceProduk;
+            this.aksesProduk = aksesProduk;
+            this.serviceRiwayat = serviceRiwayat;
             this.akun = akun;
             this.IsMdiContainer = true;
             var db = new KoneksiDB();
@@ -47,11 +55,30 @@ namespace debugging
             serviceProduk = new ServiceProduk(aksesProduk as AksesLayer.IAksesProduk);
         }
 
+
         bool sidebarExpand = true;
         bool menuExpand = false;
         private IList<string> bulanLabels;
         private ObservableCollection<double> _data = new ObservableCollection<double>();
 
+        private void btn_login_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+        private void ShowChildForm<T>(ref T formInstance, Func<T> formFactory) where T : Form
+        {
+            if (formInstance == null || formInstance.IsDisposed)
+            {
+                formInstance = formFactory();
+                formInstance.MdiParent = this;
+                formInstance.Dock = DockStyle.Fill;
+                formInstance.Show();
+            }
+            else
+            {
+                formInstance.Activate();
+            }
+        }
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (sidebarExpand == false)
@@ -85,11 +112,13 @@ namespace debugging
 
         private void cartesianChart1_Load(object sender, EventArgs e)
         {
+
             Random rand = new Random();
             for (int i = 1; i <= 12; i++)
             {
                 _data.Add(rand.Next(0, 100));
             }
+
         }
 
         private void cartesianChart2_Load(object sender, EventArgs e)
@@ -107,18 +136,7 @@ namespace debugging
 
         private void button4_Click(object sender, EventArgs e)
         {
-            if (chatadmin == null)
-            {
-                chatadmin = new Chat_admin();
-                chatadmin.FormClosed += Chatadmin_FormClosed;
-                chatadmin.MdiParent = this;
-                chatadmin.Dock = DockStyle.Fill;
-                chatadmin.Show();
-            }
-            else
-            {
-                chatadmin.Activate();
-            }
+            ShowChildForm(ref chatadmin, () => new Chat_admin());
         }
         private void Chatadmin_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -127,10 +145,10 @@ namespace debugging
 
         private void button3_Click(object sender, EventArgs e)
         {
-            if (history == null)
+            if (history == null || history.IsDisposed)
             {
-                history = new Riwayat_Transaksi();
-                history.FormClosed += History_FormClosed;
+                history = new Riwayat_Transaksi(this.serviceRiwayat);
+                history.FormClosed += (s, args) => history = null; 
                 history.MdiParent = this;
                 history.Dock = DockStyle.Fill;
                 history.Show();
@@ -144,6 +162,22 @@ namespace debugging
         private void flowLayoutPanel2_Paint(object sender, PaintEventArgs e)
         {
         }
+
+//         private void button5_Click(object sender, EventArgs e)
+//         {
+//             if (status == null || status.IsDisposed)
+//             {
+//                 status = new Status(this.serviceRiwayat); 
+//                 status.FormClosed += (s, args) => status = null;
+//                 status.MdiParent = this;
+//                 status.Dock = DockStyle.Fill;
+//                 status.Show();
+//             }
+//             else
+//             {
+//                 status.Activate();
+//             }
+//         }
         private void History_FormClosed(object sender, FormClosedEventArgs e)
         {
             history = null;
@@ -152,7 +186,7 @@ namespace debugging
         private void button6_Click(object sender, EventArgs e)
         {
             this.Hide();
-            Login login = new Login();
+            Login login = new Login(this.serviceAkun);
             login.ShowDialog();
             this.Hide();
         }
@@ -163,18 +197,7 @@ namespace debugging
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (formHomeAdmin == null)
-            {
-                formHomeAdmin = new formhomeadmin(serviceProduk);
-                formHomeAdmin.FormClosed += FormHomeAdmin_FormClosed;
-                formHomeAdmin.MdiParent = this;
-                formHomeAdmin.Dock = DockStyle.Fill;
-                formHomeAdmin.Show();
-            }
-            else
-            {
-                formHomeAdmin.Activate();
-            }
+            ShowChildForm(ref formHomeAdmin, () => new formhomeadmin(serviceProduk));
         }
         private void FormHomeAdmin_FormClosed(object sender, FormClosedEventArgs e)
         {

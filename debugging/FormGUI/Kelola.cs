@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using debugging.Service;
@@ -26,6 +26,7 @@ namespace debugging
 
         private void Kelola_Load(object sender, EventArgs e)
         {
+
             grid_Produk.AutoGenerateColumns = true;
             LoadDataProduk();
         }
@@ -51,16 +52,16 @@ namespace debugging
                     DataGridViewColumn disewakanColumn = grid_Produk.Columns["Disewakan"];
                     if (!(disewakanColumn is DataGridViewTextBoxColumn))
                     {
-
+ 
                         int columnIndex = disewakanColumn.Index;
                         string headerText = disewakanColumn.HeaderText;
                         grid_Produk.Columns.Remove(disewakanColumn);
 
                         DataGridViewTextBoxColumn newColumn = new DataGridViewTextBoxColumn
                         {
-                            Name = "Disewakan",
+                            Name = "Disewakan", 
                             HeaderText = headerText,
-                            DataPropertyName = "Disewakan"
+                            DataPropertyName = "Disewakan" 
                         };
                         grid_Produk.Columns.Insert(columnIndex, newColumn);
                     }
@@ -106,21 +107,13 @@ namespace debugging
         private bool isDeleteMode = false;
         private void btnHapus_Click(object sender, EventArgs e)
         {
-
-            if (!isDeleteMode)
+            if (grid_Produk.SelectedRows.Count > 0)
             {
-                txtId.Enabled = true;
-                txtId.Focus();
-                isDeleteMode = true;
-                MessageBox.Show("Masukkan ID produk yang ingin dihapus di kotak teks, lalu tekan tombol 'Delete' lagi untuk konfirmasi.");
-                return;
-            }
+                int idToDelete = Convert.ToInt32(grid_Produk.SelectedRows[0].Cells["id_produk"].Value);
+                string namaProduk = grid_Produk.SelectedRows[0].Cells["nama"].Value.ToString();
 
-
-            if (int.TryParse(txtId.Text, out int idToDelete))
-            {
                 DialogResult confirmResult = MessageBox.Show(
-                    $"Anda yakin ingin menghapus produk dengan ID: {idToDelete}? Tindakan ini tidak dapat dibatalkan.",
+                    $"Anda yakin ingin menghapus produk '{namaProduk}' (ID: {idToDelete})?",
                     "Konfirmasi Hapus Produk",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Warning);
@@ -129,31 +122,19 @@ namespace debugging
                 {
                     try
                     {
-                        aksesProduk.HapusProduk(idToDelete);
+                        serviceProduk.HapusProduk(idToDelete);
                         MessageBox.Show("Produk berhasil dihapus.", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        txtId.Text = "";
-                        txtId.Enabled = false;
-                        isDeleteMode = false;
-                        LoadDataProduk();
+                        LoadDataProduk(); 
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show($"Gagal menghapus produk: {ex.Message}\nDetail: {ex.InnerException?.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show($"Gagal menghapus produk: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-                }
-                else
-                {
-                    txtId.Text = "";
-                    txtId.Enabled = false;
-                    isDeleteMode = false;
                 }
             }
             else
             {
-                MessageBox.Show("ID produk tidak valid. Mohon masukkan angka.", "Error Input", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txtId.Text = "";
-                txtId.Enabled = false;
-                isDeleteMode = false;
+                MessageBox.Show("Silakan pilih satu baris produk dari tabel yang ingin dihapus.", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -169,9 +150,27 @@ namespace debugging
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            update_Produk updateProdukForm = new update_Produk(serviceProduk, aksesProduk);
-            updateProdukForm.ShowDialog();
-
+            if (grid_Produk.SelectedRows.Count > 0)
+            {
+                try
+                {
+                    int idToUpdate = Convert.ToInt32(grid_Produk.SelectedRows[0].Cells["id_produk"].Value);
+                    update_Produk updateForm = new update_Produk(idToUpdate, this.serviceProduk);
+                    DialogResult result = updateForm.ShowDialog();
+                    if (result == DialogResult.OK)
+                    {
+                        LoadDataProduk();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Terjadi error saat mencoba membuka form update: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Silakan pilih satu baris produk dari tabel yang ingin di-update.", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void grid_Produk_CellContentClick(object sender, DataGridViewCellEventArgs e)
