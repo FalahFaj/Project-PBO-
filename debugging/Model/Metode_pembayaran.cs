@@ -13,7 +13,7 @@ namespace Project_PBO_Kel_5.Model
         [Key]
         public int id_metode_pembayaran { get; set; }
         public string metode_pembayaran { get; set; }
-        public string no_rekening { get; set; }
+        public string? no_rekening { get; set; }
         public ICollection<Transaksi> MetodePembayaran { get; set; }
 
     }

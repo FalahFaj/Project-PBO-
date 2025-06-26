@@ -102,7 +102,7 @@
             textBoxUpdateValue.Name = "textBoxUpdateValue";
             textBoxUpdateValue.Size = new Size(340, 27);
             textBoxUpdateValue.TabIndex = 13;
-            textBoxUpdateValue.TextChanged += textBoxUpdateValue_TextChanged;
+            //textBoxUpdateValue.TextChanged += textBoxUpdateValue_TextChanged;
             // 
             // comboBoxKategoriUpdate
             // 
@@ -111,7 +111,7 @@
             comboBoxKategoriUpdate.Name = "comboBoxKategoriUpdate";
             comboBoxKategoriUpdate.Size = new Size(340, 28);
             comboBoxKategoriUpdate.TabIndex = 14;
-            comboBoxKategoriUpdate.SelectedIndexChanged += comboBoxKategoriUpdate_SelectedIndexChanged;
+            //comboBoxKategoriUpdate.SelectedIndexChanged += comboBoxKategoriUpdate_SelectedIndexChanged;
             // 
             // panel1
             // 

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using debugging.PenghubungDB;
 using debugging.AksesLayer;
 using debugging.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace debugging.Service
 {
@@ -35,20 +36,28 @@ namespace debugging.Service
 
         public void TambahProduk(Produk produk)
         {
+            aksesProduk.TambahProduk(produk);
+        }
+
+        public void HapusProduk(int idProduk)
+        {
+            aksesProduk.HapusProduk(idProduk);
+        }
+        public Kategori GetKategoriBById(int id)
+        {
+            using (var dbContext = new KoneksiDB())
+            {
+                return dbContext.kategori.FirstOrDefault(k => k.id_kategori == id);
+            }
+        }
+        public void UpdateProduk(Produk produk)
+        {
             aksesProduk.UpdateProduk(produk);
         }
-//         public void HapusProduk(int id)
-//         {
-//             aksesProduk.HapusProduk(id);
-//         }
-
-//         public void UpdateProduk(Produk produk)
-//         {
-//             aksesProduk.UpdateProduk(produk);
-//         }
-//         public List<Kategori> GetAllKategori()
-//         {
-//             return aksesProduk.GetAllKategori();
+        public List<Kategori> GetAllKategori()
+        {
+            return aksesProduk.GetAllKategori();
+        }
         public List<Produk> ProdukDiSewa(int id_customer)
         {
             return aksesProduk.ProdukDiSewa(id_customer);
@@ -57,9 +66,9 @@ namespace debugging.Service
         {
             using (var db = new KoneksiDB())
             {
-                var query = from p in db.penyewaan
-                            join ip in db.item_penyewaan on p.id_penyewaan equals ip.id_penyewaan
-                            join pro in db.produk on ip.id_produk equals pro.id_produk
+                var query = from p in db.penyewaan.AsNoTracking()
+                            join ip in db.item_penyewaan.AsNoTracking() on p.id_penyewaan equals ip.id_penyewaan
+                            join pro in db.produk.AsNoTracking() on ip.id_produk equals pro.id_produk
                             where p.id_customer == idCustomer
                             select new ProdukDiSewa
                             {
@@ -75,6 +84,24 @@ namespace debugging.Service
                             };
                 return query.ToList();
             }
+        }
+        public int GetTotalBarangDisewa()
+        {
+            return aksesProduk.HitungTotalBarangDisewa();
+        }
+
+        public int GetTotalBarangDijual()
+        {
+            return aksesProduk.HitungTotalBarangDijual();
+        }
+
+        public decimal GetTotalPemasukan()
+        {
+            return aksesProduk.HitungTotalPemasukan();
+        }
+        public int Getbarangbelumdikembalikan()
+        {
+            return aksesProduk.HitungBarangbelumdikembalikan();
         }
     }
 }

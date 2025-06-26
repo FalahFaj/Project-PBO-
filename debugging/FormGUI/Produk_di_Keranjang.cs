@@ -12,9 +12,16 @@ namespace debugging
 {
     public partial class Produk_di_Keranjang : UserControl
     {
+        public event EventHandler CheckboxChanged;
         public Produk_di_Keranjang()
         {
             InitializeComponent();
+        }
+        public int IdProduk { get; set; }
+        public bool diPilih
+        {
+            get => Produk_dipilih.Checked;
+            set => Produk_dipilih.Checked = value;
         }
         public string NamaProduk
         {
@@ -36,20 +43,14 @@ namespace debugging
             get { return fotoProduk.Image; }
             set { fotoProduk.Image = value; }
         }
-
-        private void Produk_di_Keranjang_Load(object sender, EventArgs e)
+        private void Produk_dipilih_CheckedChanged(object sender, EventArgs e)
         {
-
+            CheckboxChanged?.Invoke(this, EventArgs.Empty);
         }
 
-        private void Produk_di_Keranjang_Load_1(object sender, EventArgs e)
+        private void Produk_dipilih_CheckedChanged_1(object sender, EventArgs e)
         {
-
-        }
-
-        private void pictureBox2_Click(object sender, EventArgs e)
-        {
-
+            CheckboxChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 }

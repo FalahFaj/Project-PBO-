@@ -58,22 +58,48 @@ namespace debugging.FormGUI
                     {
                         var kartu = new Produk_di_Keranjang
                         {
+                            IdProduk = produk.id_produk,
                             NamaProduk = produk.nama,
                             HargaProduk = produk.harga,
                             FotoProduk = !string.IsNullOrEmpty(produk.foto) && System.IO.File.Exists(produk.foto) ? Image.FromFile((produk.foto)) : FotoDefault.GetFotoDefault(),
                             JumlahProduk = detail.jumlah
                         };
-
+                        kartu.CheckboxChanged += ProdukCheckboxChanged;
                         flpProduk_keranjang.Controls.Add(kartu);
                     }
                 }
             }
+            UpdateBtnBeliState();
+        }
+        private void ProdukCheckboxChanged(object sender, EventArgs e)
+        {
+            UpdateBtnBeliState();
+        }
+
+        private void UpdateBtnBeliState()
+        {
+            btnBeli.Enabled = flpProduk_keranjang.Controls
+                .OfType<Produk_di_Keranjang>()
+                .Any(kartu => kartu.diPilih);
         }
 
         private void btnBeli_Click(object sender, EventArgs e)
         {
+            var produkDipilih = new List<(int id_produk, int jumlah)> ();
+            foreach (Produk_di_Keranjang kartu in flpProduk_keranjang.Controls)
+            {
+                if (kartu.diPilih)
+                {
+                    produkDipilih.Add((kartu.IdProduk, kartu.JumlahProduk));
+                }
+            }
+            if (produkDipilih.Count == 0)
+            {
+                MessageBox.Show("Pilih produk yang ingin dibeli.");
+                return;
+            }
             this.Hide();
-            Pembayaran pembayaran = new Pembayaran(serviceAkun, akun);
+            Pembayaran pembayaran = new Pembayaran(serviceAkun, akun, produkDipilih);
             pembayaran.ShowDialog();
             this.Hide();
         }

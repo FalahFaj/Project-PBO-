@@ -38,8 +38,6 @@
             btnUpdate = new Button();
             btnHapus = new Button();
             grid_Produk = new DataGridView();
-            txtId = new TextBox();
-            btn_hapus = new Button();
             flowLayoutPanel1 = new FlowLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)grid_Produk).BeginInit();
             flowLayoutPanel1.SuspendLayout();
@@ -117,33 +115,15 @@
             grid_Produk.Location = new Point(0, 0);
             grid_Produk.Name = "grid_Produk";
             grid_Produk.RowHeadersWidth = 51;
-            grid_Produk.Size = new Size(678, 277);
+            grid_Produk.Size = new Size(679, 302);
             grid_Produk.TabIndex = 4;
             grid_Produk.CellContentClick += grid_Produk_CellContentClick;
-            // 
-            // txtId
-            // 
-            txtId.Location = new Point(303, 3);
-            txtId.Name = "txtId";
-            txtId.Size = new Size(44, 27);
-            txtId.TabIndex = 5;
-            // 
-            // btn_hapus
-            // 
-            btn_hapus.Location = new Point(353, 3);
-            btn_hapus.Name = "btn_hapus";
-            btn_hapus.Size = new Size(67, 29);
-            btn_hapus.TabIndex = 6;
-            btn_hapus.Text = "hapus";
-            btn_hapus.UseVisualStyleBackColor = true;
             // 
             // flowLayoutPanel1
             // 
             flowLayoutPanel1.Controls.Add(btnTambah);
             flowLayoutPanel1.Controls.Add(btnUpdate);
             flowLayoutPanel1.Controls.Add(btnHapus);
-            flowLayoutPanel1.Controls.Add(txtId);
-            flowLayoutPanel1.Controls.Add(btn_hapus);
             flowLayoutPanel1.Dock = DockStyle.Bottom;
             flowLayoutPanel1.Location = new Point(0, 302);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
@@ -154,7 +134,6 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            AutoScroll = true;
             ClientSize = new Size(679, 341);
             Controls.Add(grid_Produk);
             Controls.Add(flowLayoutPanel1);
@@ -163,7 +142,6 @@
             Text = "Kelola";
             ((System.ComponentModel.ISupportInitialize)grid_Produk).EndInit();
             flowLayoutPanel1.ResumeLayout(false);
-            flowLayoutPanel1.PerformLayout();
             ResumeLayout(false);
         }
 

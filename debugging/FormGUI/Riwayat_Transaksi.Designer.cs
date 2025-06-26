@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Riwayat_Transaksi));
             label1 = new Label();
-            comboBox1 = new ComboBox();
             dataGridView1 = new DataGridView();
             Column1 = new DataGridViewTextBoxColumn();
             Column2 = new DataGridViewTextBoxColumn();
@@ -43,10 +43,12 @@
             button1 = new Button();
             BtnExportPDF = new Button();
             button2 = new Button();
-//             textBox1 = new TextBox();
-//             txtCariID = new Label();
-//             button4 = new Button();
+            panel1 = new Panel();
+            MenuKonteks = new ContextMenuStrip(components);
+            menuDisetujui = new ToolStripMenuItem();
+            menuDitolak = new ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            MenuKonteks.SuspendLayout();
             SuspendLayout();
             // 
             // label1
@@ -59,29 +61,15 @@
             label1.TabIndex = 0;
             label1.Text = "Detail Penyewaan\r\n";
             // 
-            // comboBox1
-            // 
-            comboBox1.FormattingEnabled = true;
-//             comboBox1.Location = new Point(31, 80);
-            comboBox1.Location = new Point(54, 79);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(151, 28);
-            comboBox1.TabIndex = 1;
-            // 
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column4, Column5, Column6, Column7, Column8 });
-//             dataGridView1.Location = new Point(31, 114);
-//             dataGridView1.Name = "dataGridView1";
-//             dataGridView1.RowHeadersVisible = false;
-//             dataGridView1.RowHeadersWidth = 51;
-//             dataGridView1.Size = new Size(1020, 467);
             dataGridView1.Location = new Point(54, 113);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersVisible = false;
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(954, 467);
+            dataGridView1.Size = new Size(954, 402);
             dataGridView1.TabIndex = 2;
             // 
             // Column1
@@ -179,33 +167,31 @@
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
             // 
-            // textBox1
+            // panel1
             // 
-//             textBox1.Location = new Point(215, 586);
-//             textBox1.Name = "textBox1";
-//             textBox1.Size = new Size(125, 27);
-//             textBox1.TabIndex = 7;
-//             textBox1.TextChanged += textBox1_TextChanged;
-//             // 
-//             // txtCariID
-//             // 
-//             txtCariID.AutoSize = true;
-//             txtCariID.Location = new Point(39, 589);
-//             txtCariID.Name = "txtCariID";
-//             txtCariID.Size = new Size(170, 20);
-//             txtCariID.TabIndex = 9;
-//             txtCariID.Text = "Masukkan ID Penyewaan";
-//             // 
-//             // button4
-//             // 
-//             button4.Location = new Point(346, 584);
-//             button4.Name = "button4";
-//             button4.Size = new Size(43, 29);
-//             button4.TabIndex = 10;
-//             button4.Text = "OK";
-//             button4.UseVisualStyleBackColor = true;
-//             button4.EnabledChanged += button4_Click;
-//             button4.Click += button4_Click;
+            panel1.Location = new Point(308, 523);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(399, 92);
+            panel1.TabIndex = 7;
+            // 
+            // MenuKonteks
+            // 
+            MenuKonteks.ImageScalingSize = new Size(20, 20);
+            MenuKonteks.Items.AddRange(new ToolStripItem[] { menuDisetujui, menuDitolak });
+            MenuKonteks.Name = "contextMenuStrip1";
+            MenuKonteks.Size = new Size(137, 52);
+            // 
+            // menuDisetujui
+            // 
+            menuDisetujui.Name = "menuDisetujui";
+            menuDisetujui.Size = new Size(136, 24);
+            menuDisetujui.Text = "Disetujui";
+            // 
+            // menuDitolak
+            // 
+            menuDitolak.Name = "menuDitolak";
+            menuDitolak.Size = new Size(136, 24);
+            menuDitolak.Text = "Ditolak";
             // 
             // Riwayat_Transaksi
             // 
@@ -214,20 +200,18 @@
             AutoScroll = true;
             BackColor = Color.FromArgb(149, 175, 192);
             ClientSize = new Size(1082, 627);
-//             Controls.Add(button4);
-//             Controls.Add(txtCariID);
-//             Controls.Add(textBox1);
+            Controls.Add(panel1);
             Controls.Add(button2);
             Controls.Add(BtnExportPDF);
             Controls.Add(button1);
             Controls.Add(dataGridView1);
-            Controls.Add(comboBox1);
             Controls.Add(label1);
             FormBorderStyle = FormBorderStyle.None;
             Name = "Riwayat_Transaksi";
             Text = "Statuss_Penyewaan";
             Load += Riwayat_Transaksi_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            MenuKonteks.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -235,7 +219,6 @@
         #endregion
 
         private Label label1;
-        private ComboBox comboBox1;
         private DataGridView dataGridView1;
         private Button button1;
         private Button BtnExportPDF;
@@ -248,10 +231,9 @@
         private DataGridViewTextBoxColumn Column6;
         private DataGridViewTextBoxColumn Column7;
         private DataGridViewTextBoxColumn Column8;
-        private TextBox textBox1;
-        private Button button3;
-        private Label label2;
-        private Label txtCariID;
-        private Button button4;
+        private Panel panel1;
+        private ContextMenuStrip MenuKonteks;
+        private ToolStripMenuItem menuDisetujui;
+        private ToolStripMenuItem menuDitolak;
     }
 }

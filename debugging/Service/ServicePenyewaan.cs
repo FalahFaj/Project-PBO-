@@ -121,7 +121,7 @@ namespace debugging.Service
                     errorMessage = "Penyewaan tidak ditemukan.";
                     return false;
                 }
-                penyewaan.status_peminjaman = "Selesai";
+                penyewaan.status_peminjaman = "Dikembalikan";
                 db.SaveChanges();
                 var itemPenyewaan = db.item_penyewaan.FirstOrDefault(i => i.id_penyewaan == idPenyewaan);
                 if (itemPenyewaan != null)
@@ -140,7 +140,7 @@ namespace debugging.Service
                     id_customer = _userLogin.Id,
                     id_metode_pembayaran = 5,
                     id_penyewaan = idPenyewaan,
-                    id_jenis_transaksi = 4 
+                    id_jenis_transaksi = 4
                 };
                 db.transaksi.Add(transaksiPengembalian);
                 db.SaveChanges();

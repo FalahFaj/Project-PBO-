@@ -37,24 +37,19 @@ namespace debugging.PenghubungDB
         {
             base.OnModelCreating(modelBuilder);
 
-            // Kategori  
             modelBuilder.Entity<Kategori>()
                 .HasKey(k => k.id_kategori);
-
-            // Produk  
+ 
             modelBuilder.Entity<Produk>()
                 .HasOne(p => p.kategori)
                 .WithMany(k => k.produk)
                 .HasForeignKey(p => p.id_kategori);
 
-            // Akun Admin  
             modelBuilder.Entity<Akun_admin>()
                 .HasKey(a => a.id_admin);
 
-            // Customer  
             modelBuilder.Entity<Customer>();
 
-            // Transaksi  
             modelBuilder.Entity<Transaksi>()
                 .HasOne(t => t.customer)
                 .WithMany(c => c.transaksi)
@@ -72,25 +67,19 @@ namespace debugging.PenghubungDB
                 .WithMany(p => p.Transaksis)
                 .HasForeignKey(t => t.id_penyewaan);
 
-            // Data Chat  
             modelBuilder.Entity<Data_chat>()
                 .HasOne(dc => dc.customer)
                 .WithMany(c => c.data_chat)
                 .HasForeignKey(dc => dc.id_customer);
-
-            // Daftar Transaksi  
+ 
             modelBuilder.Entity<Item_penyewaan>();
 
-            // Item Transaksi  
             modelBuilder.Entity<Item_transaksi>();
-
-            // Metode Pembayaran  
+ 
             modelBuilder.Entity<Metode_pembayaran>();
 
-            // Penyewaan  
             modelBuilder.Entity<Model.Penyewaan>();
 
-            // Keranjang  
             modelBuilder.Entity<Keranjang>();
 
             modelBuilder.Entity<Detail_keranjang>()
@@ -102,7 +91,6 @@ namespace debugging.PenghubungDB
                 .WithMany()
                 .HasForeignKey(d => d.id_produk);
 
-            // Jenis Transaksi  
             modelBuilder.Entity<Jenis_transaksi>();
         }
     }

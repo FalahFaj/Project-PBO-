@@ -15,6 +15,10 @@ namespace debugging.AksesLayer
         void UpdateProduk(Produk produk);
         void HapusProduk(int id_produk);
         void TambahProduk(Produk produk);
+        int HitungTotalBarangDisewa();
+        int HitungTotalBarangDijual();
+        decimal HitungTotalPemasukan();
+        int HitungBarangbelumdikembalikan();
         List<Kategori> GetAllKategori();
         List<Produk> ProdukDiSewa(int id_customer);
     }
@@ -76,6 +80,27 @@ namespace debugging.AksesLayer
                         where se.id_customer == id_customer
                         select p).ToList();
             return hasil;
+        }
+        public int HitungTotalBarangDisewa()
+
+        {
+            var jenisSewa = new List<string> { "dp", "pelunasan" };
+            return db.transaksi.Count(t => jenisSewa.Contains(t.jenis_transaksi.nama_jenis.ToLower()));
+        }
+
+        public int HitungTotalBarangDijual()
+
+        {
+            return db.transaksi.Count(t => t.jenis_transaksi.nama_jenis.ToLower() == "pembelian");
+        }
+        public decimal HitungTotalPemasukan()
+        {
+            return db.transaksi.Sum(t => t.nominal);
+
+        }
+        public int HitungBarangbelumdikembalikan()
+        {
+            return db.penyewaan.Count(ip => ip.status_peminjaman.ToLower() == "dipinjam");
         }
     }
 }

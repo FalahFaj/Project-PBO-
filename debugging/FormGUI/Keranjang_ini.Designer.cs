@@ -32,15 +32,13 @@
             label1 = new Label();
             flpProduk_keranjang = new FlowLayoutPanel();
             panel2 = new Panel();
-            panel3 = new Panel();
-            panel3.SuspendLayout();
             SuspendLayout();
             // 
             // btnBeli
             // 
             btnBeli.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnBeli.AutoSize = true;
-            btnBeli.Location = new Point(692, 13);
+            btnBeli.Location = new Point(1182, 694);
             btnBeli.Margin = new Padding(2);
             btnBeli.Name = "btnBeli";
             btnBeli.Size = new Size(143, 49);
@@ -51,10 +49,11 @@
             // 
             // label1
             // 
+            label1.Anchor = AnchorStyles.Top;
             label1.AutoSize = true;
             label1.Font = new Font("Microsoft Sans Serif", 16F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.Gray;
-            label1.Location = new Point(0, 15);
+            label1.Location = new Point(245, 15);
             label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
             label1.Size = new Size(228, 31);
@@ -65,41 +64,32 @@
             // 
             flpProduk_keranjang.AutoScroll = true;
             flpProduk_keranjang.FlowDirection = FlowDirection.TopDown;
-            flpProduk_keranjang.Location = new Point(0, 62);
+            flpProduk_keranjang.Location = new Point(0, 65);
             flpProduk_keranjang.Name = "flpProduk_keranjang";
-            flpProduk_keranjang.Size = new Size(846, 383);
+            flpProduk_keranjang.Size = new Size(1337, 611);
             flpProduk_keranjang.TabIndex = 6;
             // 
             // panel2
             // 
+            panel2.AutoSize = true;
             panel2.Location = new Point(0, 8);
             panel2.Name = "panel2";
-            panel2.Size = new Size(846, 51);
+            panel2.Size = new Size(1337, 51);
             panel2.TabIndex = 7;
-            // 
-            // panel3
-            // 
-            panel3.Controls.Add(btnBeli);
-            panel3.Location = new Point(0, 437);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(846, 64);
-            panel3.TabIndex = 0;
             // 
             // Keranjang_ini
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
-            ClientSize = new Size(846, 500);
-            Controls.Add(label1);
+            ClientSize = new Size(1336, 754);
+            Controls.Add(btnBeli);
             Controls.Add(panel2);
-            Controls.Add(panel3);
             Controls.Add(flpProduk_keranjang);
+            Controls.Add(label1);
             FormBorderStyle = FormBorderStyle.None;
             Name = "Keranjang_ini";
             Text = "Keranjang_ini";
-            panel3.ResumeLayout(false);
-            panel3.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }

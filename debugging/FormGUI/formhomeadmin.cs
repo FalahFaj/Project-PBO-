@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Globalization;
 using debugging.Service;
 
 namespace debugging
@@ -25,79 +26,9 @@ namespace debugging
             InitializeComponent();
             this.serviceProduk = serviceProduk;
         }
-        // Ganti tanggalLabels jadi bulanLabels
-        private readonly string[] bulanLabels = new[]
-        {
-            "Jan", "Feb", "Mar", "Apr", "Mei", "Jun",
-            "Jul", "Agu", "Sep", "Okt", "Nov", "Des"
-        };
 
-        private ObservableCollection<double> _data = new ObservableCollection<double>();
 
-        private void Form2_Load(object sender, EventArgs e)
-        {
-            Random rand = new Random();
-            for (int i = 1; i <= 12; i++)
-            {
-                _data.Add(rand.Next(0, 100));
-            }
-
-            cartesianChart1.Series = new List<ISeries>
-            {
-                new ColumnSeries<double>
-                {
-                    Values = _data,
-                    Name = "Jumlah per Bulan",
-                    Fill = new SolidColorPaint(SKColors.DeepSkyBlue)
-                }
-            };
-
-            cartesianChart1.XAxes = new Axis[]
-            {
-                new Axis
-                {
-                    Name = "Bulan",
-                    Labels = bulanLabels,
-                    TextSize = 10,
-                    LabelsPaint = new SolidColorPaint(SKColors.Black),
-                    SeparatorsPaint = new SolidColorPaint(SKColors.LightGray),
-                    LabelsRotation = 0,
-                    UnitWidth = 1,
-                    MinStep = 1
-                }
-            };
-
-            cartesianChart1.YAxes = new Axis[]
-            {
-                new Axis
-                {
-                    Name = "Pendapatan",
-                    TextSize = 10,
-                    LabelsPaint = new SolidColorPaint(SKColors.Black),
-                    SeparatorsPaint = new SolidColorPaint(SKColors.LightGray),
-                    UnitWidth = 1,
-                    MinStep = 1
-                }
-            };
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void cartesianChart1_Load(object sender, EventArgs e)
-        {
-        }
-
-        private void button2_Click(object sender, EventArgs e)
+        void button2_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
@@ -119,81 +50,43 @@ namespace debugging
             WindowState = FormWindowState.Minimized;
         }
 
-        private void cartesianChart2_Load(object sender, EventArgs e)
+        private void LoadDashboardData()
         {
-            Random rand = new Random();
-            var dataBeli = new ObservableCollection<double>();
-            var dataSewa = new ObservableCollection<double>();
-
-            for (int i = 1; i <= 12; i++)
+            try
             {
-                dataBeli.Add(rand.Next(20, 100));
-                dataSewa.Add(rand.Next(10, 80));
+                int totaldisewa = serviceProduk.GetTotalBarangDisewa();
+                int totaldijual = serviceProduk.GetTotalBarangDijual();
+                decimal totalpemasukan = serviceProduk.GetTotalPemasukan();
+                int Barangblmdikembalikan = serviceProduk.Getbarangbelumdikembalikan();
+                jmlhdisewa.Text = totaldisewa.ToString();
+                jmlhdijual.Text = totaldijual.ToString();
+                var culture = new CultureInfo("id-ID");
+                jmlhpemasukan.Text = totalpemasukan.ToString("C0", culture);
+                barangbelumdikembalikan.Text = Barangblmdikembalikan.ToString();
+
             }
-
-            cartesianChart2.Series = new List<ISeries>
+            catch (Exception ex)
             {
-                new ColumnSeries<double>
-                {
-                    Values = dataBeli,
-                    Name = "Beli",
-                    Fill = new SolidColorPaint(SKColors.Blue),
-                    Stroke = null
-                },
-                new ColumnSeries<double>
-                {
-                    Values = dataSewa,
-                    Name = "Sewa",
-                    Fill = new SolidColorPaint(SKColors.Red),
-                    Stroke = null
-                }
-            };
-
-            cartesianChart2.XAxes = new Axis[]
-            {
-                new Axis
-                {
-                    Name = "Bulan",
-                    Labels = bulanLabels,
-                    LabelsRotation = 0
-                }
-            };
-
-            cartesianChart2.YAxes = new Axis[]
-            {
-                new Axis
-                {
-                    Name = "Pendapatan"
-                }
-            };
+                MessageBox.Show(
+                    "Gagal memuat data dashboard. Pastikan koneksi database tidak eror" + ex.Message,
+                    "Kesalahan Data",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
+        private void jmlhpemasukan_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void panel2_Paint(object sender, PaintEventArgs e)
+        private void formhomeadmin_Load_1(object sender, EventArgs e)
         {
-
+            LoadDashboardData();
         }
 
-        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void panel4_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void cartesianChart1_Load_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void formhomeadmin_Load(object sender, EventArgs e)
+        private void label1_Click(object sender, EventArgs e)
         {
 
         }

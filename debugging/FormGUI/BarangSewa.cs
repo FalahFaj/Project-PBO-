@@ -15,9 +15,21 @@ namespace debugging.FormGUI
 {
     public partial class BarangSewa : UserControl
     {
+        public event EventHandler BarangDikembalikan;
         private readonly UserLogin userLogin;
         private readonly Produk produk;
         public int IdTransaksiSewa { get; set; }
+        private string _status;
+        public string Status
+        {
+            get => _status;
+            set
+            {
+                _status = value;
+                txtStatus.Text = value;
+                btnKembalikan.Enabled = value.ToLower() == "dipinjam";
+            }
+        }
         public string FotoProduk
         {
             set
@@ -47,26 +59,17 @@ namespace debugging.FormGUI
             get => DateTime.Parse(txtTglJatuhTempo.Text);
             set => txtTglJatuhTempo.Text = value.ToString("dd/MM/yyyy");
         }
-        public string Status
-        {
-            get => txtStatus.Text;
-            set => txtStatus.Text = value;
-        }
         public BarangSewa(UserLogin userLogin, Produk produk)
         {
             InitializeComponent();
             btnKembalikan.Click += btnKembalikan_Click;
             this.userLogin = userLogin;
             this.produk = produk;
-            if (Status == "Menunggu Konfirmasi")
-            {
-                btnKembalikan.Visible = false;
-            }
         }
 
         private void btnKembalikan_Click(object sender, EventArgs e)
         {
-            if (Status == "Sudah dikembalikan")
+            if (Status.ToLower() != "dipinjam")
             {
                 MessageBox.Show("Barang sudah dikembalikan.", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
@@ -77,20 +80,23 @@ namespace debugging.FormGUI
             if (hariTerlambat > 0)
             {
                 denda = hariTerlambat * 5000;
+                txtDenda.Visible = true;
                 txtDenda.Text = denda.ToString("C2");
                 MessageBox.Show($"Barang dikembalikan terlambat {hariTerlambat} hari. Denda: {denda:C2}", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-                txtDenda.Text = "Rp 0,00";
-                MessageBox.Show("Barang dikembalikan tepat waktu.", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Barang berhasil dikembalikan", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            Status = "Sudah dikembalikan";
-            btnKembalikan.Enabled = false;
 
             var service = new PenyewaanService(userLogin, produk);
             string errorMessage;
             bool sukses = service.KembalikanBarang(IdTransaksiSewa, denda, out errorMessage);
+            if (sukses)
+            {
+                Status = "Sudah dikembalikan";
+                BarangDikembalikan?.Invoke(this, EventArgs.Empty);
+            }
         }
     }
 }

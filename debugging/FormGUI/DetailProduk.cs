@@ -82,9 +82,10 @@ namespace debugging.FormGUI
         {
             int jumlah = (int)numericUpDownJumlah.Value;
             string error;
-            if (jumlah <= 0)
+            if (jumlah > 0)
             {
-                bool sukses = ServiceKeranjang.TambahKeranjang(akun.Id, produk.id_produk, jumlah, out error);
+                var serviceKeranjang = new ServiceKeranjang();
+                bool sukses = serviceKeranjang.TambahKeranjang(akun.Id, produk.id_produk, jumlah, out error);
                 if (sukses)
                 {
                     MessageBox.Show("Produk berhasil ditambahkan ke keranjang", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);

@@ -74,7 +74,7 @@ namespace debugging
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             this.Hide();
-            Login login = new Login(this.serviceAkun);
+            Login login = new Login();
             login.ShowDialog();
             this.Show();
 
@@ -110,7 +110,7 @@ namespace debugging
                 {
                     MessageBox.Show("Registrasi Berhasil", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Hide();    
-                    Login login = new Login(this.serviceAkun);
+                    Login login = new Login();
                     login.ShowDialog();
                     this.Close();
                 }

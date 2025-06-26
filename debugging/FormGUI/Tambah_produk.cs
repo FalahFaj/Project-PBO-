@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using debugging.Model;
 using debugging.Service;
 using debugging.AksesLayer;
+using debugging.PenghubungDB;
 
 namespace debugging.FormGUI 
 {
@@ -56,7 +57,13 @@ namespace debugging.FormGUI
                 MessageBox.Show("ComboBox Disewakan tidak ditemukan. Pastikan nama komponen sudah benar.");
             }
         }
-
+        private List<Kategori> GetAllNamaKategori()
+        {
+            using (var db = new KoneksiDB())
+            {
+                return db.kategori.ToList();
+            }
+        }
         private void btnSimpan_Click(object sender, EventArgs e)
 //         private List<Kategori> GetAllNamaKategori()
         {

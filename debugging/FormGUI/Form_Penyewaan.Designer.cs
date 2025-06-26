@@ -152,7 +152,7 @@
             // lblNoRek
             // 
             lblNoRek.AutoSize = true;
-            lblNoRek.Location = new Point(412, 314);
+            lblNoRek.Location = new Point(395, 347);
             lblNoRek.Name = "lblNoRek";
             lblNoRek.Size = new Size(0, 20);
             lblNoRek.TabIndex = 12;

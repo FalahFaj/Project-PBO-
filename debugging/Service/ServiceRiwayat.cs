@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace debugging.Service
 {
-    public class ServiceRiwayat :   IServiceRiwayat
+    public class ServiceRiwayat : IServiceRiwayat
     {
         private readonly KoneksiDB db;
         public ServiceRiwayat(KoneksiDB dbContext)
@@ -32,7 +32,7 @@ namespace debugging.Service
 
             var riwayatBeli = (from t in db.transaksi
                                join c in db.customer on t.id_customer equals c.id_customer
-                               where t.id_jenis_transaksi == 2 
+                               where t.id_jenis_transaksi == 2
                                select new RiwayatViewModel
                                {
                                    Tipe = "Beli",
@@ -40,8 +40,8 @@ namespace debugging.Service
                                    NamaPelanggan = c.nama,
                                    Tanggal = t.tanggal,
                                    KeteranganProduk = "Pembelian Produk",
-                                   Status = t.status, 
-                                   Total = t.Total
+                                   Status = t.nominal.ToString(),
+                                   Total = t.nominal 
                                }).ToList();
             return riwayatSewa.Concat(riwayatBeli).ToList();
         }

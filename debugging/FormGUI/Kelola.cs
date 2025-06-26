@@ -52,16 +52,16 @@ namespace debugging
                     DataGridViewColumn disewakanColumn = grid_Produk.Columns["Disewakan"];
                     if (!(disewakanColumn is DataGridViewTextBoxColumn))
                     {
- 
+
                         int columnIndex = disewakanColumn.Index;
                         string headerText = disewakanColumn.HeaderText;
                         grid_Produk.Columns.Remove(disewakanColumn);
 
                         DataGridViewTextBoxColumn newColumn = new DataGridViewTextBoxColumn
                         {
-                            Name = "Disewakan", 
+                            Name = "Disewakan",
                             HeaderText = headerText,
-                            DataPropertyName = "Disewakan" 
+                            DataPropertyName = "Disewakan"
                         };
                         grid_Produk.Columns.Insert(columnIndex, newColumn);
                     }
@@ -124,7 +124,7 @@ namespace debugging
                     {
                         serviceProduk.HapusProduk(idToDelete);
                         MessageBox.Show("Produk berhasil dihapus.", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        LoadDataProduk(); 
+                        LoadDataProduk();
                     }
                     catch (Exception ex)
                     {
@@ -155,7 +155,9 @@ namespace debugging
                 try
                 {
                     int idToUpdate = Convert.ToInt32(grid_Produk.SelectedRows[0].Cells["id_produk"].Value);
+
                     update_Produk updateForm = new update_Produk(idToUpdate, this.serviceProduk);
+
                     DialogResult result = updateForm.ShowDialog();
                     if (result == DialogResult.OK)
                     {

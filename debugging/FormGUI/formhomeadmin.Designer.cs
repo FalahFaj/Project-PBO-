@@ -29,241 +29,254 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(formhomeadmin));
-            panel9 = new Panel();
-            pictureBox11 = new PictureBox();
+            panel2 = new Panel();
+            label10 = new Label();
+            jmlhdisewa = new Label();
+            label12 = new Label();
+            panel1 = new Panel();
+            jmlhdijual = new Label();
             label8 = new Label();
-            label7 = new Label();
-            panel8 = new Panel();
-            pictureBox10 = new PictureBox();
-            label6 = new Label();
-            label5 = new Label();
-            panel7 = new Panel();
-            label3 = new Label();
-            pictureBox9 = new PictureBox();
-            label4 = new Label();
+            label9 = new Label();
+            panel3 = new Panel();
+            jmlhpemasukan = new Label();
+            label13 = new Label();
+            label14 = new Label();
+            panel4 = new Panel();
+            barangbelumdikembalikan = new Label();
             label2 = new Label();
-            cartesianChart2 = new LiveChartsCore.SkiaSharpView.WinForms.CartesianChart();
-            cartesianChart1 = new LiveChartsCore.SkiaSharpView.WinForms.CartesianChart();
-            panel9.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox11).BeginInit();
-            panel8.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox10).BeginInit();
-            panel7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox9).BeginInit();
+            lblbrng = new Label();
+            panel5 = new Panel();
+            pictureBox8 = new PictureBox();
+            panel2.SuspendLayout();
+            panel1.SuspendLayout();
+            panel3.SuspendLayout();
+            panel4.SuspendLayout();
+            panel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox8).BeginInit();
             SuspendLayout();
             // 
-            // panel9
+            // panel2
             // 
-            panel9.BackColor = Color.FromArgb(231, 76, 60);
-            panel9.Controls.Add(pictureBox11);
-            panel9.Controls.Add(label8);
-            panel9.Controls.Add(label7);
-            panel9.Location = new Point(549, 13);
-            panel9.Margin = new Padding(4);
-            panel9.Name = "panel9";
-            panel9.Size = new Size(238, 144);
-            panel9.TabIndex = 15;
+            panel2.BackColor = Color.OrangeRed;
+            panel2.Controls.Add(label10);
+            panel2.Controls.Add(jmlhdisewa);
+            panel2.Controls.Add(label12);
+            panel2.Location = new Point(12, 223);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(185, 125);
+            panel2.TabIndex = 4;
             // 
-            // pictureBox11
+            // label10
             // 
-            pictureBox11.BackgroundImage = (Image)resources.GetObject("pictureBox11.BackgroundImage");
-            pictureBox11.Location = new Point(167, 34);
-            pictureBox11.Margin = new Padding(4);
-            pictureBox11.Name = "pictureBox11";
-            pictureBox11.Size = new Size(82, 76);
-            pictureBox11.TabIndex = 10;
-            pictureBox11.TabStop = false;
+            label10.AutoSize = true;
+            label10.Location = new Point(17, 6);
+            label10.Name = "label10";
+            label10.Size = new Size(145, 20);
+            label10.TabIndex = 0;
+            label10.Text = "Total Barang Disewa";
+            // 
+            // jmlhdisewa
+            // 
+            jmlhdisewa.AutoSize = true;
+            jmlhdisewa.ForeColor = SystemColors.MenuText;
+            jmlhdisewa.Location = new Point(71, 41);
+            jmlhdisewa.Name = "jmlhdisewa";
+            jmlhdisewa.Size = new Size(113, 20);
+            jmlhdisewa.TabIndex = 2;
+            jmlhdisewa.Text = "                          ";
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Location = new Point(3, 41);
+            label12.Name = "label12";
+            label12.Size = new Size(62, 20);
+            label12.TabIndex = 1;
+            label12.Text = "Jumlah :";
+            // 
+            // panel1
+            // 
+            panel1.BackColor = Color.SkyBlue;
+            panel1.Controls.Add(jmlhdijual);
+            panel1.Controls.Add(label8);
+            panel1.Controls.Add(label9);
+            panel1.Location = new Point(213, 223);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(179, 125);
+            panel1.TabIndex = 6;
+            // 
+            // jmlhdijual
+            // 
+            jmlhdijual.AutoSize = true;
+            jmlhdijual.Location = new Point(63, 41);
+            jmlhdijual.Name = "jmlhdijual";
+            jmlhdijual.Size = new Size(113, 20);
+            jmlhdijual.TabIndex = 5;
+            jmlhdijual.Text = "                          ";
             // 
             // label8
             // 
             label8.AutoSize = true;
-            label8.Font = new Font("Segoe UI", 13F, FontStyle.Bold);
-            label8.ForeColor = Color.WhiteSmoke;
-            label8.Location = new Point(0, 59);
-            label8.Margin = new Padding(4, 0, 4, 0);
+            label8.Location = new Point(3, 41);
             label8.Name = "label8";
-            label8.Size = new Size(174, 36);
-            label8.TabIndex = 9;
-            label8.Text = "RP 52.000.00";
+            label8.Size = new Size(62, 20);
+            label8.TabIndex = 1;
+            label8.Text = "Jumlah :";
             // 
-            // label7
+            // label9
             // 
-            label7.AutoSize = true;
-            label7.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            label7.ForeColor = Color.WhiteSmoke;
-            label7.Location = new Point(15, 16);
-            label7.Margin = new Padding(4, 0, 4, 0);
-            label7.Name = "label7";
-            label7.Size = new Size(81, 28);
-            label7.TabIndex = 8;
-            label7.Text = "Income";
+            label9.AutoSize = true;
+            label9.Location = new Point(15, 6);
+            label9.Name = "label9";
+            label9.Size = new Size(136, 20);
+            label9.TabIndex = 0;
+            label9.Text = "Total Barang Dijual";
             // 
-            // panel8
+            // panel3
             // 
-            panel8.BackColor = Color.FromArgb(26, 188, 156);
-            panel8.Controls.Add(pictureBox10);
-            panel8.Controls.Add(label6);
-            panel8.Controls.Add(label5);
-            panel8.Location = new Point(301, 13);
-            panel8.Margin = new Padding(4);
-            panel8.Name = "panel8";
-            panel8.Size = new Size(240, 144);
-            panel8.TabIndex = 14;
+            panel3.BackColor = Color.Turquoise;
+            panel3.Controls.Add(jmlhpemasukan);
+            panel3.Controls.Add(label13);
+            panel3.Controls.Add(label14);
+            panel3.ForeColor = Color.Black;
+            panel3.Location = new Point(407, 223);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(204, 125);
+            panel3.TabIndex = 4;
             // 
-            // pictureBox10
+            // jmlhpemasukan
             // 
-            pictureBox10.BackgroundImage = (Image)resources.GetObject("pictureBox10.BackgroundImage");
-            pictureBox10.Location = new Point(154, 44);
-            pictureBox10.Margin = new Padding(4);
-            pictureBox10.Name = "pictureBox10";
-            pictureBox10.Size = new Size(82, 76);
-            pictureBox10.TabIndex = 9;
-            pictureBox10.TabStop = false;
+            jmlhpemasukan.AutoSize = true;
+            jmlhpemasukan.Location = new Point(83, 41);
+            jmlhpemasukan.Name = "jmlhpemasukan";
+            jmlhpemasukan.Size = new Size(113, 20);
+            jmlhpemasukan.TabIndex = 4;
+            jmlhpemasukan.Text = "                          ";
+            jmlhpemasukan.Click += jmlhpemasukan_Click;
             // 
-            // label6
+            // label13
             // 
-            label6.AutoSize = true;
-            label6.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
-            label6.ForeColor = Color.WhiteSmoke;
-            label6.Location = new Point(18, 45);
-            label6.Margin = new Padding(4, 0, 4, 0);
-            label6.Name = "label6";
-            label6.Size = new Size(69, 54);
-            label6.TabIndex = 8;
-            label6.Text = "50";
+            label13.AutoSize = true;
+            label13.Location = new Point(3, 41);
+            label13.Name = "label13";
+            label13.Size = new Size(62, 20);
+            label13.TabIndex = 1;
+            label13.Text = "Jumlah :";
             // 
-            // label5
+            // label14
             // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            label5.ForeColor = Color.WhiteSmoke;
-            label5.Location = new Point(18, 16);
-            label5.Margin = new Padding(4, 0, 4, 0);
-            label5.Name = "label5";
-            label5.Size = new Size(56, 28);
-            label5.TabIndex = 7;
-            label5.Text = "Rent";
+            label14.AutoSize = true;
+            label14.Location = new Point(40, 6);
+            label14.Name = "label14";
+            label14.Size = new Size(119, 20);
+            label14.TabIndex = 0;
+            label14.Text = "Total Pemasukan";
             // 
-            // panel7
+            // panel4
             // 
-            panel7.BackColor = Color.FromArgb(52, 152, 219);
-            panel7.Controls.Add(label3);
-            panel7.Controls.Add(pictureBox9);
-            panel7.Controls.Add(label4);
-            panel7.Controls.Add(label2);
-            panel7.Location = new Point(13, 13);
-            panel7.Margin = new Padding(4);
-            panel7.Name = "panel7";
-            panel7.Size = new Size(280, 144);
-            panel7.TabIndex = 13;
+            panel4.BackColor = Color.CadetBlue;
+            panel4.Controls.Add(barangbelumdikembalikan);
+            panel4.Controls.Add(label2);
+            panel4.Controls.Add(lblbrng);
+            panel4.Location = new Point(630, 223);
+            panel4.Name = "panel4";
+            panel4.Size = new Size(204, 125);
+            panel4.TabIndex = 7;
             // 
-            // label3
+            // barangbelumdikembalikan
             // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
-            label3.ForeColor = Color.WhiteSmoke;
-            label3.Location = new Point(0, 44);
-            label3.Margin = new Padding(4, 0, 4, 0);
-            label3.Name = "label3";
-            label3.Size = new Size(115, 54);
-            label3.TabIndex = 7;
-            label3.Text = "1357";
-            // 
-            // pictureBox9
-            // 
-            pictureBox9.BackgroundImage = (Image)resources.GetObject("pictureBox9.BackgroundImage");
-            pictureBox9.Location = new Point(190, 44);
-            pictureBox9.Margin = new Padding(4);
-            pictureBox9.Name = "pictureBox9";
-            pictureBox9.Size = new Size(82, 76);
-            pictureBox9.TabIndex = 6;
-            pictureBox9.TabStop = false;
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label4.ForeColor = Color.WhiteSmoke;
-            label4.Location = new Point(4, 114);
-            label4.Margin = new Padding(4, 0, 4, 0);
-            label4.Name = "label4";
-            label4.Size = new Size(131, 25);
-            label4.TabIndex = 8;
-            label4.Text = "15 new orders";
+            barangbelumdikembalikan.AutoSize = true;
+            barangbelumdikembalikan.Location = new Point(71, 41);
+            barangbelumdikembalikan.Name = "barangbelumdikembalikan";
+            barangbelumdikembalikan.Size = new Size(105, 20);
+            barangbelumdikembalikan.TabIndex = 9;
+            barangbelumdikembalikan.Text = "                        ";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            label2.ForeColor = Color.WhiteSmoke;
-            label2.Location = new Point(16, 16);
-            label2.Margin = new Padding(4, 0, 4, 0);
+            label2.Location = new Point(3, 41);
             label2.Name = "label2";
-            label2.Size = new Size(75, 28);
-            label2.TabIndex = 6;
-            label2.Text = "Orders";
+            label2.Size = new Size(62, 20);
+            label2.TabIndex = 8;
+            label2.Text = "Jumlah :";
             // 
-            // cartesianChart2
+            // lblbrng
             // 
-            cartesianChart2.BackColor = Color.WhiteSmoke;
-            cartesianChart2.Location = new Point(13, 176);
-            cartesianChart2.Margin = new Padding(4);
-            cartesianChart2.MatchAxesScreenDataRatio = false;
-            cartesianChart2.Name = "cartesianChart2";
-            cartesianChart2.Size = new Size(369, 250);
-            cartesianChart2.TabIndex = 17;
+            lblbrng.AutoSize = true;
+            lblbrng.Location = new Point(3, 6);
+            lblbrng.Name = "lblbrng";
+            lblbrng.Size = new Size(195, 20);
+            lblbrng.TabIndex = 0;
+            lblbrng.Text = "Barang belum dikembalikan";
             // 
-            // cartesianChart1
+            // panel5
             // 
-            cartesianChart1.BackColor = Color.WhiteSmoke;
-            cartesianChart1.Location = new Point(390, 176);
-            cartesianChart1.Margin = new Padding(4);
-            cartesianChart1.MatchAxesScreenDataRatio = false;
-            cartesianChart1.Name = "cartesianChart1";
-            cartesianChart1.Size = new Size(374, 250);
-            cartesianChart1.TabIndex = 16;
+            panel5.BackColor = Color.FromArgb(32, 33, 36);
+            panel5.Controls.Add(pictureBox8);
+            panel5.Location = new Point(15, 12);
+            panel5.Name = "panel5";
+            panel5.Size = new Size(819, 176);
+            panel5.TabIndex = 8;
+            // 
+            // pictureBox8
+            // 
+            pictureBox8.Image = (Image)resources.GetObject("pictureBox8.Image");
+            pictureBox8.Location = new Point(284, 16);
+            pictureBox8.Margin = new Padding(2);
+            pictureBox8.Name = "pictureBox8";
+            pictureBox8.Size = new Size(229, 139);
+            pictureBox8.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox8.TabIndex = 3;
+            pictureBox8.TabStop = false;
             // 
             // formhomeadmin
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(panel9);
-            Controls.Add(panel8);
-            Controls.Add(panel7);
-            Controls.Add(cartesianChart2);
-            Controls.Add(cartesianChart1);
+            ClientSize = new Size(846, 360);
+            Controls.Add(panel5);
+            Controls.Add(panel4);
+            Controls.Add(panel3);
+            Controls.Add(panel1);
+            Controls.Add(panel2);
             FormBorderStyle = FormBorderStyle.None;
+            Margin = new Padding(2);
             Name = "formhomeadmin";
             Text = "formhomeadmin";
-            panel9.ResumeLayout(false);
-            panel9.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox11).EndInit();
-            panel8.ResumeLayout(false);
-            panel8.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox10).EndInit();
-            panel7.ResumeLayout(false);
-            panel7.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox9).EndInit();
+            Load += formhomeadmin_Load_1;
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            panel3.ResumeLayout(false);
+            panel3.PerformLayout();
+            panel4.ResumeLayout(false);
+            panel4.PerformLayout();
+            panel5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox8).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private Panel panel9;
-        private PictureBox pictureBox11;
+        private Panel panel2;
+        private Label label10;
+        private Label jmlhdisewa;
+        private Label label12;
+        private Panel panel1;
         private Label label8;
-        private Label label7;
-        private Panel panel8;
-        private PictureBox pictureBox10;
-        private Label label6;
-        private Label label5;
-        private Panel panel7;
-        private Label label3;
-        private PictureBox pictureBox9;
-        private Label label4;
+        private Label label9;
+        private Panel panel3;
+        private Label jmlhpemasukan;
+        private Label label13;
+        private Label label14;
+        private Label jmlhdijual;
+        private Panel panel4;
+        private Label barangbelumdikembalikan;
         private Label label2;
-        private LiveChartsCore.SkiaSharpView.WinForms.CartesianChart cartesianChart2;
-        private LiveChartsCore.SkiaSharpView.WinForms.CartesianChart cartesianChart1;
+        private Label lblbrng;
+        private Panel panel5;
+        private PictureBox pictureBox8;
     }
 }

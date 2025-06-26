@@ -408,7 +408,7 @@ namespace debugging
         private void button4_Click_1(object sender, EventArgs e)
         {
             this.Hide();
-            Login login = new Login(this.serviceAkun);
+            Login login = new Login();
             login.ShowDialog();
             this.Show();
         }
@@ -456,14 +456,15 @@ namespace debugging
 
         private void button8_Click(object sender, EventArgs e)
         {
+            flowLayoutPanel3.Visible = false;
             try
             {
                 if (pengembalian == null)
                 {
-                    var userLogin = akun;
+                    //TampilkanSemula();
                     var produk = new Produk();
 
-                    var servicepenyewaan = new PenyewaanService(userLogin, produk);
+                    var servicepenyewaan = new PenyewaanService(akun, produk);
                     pengembalian = new Pengembalian(serviceProduk, servicepenyewaan, akun);
                     pengembalian.MdiParent = this;
                     pengembalian.Dock = DockStyle.Fill;

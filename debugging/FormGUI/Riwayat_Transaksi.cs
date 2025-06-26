@@ -1,127 +1,253 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Windows.Forms;
+using MigraDoc.DocumentObjectModel;
+using MigraDoc.DocumentObjectModel.Tables;
+using MigraDoc.Rendering;
+using Color = MigraDoc.DocumentObjectModel.Color;
+using Font = MigraDoc.DocumentObjectModel.Font;
 using debugging.Model;
-using debugging.Service;
+using debugging.PenghubungDB;
+using System.Linq;
+using System.IO;
+using System.Collections.Generic;
 
 namespace debugging
 {
+    [NotMapped]
     public partial class Riwayat_Transaksi : Form
     {
-        private readonly IServiceRiwayat serviceRiwayat;
-        private List<RiwayatViewModel> semuaTransaksi;
-        public Riwayat_Transaksi(IServiceRiwayat serviceRiwayat)
+        private readonly KoneksiDB db = new KoneksiDB();
+
+        public Riwayat_Transaksi()
         {
             InitializeComponent();
-//             this.serviceRiwayat = serviceRiwayat;
-//             this.Load += new System.EventHandler(this.Riwayat_Transaksi_Load);
-//             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
-//             this.button4.Click += new System.EventHandler(this.button4_Click); 
-            dataGridView1.AutoGenerateColumns = true;
+            dataGridView1.AutoGenerateColumns = false;
+            menuDisetujui.Click += new EventHandler(menuDisetujui_Click);
+            menuDitolak.Click += new EventHandler(menuDitolak_Click);
+            this.dataGridView1.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseClick);
+        }
 
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
         }
 
         private void Riwayat_Transaksi_Load(object sender, EventArgs e)
         {
-            SetupDataGridView();
-            comboBox1.Items.AddRange(new object[] { "Semua", "Sewa", "Beli" });
-            comboBox1.SelectedIndex = 0;
-            LoadData();
+            dataGridView1.EnableHeadersVisualStyles = false;
+            dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = ColorTranslator.FromHtml("#3F51B5");
+            dataGridView1.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView1.ColumnHeadersHeight = 40;
+            dataGridView1.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+
+            LoadRiwayatTransaksi();
         }
 
-        private void SetupDataGridView()
+        private void LoadRiwayatTransaksi()
         {
-            dataGridView1.Columns.Clear();
-//             dataGridView1.AutoGenerateColumns = false;
-//             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-//             dataGridView1.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Tipe", DataPropertyName = "Tipe" });
-//             dataGridView1.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "ID", DataPropertyName = "IdTransaksi" });
-//             dataGridView1.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Nama Pelanggan", DataPropertyName = "NamaPelanggan" });
-//             dataGridView1.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Tanggal", DataPropertyName = "Tanggal", DefaultCellStyle = { Format = "dd-MM-yyyy" } });
-//             dataGridView1.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Keterangan", DataPropertyName = "KeteranganProduk" });
-//             dataGridView1.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Status", DataPropertyName = "Status" });
             var data = (from p in db.penyewaan
                         join c in db.customer on p.id_customer equals c.id_customer
-                        join d in db.item_penyewaan on p.id_penyewaan equals d.id_penyewaan
-                        join pr in db.produk on d.id_produk equals pr.id_produk
+                        join d_group in db.item_penyewaan on p.id_penyewaan equals d_group.id_penyewaan into itemGroup
                         select new
                         {
-                            NamaPenyewaan = c.nama,
+                            IdPenyewaan = p.id_penyewaan,
+                            NamaPenyewa = c.nama,
+                            Produk = string.Join(", ", itemGroup.Select(item => db.produk.FirstOrDefault(pr => pr.id_produk == item.id_produk).nama)),
                             TanggalPenyewaan = p.tanggal_sewa,
-                            TanggalPengembalian = p.tanggal_kembali,
-                            Produk = pr.nama,
-                            Nominal = p.pembayaran_dp,
-                            SatusPinjam = p.status_peminjaman,
-                            DurasiHari = d.durasi_hari,
-                            TotalHarga = d.jumlah * pr.harga
+                            BatasPenyewaan = p.tanggal_kembali,
+                            NominalDP = p.pembayaran_dp,
+                            StatusDP = p.status_dp,
+                            StatusPenyewaan = p.status_peminjaman
                         }).ToList();
+
             dataGridView1.DataSource = data;
-        }
-        private void LoadData()
-        {
-            try
+
+            for (int i = 0; i < dataGridView1.Rows.Count; i++)
             {
-                semuaTransaksi = serviceRiwayat.GetSemuaRiwayat();
-                dataGridView1.DataSource = semuaTransaksi.OrderByDescending(t => t.Tanggal).ToList();
+                dataGridView1.Rows[i].Cells["Column1"].Value = i + 1;
             }
-            catch (Exception ex)
+
+            Column2.DataPropertyName = "NamaPenyewa";
+            Column3.DataPropertyName = "Produk";
+            Column4.DataPropertyName = "TanggalPenyewaan";
+            Column5.DataPropertyName = "BatasPenyewaan";
+            Column6.DataPropertyName = "NominalDP";
+            Column7.DataPropertyName = "StatusDP";
+            Column8.DataPropertyName = "StatusPenyewaan";
+
+            foreach (DataGridViewColumn column in dataGridView1.Columns)
             {
-                MessageBox.Show("Gagal memuat data: " + ex.Message, "Error");
+                column.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            }
+        }
+        private void dataGridView1_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right && e.RowIndex >= 0 && e.RowIndex < dataGridView1.Rows.Count - 1)
+            {
+                dataGridView1.ClearSelection();
+                dataGridView1.Rows[e.RowIndex].Selected = true;
+                MenuKonteks.Show(dataGridView1, e.Location);
             }
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void UpdateStatusPenyewaan(string newStatus)
         {
-            if (semuaTransaksi == null) return;
-            string filter = comboBox1.SelectedItem.ToString();
-            List<RiwayatViewModel> dataTersaring;
-
-            if (filter == "Semua")
+            if (dataGridView1.SelectedRows.Count == 0)
             {
-                dataTersaring = semuaTransaksi;
-            }
-            else
-            {
-                dataTersaring = semuaTransaksi.Where(t => t.Tipe == filter).ToList();
-            }
-            dataGridView1.DataSource = dataTersaring.OrderByDescending(t => t.Tanggal).ToList();
-        }
-        private void button4_Click(object sender, EventArgs e)
-        {
-            if (!int.TryParse(textBox1.Text.Trim(), out int idToUpdate))
-            {
-                MessageBox.Show("Harap masukkan ID penyewaan yang valid.", "Input Tidak Valid", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Silakan pilih baris penyewaan terlebih dahulu.", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            var dialogResult = MessageBox.Show($"Pilih status baru untuk transaksi ID {idToUpdate}:\n\n[YES] = Disetujui\n[NO] = Ditolak",
-                                               "Konfirmasi Update Status", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-            if (dialogResult == DialogResult.Cancel) return;
+            DialogResult result = MessageBox.Show(
+                $"Apakah Anda yakin ingin mengatur status penyewaan yang dipilih menjadi '{newStatus}'?",
+                "Konfirmasi Perubahan Status",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            );
 
-            string newStatus = (dialogResult == DialogResult.Yes) ? "Disetujui" : "Ditolak";
-            
-            try
+            if (result == DialogResult.Yes)
             {
-                serviceRiwayat.UpdateStatusPenyewaan(idToUpdate, newStatus);
-                MessageBox.Show($"Status untuk ID {idToUpdate} berhasil diubah.", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                
-                LoadData();
-                textBox1.Clear();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Gagal update: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                try
+                {
+                    foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+                    {
+                        var selectedDataRow = row.DataBoundItem as dynamic;
+                        int idPenyewaan = selectedDataRow.IdPenyewaan;
+
+                        var penyewaanToUpdate = db.penyewaan.FirstOrDefault(p => p.id_penyewaan == idPenyewaan);
+
+                        if (penyewaanToUpdate != null)
+                        {
+                            penyewaanToUpdate.status_peminjaman = newStatus;
+                        }
+                    }
+                    db.SaveChanges();
+                    MessageBox.Show($"Status penyewaan berhasil diupdate menjadi '{newStatus}'.", "Update Berhasil", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadRiwayatTransaksi();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Gagal mengupdate status: {ex.Message}", "Error Update", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
-        #region Unused or other methods
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
-        public void ExportToPDF(DataGridView dataGridView) {  }
-        private void ExportPDF_Click(object sender, EventArgs e) { ExportToPDF(dataGridView1); }
-        private void button2_Click(object sender, EventArgs e) { Application.Exit(); }
-        private void textBox1_TextChanged(object sender, EventArgs e) { }
-        #endregion
+        private void menuDisetujui_Click(object sender, EventArgs e)
+        {
+            UpdateStatusPenyewaan("Disetujui");
+        }
+
+        private void menuDitolak_Click(object sender, EventArgs e)
+        {
+            UpdateStatusPenyewaan("Ditolak");
+        }
+
+        public void ExportToPDF(DataGridView dataGridView)
+        {
+            try
+            {
+                Document document = new Document();
+                Section section = document.AddSection();
+
+                Paragraph title = section.AddParagraph("DETAIL PENYEWAAN");
+                title.Format.Font.Size = 16;
+                title.Format.Font.Bold = true;
+                title.Format.Alignment = ParagraphAlignment.Center;
+                title.AddSpace(1);
+
+                Table table = section.AddTable();
+                table.Borders.Width = 0.75;
+
+                int visibleColumnCount = dataGridView.Columns.Cast<DataGridViewColumn>().Count(c => c.Visible);
+                if (visibleColumnCount == 0)
+                {
+                    MessageBox.Show("Tidak ada kolom yang terlihat untuk diekspor ke PDF.", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                double totalWidth = section.PageSetup.PageWidth - section.PageSetup.LeftMargin - section.PageSetup.RightMargin;
+                double defaultColumnWidth = totalWidth / visibleColumnCount;
+
+                foreach (DataGridViewColumn column in dataGridView.Columns)
+                {
+                    if (column.Visible)
+                    {
+                        table.AddColumn(defaultColumnWidth);
+                    }
+                }
+
+                Row headerRow = table.AddRow();
+                headerRow.Shading.Color = new Color(63, 81, 181);
+                headerRow.Format.Font.Color = Colors.White;
+                headerRow.Format.Font.Bold = true;
+
+                int colIndexPdf = 0;
+                for (int i = 0; i < dataGridView.Columns.Count; i++)
+                {
+                    if (dataGridView.Columns[i].Visible)
+                    {
+                        headerRow.Cells[colIndexPdf].AddParagraph(dataGridView.Columns[i].HeaderText);
+                        headerRow.Cells[colIndexPdf].Format.Alignment = ParagraphAlignment.Center;
+                        colIndexPdf++;
+                    }
+                }
+
+                foreach (DataGridViewRow dgvRow in dataGridView.Rows)
+                {
+                    if (dgvRow.IsNewRow) continue;
+
+                    Row dataRow = table.AddRow();
+                    colIndexPdf = 0;
+                    for (int i = 0; i < dataGridView.Columns.Count; i++)
+                    {
+                        if (dataGridView.Columns[i].Visible)
+                        {
+                            string cellValue = dgvRow.Cells[i].Value?.ToString() ?? "";
+                            dataRow.Cells[colIndexPdf].AddParagraph(cellValue);
+                            dataRow.Cells[colIndexPdf].Format.Alignment = ParagraphAlignment.Center;
+
+                            if (dgvRow.Index % 2 == 1)
+                            {
+                                dataRow.Cells[colIndexPdf].Shading.Color = Colors.LightGray;
+                            }
+                            colIndexPdf++;
+                        }
+                    }
+                }
+
+                section.PageSetup.LeftMargin = Unit.FromCentimeter(2);
+                section.PageSetup.RightMargin = Unit.FromCentimeter(2);
+                PdfDocumentRenderer renderer = new PdfDocumentRenderer();
+                renderer.Document = document;
+                renderer.RenderDocument();
+                string folderPath = @"C:\Users\LENOVO\Desktop\Detail Penyewaan";
+
+                if (!Directory.Exists(folderPath))
+                {
+                    Directory.CreateDirectory(folderPath);
+                }
+
+                string filePath = Path.Combine(folderPath, $"Transaksi_{DateTime.Now:yyyyMMdd_HHmmss}.pdf");
+                renderer.Save(filePath);
+
+                MessageBox.Show($"PDF berhasil disimpan di:\n{filePath}", "Success",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void ExportPDF_Click(object sender, EventArgs e)
+        {
+            ExportToPDF(dataGridView1);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

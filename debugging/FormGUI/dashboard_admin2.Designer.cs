@@ -65,11 +65,6 @@
             flowLayoutPanel2.SuspendLayout();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
-// <<<<<<< master
-//             panel5.SuspendLayout();
-//             ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
-// =======
-// >>>>>>> master
             panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox7).BeginInit();
             SuspendLayout();
@@ -83,7 +78,7 @@
             panel1.Location = new Point(0, 0);
             panel1.Margin = new Padding(2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(880, 40);
+            panel1.Size = new Size(1218, 40);
             panel1.TabIndex = 2;
             // 
             // pictureBox8
@@ -122,7 +117,7 @@
             flowLayoutPanel1.Location = new Point(0, 40);
             flowLayoutPanel1.Margin = new Padding(2);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(220, 440);
+            flowLayoutPanel1.Size = new Size(220, 642);
             flowLayoutPanel1.TabIndex = 3;
             flowLayoutPanel1.Paint += flowLayoutPanel1_Paint;
             // 
@@ -244,11 +239,7 @@
             flowLayoutPanel2.Location = new Point(2, 155);
             flowLayoutPanel2.Margin = new Padding(2);
             flowLayoutPanel2.Name = "flowLayoutPanel2";
-// <<<<<<< master
-//             flowLayoutPanel2.Size = new Size(153, 42);
-// =======
             flowLayoutPanel2.Size = new Size(153, 50);
-// >>>>>>> master
             flowLayoutPanel2.TabIndex = 13;
             flowLayoutPanel2.Paint += flowLayoutPanel2_Paint;
             // 
@@ -289,55 +280,11 @@
             button2.UseVisualStyleBackColor = false;
             button2.Click += button2_Click;
             // 
-// <<<<<<< master
-//             // panel5
-//             // 
-//             panel5.Controls.Add(pictureBox6);
-//             panel5.Controls.Add(button5);
-//             panel5.Location = new Point(2, 201);
-//             panel5.Margin = new Padding(2);
-//             panel5.Name = "panel5";
-//             panel5.Size = new Size(153, 47);
-//             panel5.TabIndex = 11;
-//             // 
-//             // pictureBox6
-//             // 
-//             pictureBox6.Image = (Image)resources.GetObject("pictureBox6.Image");
-//             pictureBox6.Location = new Point(1, 7);
-//             pictureBox6.Margin = new Padding(2);
-//             pictureBox6.Name = "pictureBox6";
-//             pictureBox6.Size = new Size(42, 24);
-//             pictureBox6.SizeMode = PictureBoxSizeMode.Zoom;
-//             pictureBox6.TabIndex = 2;
-//             pictureBox6.TabStop = false;
-//             // 
-//             // button5
-//             // 
-//             button5.BackColor = Color.FromArgb(23, 24, 29);
-//             button5.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-//             button5.ForeColor = Color.White;
-//             button5.ImageAlign = ContentAlignment.MiddleLeft;
-//             button5.Location = new Point(-4, -25);
-//             button5.Margin = new Padding(2);
-//             button5.Name = "button5";
-//             button5.Size = new Size(183, 96);
-//             button5.TabIndex = 2;
-//             button5.Text = "             History";
-//             button5.TextAlign = ContentAlignment.MiddleLeft;
-//             button5.UseVisualStyleBackColor = false;
-//             button5.Click += button5_Click;
-//             // 
-// =======
-// >>>>>>> master
             // panel6
             // 
             panel6.Controls.Add(pictureBox7);
             panel6.Controls.Add(button6);
-// <<<<<<< master
-//             panel6.Location = new Point(2, 252);
-// =======
             panel6.Location = new Point(2, 209);
-// >>>>>>> master
             panel6.Margin = new Padding(2);
             panel6.Name = "panel6";
             panel6.Size = new Size(153, 47);
@@ -385,7 +332,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
             BackColor = Color.DarkGray;
-            ClientSize = new Size(880, 480);
+            ClientSize = new Size(1218, 682);
             Controls.Add(flowLayoutPanel1);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
@@ -406,11 +353,6 @@
             flowLayoutPanel2.ResumeLayout(false);
             panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
-// <<<<<<< master
-//             panel5.ResumeLayout(false);
-//             ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
-// =======
-// >>>>>>> master
             panel6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox7).EndInit();
             ResumeLayout(false);
